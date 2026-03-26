@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3w_sj Index</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --text: #0a0a0a;
+        --muted: #64748b;
+        --border: #e5e7eb;
+        --secondary: #f1f5f9;
+      }
+      body {
+        margin: 0;
+        padding: 40px 16px;
+        font-family: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      h1 {
+        margin: 0;
+        font-size: 28px;
+        letter-spacing: -0.5px;
+      }
+      p {
+        margin: 10px 0 0;
+        color: var(--muted);
+      }
+      .section {
+        margin: 24px 0 34px;
+      }
+      .section h2 {
+        margin: 0 0 12px;
+        font-size: 18px;
+      }
+      .hint {
+        margin: 0 0 14px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      @media (min-width: 768px) {
+        .grid {
+          grid-template-columns: 2fr 2fr;
+        }
+      }
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px;
+        background: #fff;
+      }
+      .badge {
+        display: inline-block;
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: var(--secondary);
+        color: #0f172a;
+        margin-bottom: 10px;
+      }
+      h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+      }
+      .desc {
+        margin: 0 0 12px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .btn {
+        display: inline-block;
+        text-decoration: none;
+        font-weight: 600;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px 12px;
+        color: var(--text);
+        background: #fff;
+      }
+      .btn:hover {
+        background: var(--secondary);
+      }
+      footer {
+        margin-top: 24px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>3w_sj</h1>
+        <p>보고서 리스트 + 외부 페이지 모음</p>
+      </header>
+
+      <div class="section">
+        <h2>보고서</h2>
+        <div class="hint">아래 항목은 새 창에서 열립니다.</div>
+        <div class="grid">
+          <div class="card">
+            <div class="badge">보고서</div>
+            <h3>EMR 프로젝트 보고서</h3>
+            <p class="desc">EMR 프로젝트 진행 결과/정리 문서.</p>
+            <a class="btn" href="./emr-project-report.html" target="_blank" rel="noopener noreferrer">열기</a>
+          </div>
+          <div class="card">
+            <div class="badge">보고서</div>
+            <h3>KIMES Expo 보고서</h3>
+            <p class="desc">KIMES Expo 관련 자료 정리본.</p>
+            <a class="btn" href="./kimes-expo-report.html" target="_blank" rel="noopener noreferrer">열기</a>
+          </div>
+          <div class="card">
+            <div class="badge">사이트</div>
+            <h3>회사소개서(Company Profile)</h3>
+            <p class="desc">회사소개서 HTML 랜딩(2026 버전).</p>
+            <a class="btn" href="./company-profile.html" target="_blank" rel="noopener noreferrer">열기</a>
+          </div>
+          <div class="card">
+            <div class="badge">보고서</div>
+            <h3>리파인 의원 프로젝트 보고서</h3>
+            <p class="desc">피부과 의원 웹사이트 구축 진행 현황 보고서.</p>
+            <a class="btn" href="./refine-clinic-report.html" target="_blank" rel="noopener noreferrer">열기</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>페이지(외부)</h2>
+        <div class="hint">아래 항목은 새 창에서 열립니다.</div>
+        <div class="grid">
+          <div class="card">
+            <div class="badge">EMR</div>
+            <h3>MediChart EMR</h3>
+            <p class="desc">로그인 페이지로 이동합니다.</p>
+            <a
+              class="btn"
+              href="https://emrdv.vercel.app/login"
+              target="_blank"
+              rel="noopener noreferrer"
+            >열기</a>
+          </div>
+          <div class="card">
+            <div class="badge">MediW</div>
+            <h3>MediW</h3>
+            <p class="desc">메인 플랫폼 페이지로 이동합니다.</p>
+            <a class="btn" href="https://rs-dv.vercel.app" target="_blank" rel="noopener noreferrer">열기</a>
+          </div>
+        </div>
+      </div>
+
+      <footer>© 3w_sj</footer>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,2991 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMR 프로젝트 종합 보고서</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0a0a;
+      color: #222;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Slide System ── */
+    .slide {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-inner {
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    /* ── Page Numbers ── */
+    .page-num {
+      position: absolute;
+      bottom: 32px;
+      right: 48px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.15);
+    }
+
+    .dark-slide .page-num { color: rgba(255,255,255,0.15); }
+
+    /* ── Section Labels ── */
+    .section-label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 16px;
+    }
+
+    .dark-slide .section-label { color: rgba(255,255,255,0.4); }
+
+    .slide-divider {
+      width: 48px;
+      height: 3px;
+      background: #222;
+      margin-bottom: 28px;
+    }
+
+    .dark-slide .slide-divider { background: rgba(255,255,255,0.3); }
+
+    /* ══════════════════════════════════════════
+       SLIDE 1: COVER
+    ══════════════════════════════════════════ */
+    .slide-cover {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+
+    .slide-cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 50%);
+    }
+
+    .cover-tag {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 8px 28px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .slide-cover h1 {
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -2px;
+    }
+
+    .slide-cover .subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 64px;
+      line-height: 1.6;
+    }
+
+    .cover-meta {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      font-weight: 500;
+    }
+
+    .cover-meta span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cover-meta .dot {
+      width: 5px; height: 5px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+    }
+
+    .cover-status {
+      margin-top: 48px;
+      display: inline-block;
+      padding: 10px 28px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 1px;
+    }
+
+    /* ══════════════════════════════════════════
+       SLIDE 2: TOC
+    ══════════════════════════════════════════ */
+    .slide-toc {
+      background: #fff;
+    }
+
+    .slide-toc h2 {
+      font-size: 42px;
+      font-weight: 900;
+      color: #111;
+      margin-bottom: 48px;
+      letter-spacing: -1px;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+
+    .toc-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 28px 32px;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background 0.15s;
+    }
+
+    .toc-item:hover { background: #fafafa; }
+
+    .toc-item:nth-child(odd) { border-right: 1px solid #f0f0f0; }
+
+    .toc-num {
+      font-size: 32px;
+      font-weight: 900;
+      color: #ddd;
+      line-height: 1;
+      min-width: 48px;
+    }
+
+    .toc-item h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 4px;
+    }
+
+    .toc-item p {
+      font-size: 13px;
+      color: #999;
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════════════════
+       SLIDE 3: EMR 개요
+    ══════════════════════════════════════════ */
+    .slide-overview {
+      background: #fafafa;
+    }
+
+    .slide-overview h2,
+    .section-title {
+      font-size: 40px;
+      font-weight: 900;
+      color: #111;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+      line-height: 1.3;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: #888;
+      margin-bottom: 48px;
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    .overview-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .ov-card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 32px 28px;
+      transition: transform 0.2s;
+    }
+
+    .ov-card:hover { transform: translateY(-3px); }
+
+    .ov-card-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 20px;
+      background: #f5f5f5;
+    }
+
+    .ov-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .ov-card p {
+      font-size: 13px;
+      color: #777;
+      line-height: 1.7;
+    }
+
+    /* ══════════════════════════════════════════
+       SLIDE: 인증 기준
+    ══════════════════════════════════════════ */
+    .slide-cert {
+      background: #fff;
+    }
+
+    .cert-table-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #e5e5e5;
+    }
+
+    .cert-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .cert-table thead th {
+      background: #111;
+      color: #fff;
+      padding: 14px 20px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .cert-table tbody td {
+      padding: 13px 20px;
+      border-bottom: 1px solid #f0f0f0;
+      color: #444;
+      line-height: 1.5;
+      vertical-align: top;
+    }
+
+    .cert-table tbody tr:last-child td { border-bottom: none; }
+    .cert-table tbody tr:nth-child(even) { background: #fafafa; }
+    .cert-table tbody tr:hover { background: #f5f5f5; }
+
+    /* 어두운 배경 행의 텍스트를 흰색으로 */
+    .cert-table tbody tr[style*="background:#111"] td,
+    .cert-table tbody tr[style*="background:#222"] td,
+    .cert-table tbody tr[style*="background:#000"] td {
+      color: #fff;
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .chip-req { background: #111; color: #fff; }
+    .chip-sel { background: #e5e5e5; color: #666; }
+    .chip-done { background: #e8e8e8; color: #333; }
+    .chip-wip { background: #f5f5f5; color: #999; border: 1px solid #ddd; }
+    .chip-todo { background: #fff; color: #bbb; border: 1px solid #e5e5e5; }
+
+    /* ══════════════════════════════════════════
+       SLIDE: KIMES 인사이트
+    ══════════════════════════════════════════ */
+    .slide-kimes {
+      background: #111;
+      color: #fff;
+    }
+
+    .slide-kimes h2 {
+      font-size: 40px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .kimes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .kimes-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+
+    .kimes-tag {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .tag-str { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+    .tag-weak { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.4); }
+    .tag-ref { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+
+    .kimes-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .kimes-card p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+    }
+
+    /* ══════════════════════════════════════════
+       SLIDE: WORKFLOW
+    ══════════════════════════════════════════ */
+    .slide-workflow {
+      background: #fafafa;
+    }
+
+    .workflow-steps {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 48px;
+    }
+
+    .wf-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+      position: relative;
+    }
+
+    .wf-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 32px;
+      right: -50%;
+      width: 100%;
+      height: 2px;
+      background: #ddd;
+    }
+
+    .wf-circle {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: #111;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .wf-step .step-num {
+      font-size: 10px;
+      font-weight: 800;
+      color: #bbb;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+
+    .wf-step h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 4px;
+    }
+
+    .wf-step p {
+      font-size: 12px;
+      color: #999;
+      max-width: 140px;
+      line-height: 1.5;
+    }
+
+    .insight-box {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 24px 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .insight-box .ib-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .insight-box p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .insight-box strong { color: #111; }
+
+    /* ══════════════════════════════════════════
+       SLIDE: IA & STRUCTURE
+    ══════════════════════════════════════════ */
+    .slide-ia {
+      background: #fff;
+    }
+
+    .ia-tree {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .ia-branch {
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 24px 20px;
+    }
+
+    .ia-branch h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #111;
+    }
+
+    .ia-branch ul {
+      list-style: none;
+    }
+
+    .ia-branch li {
+      font-size: 12px;
+      color: #666;
+      padding: 5px 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ia-branch li:last-child { border-bottom: none; }
+
+    .ia-dot {
+      width: 4px; height: 4px;
+      background: #ccc;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .ia-status {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .ia-live { background: #111; color: #fff; }
+    .ia-dev { background: #e5e5e5; color: #777; }
+
+    /* ══════════════════════════════════════════
+       SLIDE: DB SCHEMA
+    ══════════════════════════════════════════ */
+    .slide-schema {
+      background: #111;
+      color: #fff;
+    }
+
+    .schema-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .schema-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 18px 16px;
+    }
+
+    .schema-card h5 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .schema-card ul {
+      list-style: none;
+    }
+
+    .schema-card li {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      padding: 2px 0;
+    }
+
+    .schema-card li .field-type {
+      color: rgba(255,255,255,0.25);
+      font-size: 10px;
+    }
+
+    /* ══════════════════════════════════════════
+       SLIDE: USER FLOWS
+    ══════════════════════════════════════════ */
+    .slide-flows {
+      background: #fafafa;
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .flow-card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 14px;
+      padding: 28px 24px;
+    }
+
+    .flow-card h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .flow-card h4 .flow-num {
+      width: 24px; height: 24px;
+      border-radius: 6px;
+      background: #111;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 8px 0;
+      position: relative;
+    }
+
+    .flow-step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 28px;
+      bottom: -8px;
+      width: 1px;
+      background: #e5e5e5;
+    }
+
+    .flow-dot {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: #bbb;
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow-step-text {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.6;
+      padding-top: 2px;
+    }
+
+    .flow-step-text strong { color: #333; }
+
+    /* ══════════════════════════════════════════
+       SLIDE: FEATURES
+    ══════════════════════════════════════════ */
+    .slide-features {
+      background: #fff;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .feat-card {
+      border: 1px solid #eee;
+      border-radius: 14px;
+      padding: 24px 20px;
+      transition: border-color 0.15s;
+    }
+
+    .feat-card:hover { border-color: #ccc; }
+
+    .feat-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 6px;
+    }
+
+    .feat-card p {
+      font-size: 12px;
+      color: #888;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .feat-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .feat-item {
+      font-size: 10px;
+      padding: 3px 8px;
+      background: #f5f5f5;
+      border-radius: 4px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    /* ══════════════════════════════════════════
+       SLIDE: COMPARISON TABLE
+    ══════════════════════════════════════════ */
+    .slide-compare {
+      background: #fafafa;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #e5e5e5;
+    }
+
+    .compare-table thead th {
+      background: #111;
+      color: #fff;
+      padding: 16px 20px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .compare-table tbody td {
+      padding: 14px 20px;
+      font-size: 13px;
+      color: #444;
+      border-bottom: 1px solid #f0f0f0;
+      line-height: 1.5;
+      background: #fff;
+    }
+
+    .compare-table tbody tr:last-child td { border-bottom: none; }
+    .compare-table tbody tr:hover td { background: #f8f8f8; }
+
+    /* ══════════════════════════════════════════
+       SLIDE: DEVELOPMENT ROADMAP
+    ══════════════════════════════════════════ */
+    .slide-roadmap {
+      background: #111;
+      color: #fff;
+    }
+
+    .roadmap-phases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .phase-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 28px 24px;
+    }
+
+    .phase-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .phase-card h4 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .phase-card ul {
+      list-style: none;
+    }
+
+    .phase-card li {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .phase-card li:last-child { border-bottom: none; }
+
+    .p-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .p-done { background: rgba(255,255,255,0.5); }
+    .p-prog { background: rgba(255,255,255,0.25); }
+    .p-todo { background: rgba(255,255,255,0.1); }
+
+    /* ══════════════════════════════════════════
+       SLIDE: DOCUMENTS NEEDED
+    ══════════════════════════════════════════ */
+    .slide-docs {
+      background: #fff;
+    }
+
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .doc-card {
+      border: 1px solid #eee;
+      border-radius: 14px;
+      padding: 24px 20px;
+    }
+
+    .doc-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 4px;
+    }
+
+    .doc-card .doc-desc {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .doc-card ul {
+      list-style: none;
+    }
+
+    .doc-card li {
+      font-size: 12px;
+      color: #666;
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .doc-check {
+      width: 14px; height: 14px;
+      border-radius: 3px;
+      border: 1.5px solid #ccc;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════
+       SLIDE: TECH STACK
+    ══════════════════════════════════════════ */
+    .slide-tech {
+      background: #fafafa;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .tech-card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .tech-card h5 {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #bbb;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .tech-card .tech-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 4px;
+    }
+
+    .tech-card .tech-ver {
+      font-size: 11px;
+      color: #999;
+    }
+
+    /* ══════════════════════════════════════════
+       SLIDE: CLOSING
+    ══════════════════════════════════════════ */
+    .slide-closing {
+      background: #000;
+      color: #fff;
+      text-align: center;
+    }
+
+    .slide-closing h2 {
+      font-size: 48px;
+      font-weight: 900;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .slide-closing p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ══════════════════════════════════════════
+       STAT ROW
+    ══════════════════════════════════════════ */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .stat-box {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .stat-box .stat-num {
+      font-size: 36px;
+      font-weight: 900;
+      color: #111;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-box .stat-label {
+      font-size: 12px;
+      color: #999;
+      font-weight: 500;
+    }
+
+    .dark-slide .stat-box {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .dark-slide .stat-box .stat-num { color: #fff; }
+    .dark-slide .stat-box .stat-label { color: rgba(255,255,255,0.4); }
+
+    /* ══════════════════════════════════════════
+       CERTIFICATION STATUS GRID
+    ══════════════════════════════════════════ */
+    .cert-status-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .cert-status-card {
+      background: #f8f8f8;
+      border-radius: 10px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .cert-status-card h5 {
+      font-size: 11px;
+      font-weight: 700;
+      color: #999;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .cert-status-card .cs-num {
+      font-size: 28px;
+      font-weight: 900;
+      color: #111;
+    }
+
+    .cert-status-card .cs-sub {
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 2px;
+    }
+
+    /* ── Print ── */
+    @media print {
+      .slide { page-break-after: always; min-height: 100vh; }
+      body { background: #fff; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .slide { padding: 40px 24px; }
+      .slide-cover h1 { font-size: 36px; }
+      .overview-cards, .kimes-grid, .ia-tree, .flow-grid, .feature-grid,
+      .roadmap-phases, .doc-grid, .tech-grid, .schema-grid { grid-template-columns: 1fr; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .toc-item:nth-child(odd) { border-right: none; }
+      .stat-row, .cert-status-grid { grid-template-columns: repeat(2, 1fr); }
+      .workflow-steps { flex-direction: column; gap: 20px; }
+      .wf-step:not(:last-child)::after { display: none; }
+      .compare-table { font-size: 11px; }
+    }
+
+    /* ── Accent stripe ── */
+    .accent-stripe {
+      height: 2px;
+      background: #222;
+      width: 100%;
+    }
+
+    .cert-category-header {
+      background: #222;
+      color: #fff !important;
+      padding: 10px 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* Extra: Fullwidth info blocks */
+    .info-block {
+      background: #f8f8f8;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-top: 20px;
+    }
+
+    .info-block h5 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .info-block p, .info-block li {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .info-block ul { list-style: none; padding: 0; }
+    .info-block li { padding: 3px 0; display: flex; gap: 8px; align-items: flex-start; }
+    .info-block li::before { content: ''; width: 4px; height: 4px; background: #ccc; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 1: COVER
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-cover dark-slide">
+    <div class="slide-inner" style="text-align:center; position:relative; z-index:1;">
+      <div class="cover-tag">Project Report</div>
+      <h1>EMR<br>프로젝트 종합 보고서</h1>
+      <p class="subtitle">전자의무기록시스템 리서치, 인증 기준, 개발 현황 및 로드맵</p>
+      <div class="cover-meta">
+        <span><div class="dot"></div>2026년 3월</span>
+        <span><div class="dot"></div>보건복지부 인증기준 기반</span>
+        <span><div class="dot"></div>KIMES 2026 참관 연계</span>
+      </div>
+      <div class="cover-status">PROJECT STATUS: HOLD (TEMPORARY)</div>
+    </div>
+    <div class="page-num">01</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 2: 목차
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-toc">
+    <div class="slide-inner">
+      <div class="section-label">Contents</div>
+      <h2>목차</h2>
+      <div class="toc-grid">
+        <div class="toc-item">
+          <div class="toc-num">01</div>
+          <div>
+            <h4>EMR 서비스 개요</h4>
+            <p>전자의무기록시스템의 정의, 목적, 핵심 프로세스</p>
+          </div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">02</div>
+          <div>
+            <h4>정부 인증 기준</h4>
+            <p>보건복지부 제품인증 기능 요구사항 72개 항목</p>
+          </div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">03</div>
+          <div>
+            <h4>KIMES 2026 인사이트</h4>
+            <p>경쟁사 분석 및 시장 트렌드</p>
+          </div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">04</div>
+          <div>
+            <h4>핵심 워크플로우</h4>
+            <p>업계 공통 환자 동선 프로세스</p>
+          </div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">05</div>
+          <div>
+            <h4>시스템 IA & 구조</h4>
+            <p>개발 완료 시스템의 정보 아키텍처</p>
+          </div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">06</div>
+          <div>
+            <h4>데이터 모델</h4>
+            <p>15개 핵심 엔티티 스키마 구조</p>
+          </div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">07</div>
+          <div>
+            <h4>핵심 기능 & 사용자 플로우</h4>
+            <p>구현 완료 기능 상세 및 테스트 케이스</p>
+          </div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">08</div>
+          <div>
+            <h4>개발 로드맵 & 필요 문서</h4>
+            <p>향후 개발 계획 및 인증 준비 문서 목록</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">02</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 3: EMR 서비스 개요
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-overview">
+    <div class="slide-inner">
+      <div class="section-label">Section 01</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">EMR 서비스 개요</div>
+      <p class="section-desc">
+        EMR(Electronic Medical Record)은 의료법 제22조 및 제23조에 근거한 전자의무기록시스템으로,
+        환자의 진료정보를 전자적으로 생성, 관리, 보관하는 시스템입니다.
+      </p>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-num">6</div>
+          <div class="stat-label">대분류 인증 영역</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">72</div>
+          <div class="stat-label">세부 인증기준 항목</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">3</div>
+          <div class="stat-label">인증 유형</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">15</div>
+          <div class="stat-label">개발 완료 DB 모델</div>
+        </div>
+      </div>
+
+      <div class="overview-cards">
+        <div class="ov-card">
+          <div class="ov-card-icon">&#9881;</div>
+          <h3>법적 근거</h3>
+          <p>「의료법」 제22조(진료기록부 등), 제23조(전자의무기록), 같은 법 시행규칙 제14조에 의거하여 전자의무기록시스템 제품인증 제도를 운영</p>
+        </div>
+        <div class="ov-card">
+          <div class="ov-card-icon">&#9878;</div>
+          <h3>인증 유형</h3>
+          <p><strong>유형1</strong> 의원급 / <strong>유형2</strong> 병원급(300병상 미만) / <strong>유형3</strong> 종합병원(300병상 이상). 모든 유형에서 필수 기능 항목은 동일하게 적용</p>
+        </div>
+        <div class="ov-card">
+          <div class="ov-card-icon">&#10003;</div>
+          <h3>인증 절차</h3>
+          <p>인증 신청 → 명세서/자가점검 결과서 제출 → 현장 심사(1주) → 인증 결과 통보. 재단법인 한국보건의료정보원장에게 신청</p>
+        </div>
+      </div>
+
+      <div class="info-block" style="margin-top: 32px;">
+        <h5>EMR 인증의 6대 분류 체계</h5>
+        <div class="two-col" style="margin-top: 12px;">
+          <ul>
+            <li>1. 진료정보관리 — 환자등록, 처방, 임상정보 관리</li>
+            <li>2. 의료기관 정보공유 — 진료의뢰, 회송, 타기관 연동</li>
+            <li>3. 환자 정보제공 — 환자 포털, 정보 열람 제공</li>
+          </ul>
+          <ul>
+            <li>4. 보안관리 — 접근권한, 암호화, 접속기록, 전자서명</li>
+            <li>5. 표준관리 — KCD, EDI, LOINC, SNOMED CT 연계</li>
+            <li>6. 상호운용성 — HL7 FHIR, 건강정보 교류 표준</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">03</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 4: 정부 인증 기준 - 진료정보관리
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-cert">
+    <div class="slide-inner">
+      <div class="section-label">Section 02</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">정부 인증 기준 — 진료정보관리</div>
+      <p class="section-desc">보건복지부 전자의무기록시스템 인증기준(2025.01.01 시행). 유형1(의원급) 기준 필수 항목 중심으로 정리.</p>
+
+      <div class="cert-table-wrap">
+        <table class="cert-table">
+          <thead>
+            <tr>
+              <th style="width:8%">번호</th>
+              <th style="width:12%">중분류</th>
+              <th style="width:32%">인증기준</th>
+              <th style="width:8%">유형1</th>
+              <th style="width:8%">유형2</th>
+              <th style="width:8%">유형3</th>
+              <th style="width:24%">핵심 요구사항</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>A001</strong></td>
+              <td rowspan="3">1.1<br>환자인적<br>사항관리</td>
+              <td>등록번호 및 인적 사항 기록/수정/조회</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>이름, 성별, 생년월일, 주민등록번호, 전화번호, 주소 포함 등록번호 생성</td>
+            </tr>
+            <tr>
+              <td><strong>A002</strong></td>
+              <td>다중 등록번호 의무기록 통합</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>동일 환자 다중 등록번호 의무기록 병합 또는 연계 관리</td>
+            </tr>
+            <tr>
+              <td><strong>A003</strong></td>
+              <td>동명이인 구분 관리</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>아이콘, 특수문자, 알파벳, 색상 등 구분자 표시 및 알림</td>
+            </tr>
+            <tr>
+              <td><strong>A004</strong></td>
+              <td rowspan="3">1.2<br>처방정보<br>관리</td>
+              <td>약물 처방 기록/수정/조회</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>약물명, 투여용량, 횟수, 일수, 용법, 투여경로 구분 기록</td>
+            </tr>
+            <tr>
+              <td><strong>A005</strong></td>
+              <td>검사 처방 기록/수정/조회</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>검체, 병리, 영상, 기능 검사 처방 기록/수정/조회</td>
+            </tr>
+            <tr>
+              <td><strong>A006</strong></td>
+              <td>처치/수술/기타 처방 기록/수정/조회</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>처치, 수술, 기타 치료 관련 행위 처방 기록</td>
+            </tr>
+            <tr>
+              <td><strong>A007</strong></td>
+              <td rowspan="10">1.3<br>임상정보<br>관리</td>
+              <td>진단(문제) 목록 기록/수정/조회</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>KCD-8 연계, 진단시기, 발생시기, 진료과, 진단구분 포함</td>
+            </tr>
+            <tr>
+              <td><strong>A008</strong></td>
+              <td>약물 목록 관리</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>진료일자별/약물별 조회, 약물명/투여용량/횟수 등 11개 항목</td>
+            </tr>
+            <tr>
+              <td><strong>A009</strong></td>
+              <td>약물알레르기 및 과민반응 목록</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>있음/없음/모름/문진안함 구분, 원인약물명/증상/중증도 기록</td>
+            </tr>
+            <tr>
+              <td><strong>A010</strong></td>
+              <td>검사결과 조회</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>일자별/유형별 정렬, 수치형/문자형 구분, 참고구간 정상 여부</td>
+            </tr>
+            <tr>
+              <td><strong>A011</strong></td>
+              <td>영상 검사결과와 영상 이미지 연결</td>
+              <td><span class="chip chip-sel">선택</span></td>
+              <td><span class="chip chip-sel">선택</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>PACS 연동, DICOM 영상과 판독결과 연결 조회</td>
+            </tr>
+            <tr>
+              <td><strong>A012</strong></td>
+              <td>활력징후 기록/수정/조회</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>수축기/이완기 혈압, 맥박, 체온, 호흡수 측정 단위 포함</td>
+            </tr>
+            <tr>
+              <td><strong>A013</strong></td>
+              <td>신체계측 기록/수정/조회</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>신장(cm), 체중(kg) 측정 단위 표시, 범위 내 입력</td>
+            </tr>
+            <tr>
+              <td><strong>A014</strong></td>
+              <td>의무기록 기록/수정/조회</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>초진기록, 재진기록, 퇴원요약, 입원기록, 경과기록 등 11종 서식</td>
+            </tr>
+            <tr>
+              <td><strong>A015</strong></td>
+              <td>사회력 기록/수정/조회</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>흡연, 음주, 운동 등 건강행태 및 사회적 결정요인(SDOH)</td>
+            </tr>
+            <tr>
+              <td><strong>A016</strong></td>
+              <td>가족력 기록/수정/조회</td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td><span class="chip chip-req">필수</span></td>
+              <td>유전체 정보 연계 가능, 환자생성건강데이터(PGHD) 활용</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cert-status-grid">
+        <div class="cert-status-card">
+          <h5>전체 적용</h5>
+          <div class="cs-num">16</div>
+          <div class="cs-sub">진료정보관리 필수</div>
+        </div>
+        <div class="cert-status-card">
+          <h5>표준관리</h5>
+          <div class="cs-num">8</div>
+          <div class="cs-sub">E001~E008</div>
+        </div>
+        <div class="cert-status-card">
+          <h5>보안관리</h5>
+          <div class="cs-num">12</div>
+          <div class="cs-sub">F001~F012</div>
+        </div>
+        <div class="cert-status-card">
+          <h5>참조 인증기준</h5>
+          <div class="cs-num">6</div>
+          <div class="cs-sub">연계 항목</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">04</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 5: 인증기준 상세 — 나머지 대분류
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-cert" style="background: #fafafa;">
+    <div class="slide-inner">
+      <div class="section-label">Section 02 — Continued</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">인증 기준 전체 구조</div>
+      <p class="section-desc">6개 대분류, 19개 중분류, 72개 인증기준 항목의 전체 맵. 보안관리(F001~F012)와 표준관리(E001~E008)는 전 영역에 공통 적용.</p>
+
+      <div class="cert-table-wrap">
+        <table class="cert-table">
+          <thead>
+            <tr>
+              <th style="width:5%">#</th>
+              <th style="width:18%">대분류</th>
+              <th style="width:18%">중분류</th>
+              <th style="width:35%">주요 인증기준</th>
+              <th style="width:12%">항목 수</th>
+              <th style="width:12%">필수 비율</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1</strong></td>
+              <td><strong>진료정보관리</strong></td>
+              <td>환자인적사항관리<br>처방정보관리<br>임상정보관리</td>
+              <td>A001~A016: 환자등록, 처방(약물/검사/처치), 진단목록, 활력징후, 의무기록, 사회력, 가족력</td>
+              <td style="text-align:center"><strong>16</strong></td>
+              <td style="text-align:center">94%</td>
+            </tr>
+            <tr>
+              <td><strong>2</strong></td>
+              <td><strong>임상의사결정지원</strong></td>
+              <td>환자안전<br>의약품안전</td>
+              <td>A017~A020: 약물 상호작용 점검, 약물 알레르기 경고, 용량 점검, 중복처방 경고</td>
+              <td style="text-align:center"><strong>4</strong></td>
+              <td style="text-align:center">100%</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td><strong>의료기관 정보공유</strong></td>
+              <td>진료정보교류<br>건강정보 고속도로<br>핵심교류데이터</td>
+              <td>A021~A025: 진료의뢰서, 회송서, 진료정보교류, FHIR 기반 데이터 교류</td>
+              <td style="text-align:center"><strong>5</strong></td>
+              <td style="text-align:center">80%</td>
+            </tr>
+            <tr>
+              <td><strong>4</strong></td>
+              <td><strong>환자 정보제공</strong></td>
+              <td>환자정보열람</td>
+              <td>A026~A027: 환자 건강기록 조회, 환자 포털 정보 제공</td>
+              <td style="text-align:center"><strong>2</strong></td>
+              <td style="text-align:center">100%</td>
+            </tr>
+            <tr>
+              <td><strong>5</strong></td>
+              <td><strong>표준관리</strong></td>
+              <td>용어표준<br>구조표준</td>
+              <td>E001~E008: KCD-8, EDI, LOINC, SNOMED CT, KD코드, WHO ATC, HL7 CDA, UCUM</td>
+              <td style="text-align:center"><strong>8</strong></td>
+              <td style="text-align:center">공통 적용</td>
+            </tr>
+            <tr>
+              <td><strong>6</strong></td>
+              <td><strong>보안관리</strong></td>
+              <td>접근제어<br>암호화<br>감사추적</td>
+              <td>F001~F012: 권한관리, 고유식별정보 암호화, 마스킹, 접속기록, 전자서명, 이력관리</td>
+              <td style="text-align:center"><strong>12</strong></td>
+              <td style="text-align:center">공통 적용</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-block" style="margin-top: 24px;">
+        <h5>인증 신청 시 제출 서류</h5>
+        <ul>
+          <li>전자의무기록시스템 명세서 1부</li>
+          <li>자가점검 결과서 1부</li>
+          <li>인증기준 면제신청서 1부 (해당 시)</li>
+          <li>사업자등록증 1부</li>
+          <li>소프트웨어사업자신고번호 증빙</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-num">05</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 6: KIMES 2026 인사이트
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-kimes dark-slide">
+    <div class="slide-inner">
+      <div class="section-label">Section 03</div>
+      <div class="slide-divider"></div>
+      <h2>KIMES 2026 참관 인사이트</h2>
+      <p style="font-size:15px; color:rgba(255,255,255,0.4); margin-bottom:40px;">국제의료기기 박람회에서 확인한 EMR 시장 현황과 경쟁사 분석</p>
+
+      <div class="kimes-grid">
+        <div class="kimes-card">
+          <div class="kimes-tag tag-str">STRENGTH</div>
+          <h4>베가스 EMR — 풍부한 메뉴 구성</h4>
+          <p>업계 1위. 다양한 기능이 체계적으로 메뉴화, 오랜 기간 고도화된 것이 체감됨. CRM 기능이 특히 우수하여 환자 관리/마케팅/리텐션 영역이 눈에 띄는 수준</p>
+        </div>
+        <div class="kimes-card">
+          <div class="kimes-tag tag-weak">WEAKNESS</div>
+          <h4>전 업체 공통 — 노후한 UI/UX</h4>
+          <p>구 Windows 스타일 인터페이스. 기능은 많으나 시각적 현대화 부족. 자사의 모던 웹 기반 UI는 강력한 차별화 포인트</p>
+        </div>
+        <div class="kimes-card">
+          <div class="kimes-tag tag-ref">REFERENCE</div>
+          <h4>상단 메뉴 네비게이션</h4>
+          <p>기존 참고 레퍼런스는 좌측 메뉴였으나, 베가스는 상단 메뉴 구조 채택. 메뉴 구조 선택은 전략적 판단 필요</p>
+        </div>
+        <div class="kimes-card">
+          <div class="kimes-tag tag-ref">REFERENCE</div>
+          <h4>하드웨어 연동 생태계</h4>
+          <p>키오스크, 영수증 프린터, 카드 리더기 등 외부 디바이스 연동 지원. 대기 TV 연동은 모든 업체 공통 필수 기능으로 확인</p>
+        </div>
+        <div class="kimes-card">
+          <div class="kimes-tag tag-str">OPPORTUNITY</div>
+          <h4>모던 UI/UX 차별화 기회</h4>
+          <p>모든 경쟁사가 구형 UI. 현대적 웹 기반 디자인으로 접근하면 강력한 시장 차별점 확보 가능. 실제 시연 현장에서도 UI 개선 니즈 확인</p>
+        </div>
+        <div class="kimes-card">
+          <div class="kimes-tag tag-weak">CAUTION</div>
+          <h4>기능 과잉 경계</h4>
+          <p>베가스의 불필요 기능 과다 사례를 반면교사로, 핵심 기능 중심의 정제된 제품 전략 유지 필요</p>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">06</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 7: 경쟁사 비교
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-compare">
+    <div class="slide-inner">
+      <div class="section-label">Section 03 — Comparison</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">업체별 UI/UX 비교 분석</div>
+      <p class="section-desc">KIMES 2026 현장 시연 기반 비교. 자사 EMR의 전략적 포지셔닝 근거.</p>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:15%">항목</th>
+            <th style="width:25%">베가스 (업계 1위)</th>
+            <th style="width:25%">기타 업체 A/B</th>
+            <th style="width:35%">자사 방향성</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>UI 디자인</strong></td>
+            <td><span class="chip chip-wip">Old Windows</span></td>
+            <td><span class="chip chip-wip">구형 UI</span></td>
+            <td><span class="chip chip-done">모던 웹 UI</span> — Next.js + TailwindCSS 기반</td>
+          </tr>
+          <tr>
+            <td><strong>메뉴 구조</strong></td>
+            <td>상단 메뉴 (Top Nav)</td>
+            <td>다양한 형태 혼재</td>
+            <td>좌측 사이드바 (Collapsible)</td>
+          </tr>
+          <tr>
+            <td><strong>CRM 기능</strong></td>
+            <td><span class="chip chip-done">매우 우수</span></td>
+            <td><span class="chip chip-wip">기본 수준</span></td>
+            <td><span class="chip chip-done">개발 완료</span> — 고객관리/노트/액션 추적</td>
+          </tr>
+          <tr>
+            <td><strong>기술 스택</strong></td>
+            <td>데스크톱 앱 (레거시)</td>
+            <td>혼합 (일부 웹)</td>
+            <td>풀스택 웹 — React 19 + PostgreSQL</td>
+          </tr>
+          <tr>
+            <td><strong>대기 TV</strong></td>
+            <td>지원</td>
+            <td>지원 (공통 필수)</td>
+            <td>로드맵 반영 대상</td>
+          </tr>
+          <tr>
+            <td><strong>H/W 연동</strong></td>
+            <td>키오스크/카드리더기/영수증</td>
+            <td>일부 지원</td>
+            <td>중장기 로드맵</td>
+          </tr>
+          <tr>
+            <td><strong>워크플로우</strong></td>
+            <td><span class="chip chip-done">직관적</span></td>
+            <td><span class="chip chip-done">직관적</span></td>
+            <td>핵심 4단계 완성도 확보 우선</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="page-num">07</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 8: 핵심 워크플로우
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-workflow">
+    <div class="slide-inner">
+      <div class="section-label">Section 04</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">업계 공통 핵심 워크플로우</div>
+      <p class="section-desc">KIMES 참관 전 업체에서 가장 직관적이고 편리하게 구현된 필수 환자 동선.</p>
+
+      <div class="workflow-steps">
+        <div class="wf-step">
+          <div class="wf-circle">01</div>
+          <div class="step-num">STEP 01</div>
+          <h4>환자 접수</h4>
+          <p>신규 등록 또는 기존 환자 접수 처리</p>
+        </div>
+        <div class="wf-step">
+          <div class="wf-circle">02</div>
+          <div class="step-num">STEP 02</div>
+          <h4>진료실 이동</h4>
+          <p>환자 위치 추적 및 진료 대기 관리</p>
+        </div>
+        <div class="wf-step">
+          <div class="wf-circle">03</div>
+          <div class="step-num">STEP 03</div>
+          <h4>처방 기록</h4>
+          <p>의사 진료 및 처방 내역 작성 (SOAP)</p>
+        </div>
+        <div class="wf-step">
+          <div class="wf-circle">04</div>
+          <div class="step-num">STEP 04</div>
+          <h4>수납</h4>
+          <p>진료비 계산 및 결제 처리</p>
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <div class="ib-icon">&#9670;</div>
+        <p>
+          <strong>핵심 인사이트:</strong> 위 4단계 워크플로우는 모든 참관 업체에서 가장 직관적이고 편리하게 구현되어 있었으며, 업계 기본 기대치로 판단됩니다. 자사 제품에서도 이 동선의 완성도를 최우선으로 확보해야 합니다. 현재 접수/진료대기(Queue)/차트(SOAP)/수납 기본 구조는 개발 완료된 상태입니다.
+        </p>
+      </div>
+
+      <div class="info-block" style="margin-top: 24px;">
+        <h5>해외 EMR 레퍼런스 — OpenMRS</h5>
+        <p>오픈소스 EMR 데모 사이트(o3.openmrs.org)를 통해 글로벌 EMR 워크플로우 구조를 벤치마킹했습니다. 환자 차트 > 방문(Visits) > 진료기록 흐름이 국내 EMR과 유사한 패턴을 보이며, FHIR 기반 데이터 교류 표준을 선제 적용하고 있습니다.</p>
+      </div>
+    </div>
+    <div class="page-num">08</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 9: 시스템 IA — 정확한 개발 현황
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-ia">
+    <div class="slide-inner">
+      <div class="section-label">Section 05</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">시스템 정보 아키텍처 (IA)</div>
+      <p class="section-desc">3단계 상태 구분 — <span style="background:#111;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">API</span> DB 연동 완료 &nbsp; <span style="background:#777;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">MOCK</span> UI만 완료(목데이터) &nbsp; <span style="background:#ddd;color:#777;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">PLAN</span> 기획/개발 필요</p>
+
+      <div class="ia-tree">
+        <div class="ia-branch">
+          <h4>진료 핵심</h4>
+          <ul>
+            <li><span class="ia-dot"></span>대시보드 <span class="ia-status" style="background:#777;color:#fff;">MOCK</span></li>
+            <li><span class="ia-dot"></span>환자 목록/검색 <span class="ia-status ia-live">API</span></li>
+            <li><span class="ia-dot"></span>환자 상세 <span class="ia-status" style="background:#777;color:#fff;">MOCK</span></li>
+            <li><span class="ia-dot"></span>신규 환자 등록 <span class="ia-status ia-live">API</span></li>
+            <li><span class="ia-dot"></span>진료 차트 목록 <span class="ia-status ia-live">API</span></li>
+            <li><span class="ia-dot"></span>차트 상세 (SOAP) <span class="ia-status ia-live">API</span></li>
+            <li><span class="ia-dot"></span>처방전 관리 <span class="ia-status" style="background:#777;color:#fff;">MOCK</span></li>
+          </ul>
+        </div>
+        <div class="ia-branch">
+          <h4>운영 관리</h4>
+          <ul>
+            <li><span class="ia-dot"></span>예약 관리 (캘린더) <span class="ia-status ia-live">API</span></li>
+            <li><span class="ia-dot"></span>CRM 고객관리 <span class="ia-status ia-live">API</span></li>
+            <li><span class="ia-dot"></span>수납/빌링 <span class="ia-status ia-dev">PLAN</span></li>
+            <li><span class="ia-dot"></span>검사실 (Lab) <span class="ia-status ia-dev">PLAN</span></li>
+            <li><span class="ia-dot"></span>마약류 관리 <span class="ia-status ia-dev">PLAN</span></li>
+          </ul>
+        </div>
+        <div class="ia-branch">
+          <h4>통계/분석</h4>
+          <ul>
+            <li><span class="ia-dot"></span>매출 통계 <span class="ia-status" style="background:#777;color:#fff;">MOCK</span></li>
+            <li><span class="ia-dot"></span>수납 통계 <span class="ia-status ia-dev">PLAN</span></li>
+            <li><span class="ia-dot"></span>진료 통계 <span class="ia-status ia-dev">PLAN</span></li>
+            <li><span class="ia-dot"></span>알림 센터 <span class="ia-status" style="background:#777;color:#fff;">MOCK</span></li>
+          </ul>
+        </div>
+        <div class="ia-branch">
+          <h4>시스템</h4>
+          <ul>
+            <li><span class="ia-dot"></span>로그인 <span class="ia-status" style="background:#777;color:#fff;">MOCK</span></li>
+            <li><span class="ia-dot"></span>설정 (병원 정보) <span class="ia-status" style="background:#777;color:#fff;">MOCK</span></li>
+            <li><span class="ia-dot"></span>설정 (계정) <span class="ia-status" style="background:#777;color:#fff;">MOCK</span></li>
+            <li><span class="ia-dot"></span>관리자 <span class="ia-status ia-dev">PLAN</span></li>
+            <li><span class="ia-dot"></span>전자서명 <span class="ia-status ia-dev">PLAN</span></li>
+            <li><span class="ia-dot"></span>약물 라이브러리 <span class="ia-status ia-dev">PLAN</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stat-row" style="margin-top:32px; margin-bottom:0;">
+        <div class="stat-box" style="border-left:3px solid #111;">
+          <div class="stat-num">6</div>
+          <div class="stat-label">API 연동 완료</div>
+        </div>
+        <div class="stat-box" style="border-left:3px solid #777;">
+          <div class="stat-num">7</div>
+          <div class="stat-label">UI만 완료 (Mock)</div>
+        </div>
+        <div class="stat-box" style="border-left:3px solid #ddd;">
+          <div class="stat-num">8</div>
+          <div class="stat-label">기획/개발 필요</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">4</div>
+          <div class="stat-label">DB 마이그레이션 완료</div>
+        </div>
+      </div>
+
+      <div class="info-block" style="margin-top:20px;">
+        <h5>백엔드 현황 상세</h5>
+        <div class="two-col">
+          <div>
+            <p style="font-weight:700; margin-bottom:6px; color:#111;">DB 스키마 (Prisma) — 설계 완료</p>
+            <ul>
+              <li>19개 모델 정의 완료 (schema.prisma)</li>
+              <li>4회 마이그레이션 적용됨</li>
+              <li>PostgreSQL + PrismaPg 어댑터</li>
+            </ul>
+          </div>
+          <div>
+            <p style="font-weight:700; margin-bottom:6px; color:#111;">API 라우트 — 부분 구현</p>
+            <ul>
+              <li>14개 API 그룹 중 핵심 CRUD 구현</li>
+              <li>환자/예약/차트/CRM → 실제 DB 연결</li>
+              <li>통계/설정/인증 → 미연결 또는 미구현</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">09</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 9.5: 개발 현황 매트릭스 (정확한 상태)
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-cert" style="background:#fafafa;">
+    <div class="slide-inner">
+      <div class="section-label">Section 05 — Detail Matrix</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">페이지별 개발 현황 매트릭스</div>
+      <p class="section-desc">각 페이지의 프론트엔드 UI, 백엔드 API, DB 연동 상태를 정확하게 구분.</p>
+
+      <div class="cert-table-wrap">
+        <table class="cert-table">
+          <thead>
+            <tr>
+              <th style="width:22%">페이지</th>
+              <th style="width:13%">프론트엔드</th>
+              <th style="width:13%">API 라우트</th>
+              <th style="width:13%">DB 연동</th>
+              <th style="width:39%">상세 현황</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>환자 목록/검색</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">연결</span></td>
+              <td>검색/필터/페이지네이션 실 DB 쿼리 동작. 가장 완성도 높은 페이지</td>
+            </tr>
+            <tr>
+              <td><strong>예약 관리 (캘린더)</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">연결</span></td>
+              <td>주간/월간 뷰, 날짜 범위 필터, 상태 관리 모두 실 DB</td>
+            </tr>
+            <tr>
+              <td><strong>진료 차트 목록</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">연결</span></td>
+              <td>환자 대기열 + 차트 목록 복합 쿼리, JOIN 동작</td>
+            </tr>
+            <tr>
+              <td><strong>CRM 고객관리</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">연결</span></td>
+              <td>고객 CRUD + 노트 + 액션 + SQL 집계. 가장 복잡한 API</td>
+            </tr>
+            <tr>
+              <td><strong>신규 환자 등록</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">연결</span></td>
+              <td>POST /api/patients 연동</td>
+            </tr>
+            <tr>
+              <td><strong>차트 상세 (SOAP)</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">연결</span></td>
+              <td>SOAP + 처방 + 이미지 복합 쿼리</td>
+            </tr>
+            <tr style="background:#fff8f0;">
+              <td><strong>환자 상세</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-wip">미연결</span></td>
+              <td>UI 완성, API 존재하나 <strong>프론트에서 하드코딩 목데이터 사용중</strong></td>
+            </tr>
+            <tr style="background:#fff8f0;">
+              <td><strong>처방전 관리</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-wip">미연결</span></td>
+              <td>UI 완성, API 존재하나 <strong>프론트에서 하드코딩 목데이터 사용중</strong></td>
+            </tr>
+            <tr style="background:#fff8f0;">
+              <td><strong>매출 통계</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-wip">미연결</span></td>
+              <td>Recharts UI 완성, 통계 API 존재하나 <strong>프론트에서 하드코딩</strong></td>
+            </tr>
+            <tr style="background:#fff8f0;">
+              <td><strong>대시보드</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-todo">없음</span></td>
+              <td><span class="chip chip-todo">없음</span></td>
+              <td>시계/인사 UI만 존재. 대시보드 집계 API 필요</td>
+            </tr>
+            <tr style="background:#fff8f0;">
+              <td><strong>로그인</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-todo">없음</span></td>
+              <td><span class="chip chip-todo">없음</span></td>
+              <td>UI만 존재. 인증 시스템 전체 미구현 (바이패스 리다이렉트)</td>
+            </tr>
+            <tr style="background:#fff8f0;">
+              <td><strong>설정</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-todo">없음</span></td>
+              <td><span class="chip chip-todo">없음</span></td>
+              <td>4개 탭 폼 UI 존재, 저장 로직 없음</td>
+            </tr>
+            <tr style="background:#fff8f0;">
+              <td><strong>알림 센터</strong></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-todo">없음</span></td>
+              <td><span class="chip chip-todo">없음</span></td>
+              <td>UI + 하드코딩 알림 데이터</td>
+            </tr>
+            <tr style="background:#f5f5f5;">
+              <td><strong>수납/빌링</strong></td>
+              <td><span class="chip chip-todo">미완</span></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">연결</span></td>
+              <td>API는 구현 완료, UI 미개발 ("서비스 준비중" 플레이스홀더)</td>
+            </tr>
+            <tr style="background:#f5f5f5;">
+              <td><strong>검사실 (Lab)</strong></td>
+              <td><span class="chip chip-todo">미완</span></td>
+              <td><span class="chip chip-done">완료</span></td>
+              <td><span class="chip chip-done">연결</span></td>
+              <td>API는 구현 완료, UI 미개발 (플레이스홀더)</td>
+            </tr>
+            <tr style="background:#f5f5f5;">
+              <td><strong>관리자/전자서명/마약류/라이브러리</strong></td>
+              <td><span class="chip chip-todo">미완</span></td>
+              <td><span class="chip chip-todo">없음</span></td>
+              <td><span class="chip chip-todo">없음</span></td>
+              <td>플레이스홀더만 존재. 기획 + 전체 개발 필요</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="page-num">10</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 10: DB SCHEMA
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-schema dark-slide">
+    <div class="slide-inner">
+      <div class="section-label">Section 06</div>
+      <div class="slide-divider"></div>
+      <div class="section-title" style="color:#fff;">데이터 모델 — 15개 핵심 엔티티</div>
+      <p style="font-size:15px; color:rgba(255,255,255,0.4); margin-bottom:40px;">Prisma ORM + PostgreSQL 기반. 환자 중심 관계형 데이터 구조.</p>
+
+      <div class="schema-grid">
+        <div class="schema-card">
+          <h5>Patient</h5>
+          <ul>
+            <li>chartNumber <span class="field-type">unique</span></li>
+            <li>name, birthDate, gender</li>
+            <li>phone, address</li>
+            <li>bloodType, allergies</li>
+            <li>insurance (5 types)</li>
+            <li>memo, isActive</li>
+          </ul>
+        </div>
+        <div class="schema-card">
+          <h5>MedicalChart</h5>
+          <ul>
+            <li>patientId, doctorId</li>
+            <li>visitDate</li>
+            <li>SOAP (S/O/A/P)</li>
+            <li>chiefComplaint</li>
+            <li>diagnosisCode/Name</li>
+            <li>-> prescriptions, images</li>
+          </ul>
+        </div>
+        <div class="schema-card">
+          <h5>Prescription</h5>
+          <ul>
+            <li>chartId, patientId</li>
+            <li>doctorId</li>
+            <li>status (3 states)</li>
+            <li>-> PrescriptionItem[]</li>
+            <li>&nbsp;&nbsp;medicineName, dosage</li>
+            <li>&nbsp;&nbsp;frequency, duration</li>
+          </ul>
+        </div>
+        <div class="schema-card">
+          <h5>Appointment</h5>
+          <ul>
+            <li>patientId, doctorId</li>
+            <li>date, time</li>
+            <li>status (6 states)</li>
+            <li>type (4 types)</li>
+            <li>department, symptom</li>
+            <li>memo</li>
+          </ul>
+        </div>
+        <div class="schema-card">
+          <h5>VitalSign</h5>
+          <ul>
+            <li>patientId, measuredAt</li>
+            <li>systolic, diastolic</li>
+            <li>pulse, temperature</li>
+            <li>respiration, spo2</li>
+            <li>height, weight</li>
+            <li>memo</li>
+          </ul>
+        </div>
+        <div class="schema-card">
+          <h5>Billing</h5>
+          <ul>
+            <li>patientId, billingDate</li>
+            <li>totalAmount</li>
+            <li>insurancePay</li>
+            <li>patientPay</li>
+            <li>status (4 states)</li>
+            <li>-> BillingItem[]</li>
+          </ul>
+        </div>
+        <div class="schema-card">
+          <h5>LabOrder</h5>
+          <ul>
+            <li>patientId, orderDate</li>
+            <li>category (5 types)</li>
+            <li>testCode, testName</li>
+            <li>status (5 states)</li>
+            <li>-> LabResult[]</li>
+            <li>&nbsp;&nbsp;value, unit, refRange</li>
+          </ul>
+        </div>
+        <div class="schema-card">
+          <h5>CrmCustomer</h5>
+          <ul>
+            <li>name, phone, age</li>
+            <li>status (5 states)</li>
+            <li>source, staff</li>
+            <li>interestedProcedures</li>
+            <li>-> CrmNote[]</li>
+            <li>-> CrmAction[]</li>
+          </ul>
+        </div>
+        <div class="schema-card">
+          <h5>User</h5>
+          <ul>
+            <li>email (unique)</li>
+            <li>name, password</li>
+            <li>role (5 roles)</li>
+            <li>specialty</li>
+            <li>licenseNo, phone</li>
+            <li>-> appointments, charts</li>
+          </ul>
+        </div>
+        <div class="schema-card">
+          <h5>기타 모델</h5>
+          <ul>
+            <li><strong>Room</strong> — 진료실 관리</li>
+            <li><strong>PatientQueue</strong> — 대기열</li>
+            <li><strong>ChartImage</strong> — 차트 이미지</li>
+            <li><strong>BillingItem</strong> — 수납 항목</li>
+            <li><strong>PrescriptionItem</strong></li>
+            <li><strong>LabResult</strong> — 검사 결과</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">10</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 11: 사용자 플로우 / 테스트 케이스
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-flows">
+    <div class="slide-inner">
+      <div class="section-label">Section 07</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">핵심 사용자 플로우</div>
+      <p class="section-desc">개발 완료된 주요 기능의 사용자 시나리오 및 테스트 케이스.</p>
+
+      <div class="flow-grid">
+        <div class="flow-card">
+          <h4><span class="flow-num">1</span> 신규 환자 등록 → 진료</h4>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-dot">1</div>
+              <div class="flow-step-text"><strong>로그인</strong> → 이메일/비밀번호 입력 → 대시보드</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">2</div>
+              <div class="flow-step-text"><strong>환자 등록</strong> → /patients/new → 인적사항(이름, 성별, 생년월일, 전화번호, 주소, 보험유형) 입력 → 차트번호 자동 생성</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">3</div>
+              <div class="flow-step-text"><strong>예약 생성</strong> → /appointments → 주간 캘린더에서 시간 슬롯 클릭 → 환자/의사/증상 입력</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">4</div>
+              <div class="flow-step-text"><strong>진료 차트 작성</strong> → /charts → SOAP 형식(주관적/객관적/평가/계획) 기록 → 진단코드 입력</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">5</div>
+              <div class="flow-step-text"><strong>처방전 생성</strong> → 차트 내 처방 추가 → 약물명/용량/횟수/일수/투여경로 입력</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-card">
+          <h4><span class="flow-num">2</span> 환자 검색 → 이력 조회</h4>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-dot">1</div>
+              <div class="flow-step-text"><strong>환자 검색</strong> → /patients → 이름/차트번호/전화번호로 검색 → 필터(보험유형, 상태)</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">2</div>
+              <div class="flow-step-text"><strong>환자 상세</strong> → 탭 전환: 개요/방문이력/처방이력/활력징후</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">3</div>
+              <div class="flow-step-text"><strong>방문 이력</strong> → 날짜별 진료 기록, 진단명, 담당의 확인</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">4</div>
+              <div class="flow-step-text"><strong>처방 이력</strong> → 처방 상태(대기/조제완료/취소) 필터링</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">5</div>
+              <div class="flow-step-text"><strong>활력징후</strong> → 혈압/맥박/체온/SpO2/체중 추이 확인</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-card">
+          <h4><span class="flow-num">3</span> CRM 고객 관리</h4>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-dot">1</div>
+              <div class="flow-step-text"><strong>고객 등록</strong> → /crm → 이름/전화/나이/성별/관심시술/유입경로 입력</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">2</div>
+              <div class="flow-step-text"><strong>상태 관리</strong> → 신규→상담중→관리중→완료/이탈위험 상태 전환</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">3</div>
+              <div class="flow-step-text"><strong>상담 노트</strong> → 상담 내용 및 담당자 기록</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">4</div>
+              <div class="flow-step-text"><strong>액션 추적</strong> → 후속 조치 등록(일정/완료 여부)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow-card">
+          <h4><span class="flow-num">4</span> 매출 통계 조회</h4>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="flow-dot">1</div>
+              <div class="flow-step-text"><strong>통계 접근</strong> → /statistics/revenue → 연도/월 선택</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">2</div>
+              <div class="flow-step-text"><strong>당월 vs 전월</strong> → 보험부담/본인부담/비급여/할인 등 항목별 비교</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">3</div>
+              <div class="flow-step-text"><strong>월별 추이</strong> → 12개월 매출 트렌드 차트 확인</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-dot">4</div>
+              <div class="flow-step-text"><strong>전년 대비</strong> → YoY 증감률 확인</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">11</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 12: 핵심 기능 상세
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-features">
+    <div class="slide-inner">
+      <div class="section-label">Section 07 — Features</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">개발 완료 핵심 기능</div>
+      <p class="section-desc">현재까지 구현된 기능의 상세 스펙. emrdv.vercel.app에서 확인 가능.</p>
+
+      <div class="feature-grid">
+        <div class="feat-card">
+          <h4>환자 관리</h4>
+          <p>차트번호 기반 환자 등록, 검색/필터, 인적사항 수정, VIP/보험 구분</p>
+          <div class="feat-items">
+            <span class="feat-item">CRUD API</span>
+            <span class="feat-item">검색 필터</span>
+            <span class="feat-item">페이지네이션</span>
+            <span class="feat-item">보험 구분</span>
+          </div>
+        </div>
+        <div class="feat-card">
+          <h4>예약 캘린더</h4>
+          <p>주간/월간 캘린더 뷰, 시간 슬롯 예약, 6단계 상태 관리, 컬러 코딩</p>
+          <div class="feat-items">
+            <span class="feat-item">주간 뷰</span>
+            <span class="feat-item">월간 뷰</span>
+            <span class="feat-item">상태 배지</span>
+            <span class="feat-item">9AM~6PM</span>
+          </div>
+        </div>
+        <div class="feat-card">
+          <h4>SOAP 차트</h4>
+          <p>Subjective/Objective/Assessment/Plan 구조, 진단코드, 활력징후 이상값 알림</p>
+          <div class="feat-items">
+            <span class="feat-item">SOAP 포맷</span>
+            <span class="feat-item">진단코드</span>
+            <span class="feat-item">Vital Alert</span>
+            <span class="feat-item">인쇄</span>
+          </div>
+        </div>
+        <div class="feat-card">
+          <h4>처방 관리</h4>
+          <p>약물 DB 연동, 용량/횟수/일수/투여경로, 상태 추적(대기/조제/취소)</p>
+          <div class="feat-items">
+            <span class="feat-item">처방 항목</span>
+            <span class="feat-item">약물 DB</span>
+            <span class="feat-item">상태 관리</span>
+            <span class="feat-item">이력 조회</span>
+          </div>
+        </div>
+        <div class="feat-card">
+          <h4>CRM 시스템</h4>
+          <p>고객 5단계 퍼널, 상담 노트, 액션 추적, 매출/방문 자동 집계</p>
+          <div class="feat-items">
+            <span class="feat-item">5단계 상태</span>
+            <span class="feat-item">노트</span>
+            <span class="feat-item">액션 추적</span>
+            <span class="feat-item">자동 집계</span>
+          </div>
+        </div>
+        <div class="feat-card">
+          <h4>매출 통계</h4>
+          <p>월별 매출 트렌드, 전월 대비, 보험/비보험 구분, YoY 비교</p>
+          <div class="feat-items">
+            <span class="feat-item">Recharts</span>
+            <span class="feat-item">월별 트렌드</span>
+            <span class="feat-item">전월 비교</span>
+            <span class="feat-item">보험 구분</span>
+          </div>
+        </div>
+        <div class="feat-card">
+          <h4>활력징후 기록</h4>
+          <p>혈압(수축기/이완기), 맥박, 체온, 호흡수, SpO2, 신장, 체중</p>
+          <div class="feat-items">
+            <span class="feat-item">7항목</span>
+            <span class="feat-item">이상값 경고</span>
+            <span class="feat-item">추이 확인</span>
+          </div>
+        </div>
+        <div class="feat-card">
+          <h4>환자 대기열</h4>
+          <p>진료실별 대기 환자 관리, 대기/진행/완료 상태</p>
+          <div class="feat-items">
+            <span class="feat-item">Room 기반</span>
+            <span class="feat-item">3단계 상태</span>
+            <span class="feat-item">실시간</span>
+          </div>
+        </div>
+        <div class="feat-card">
+          <h4>설정 시스템</h4>
+          <p>병원 정보, 계정 관리, 알림 설정, 시스템 백업 관리</p>
+          <div class="feat-items">
+            <span class="feat-item">4개 탭</span>
+            <span class="feat-item">병원 정보</span>
+            <span class="feat-item">프로필</span>
+            <span class="feat-item">알림</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">12</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 13: 기술 스택
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-tech">
+    <div class="slide-inner">
+      <div class="section-label">Section 07 — Tech Stack</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">기술 스택</div>
+      <p class="section-desc">모던 풀스택 웹 아키텍처. 성능과 개발 속도 모두 최적화.</p>
+
+      <div class="tech-grid">
+        <div class="tech-card">
+          <h5>Framework</h5>
+          <div class="tech-name">Next.js</div>
+          <div class="tech-ver">v16.1.6 (App Router)</div>
+        </div>
+        <div class="tech-card">
+          <h5>Frontend</h5>
+          <div class="tech-name">React</div>
+          <div class="tech-ver">v19.2.3 + TypeScript 5</div>
+        </div>
+        <div class="tech-card">
+          <h5>Database</h5>
+          <div class="tech-name">PostgreSQL</div>
+          <div class="tech-ver">Prisma ORM v7.4.2</div>
+        </div>
+        <div class="tech-card">
+          <h5>Styling</h5>
+          <div class="tech-name">TailwindCSS</div>
+          <div class="tech-ver">v4 + Custom UI</div>
+        </div>
+        <div class="tech-card">
+          <h5>State</h5>
+          <div class="tech-name">Zustand</div>
+          <div class="tech-ver">v5.0.11</div>
+        </div>
+        <div class="tech-card">
+          <h5>Charts</h5>
+          <div class="tech-name">Recharts</div>
+          <div class="tech-ver">v3.8.0</div>
+        </div>
+        <div class="tech-card">
+          <h5>Icons</h5>
+          <div class="tech-name">Lucide</div>
+          <div class="tech-ver">v0.577</div>
+        </div>
+        <div class="tech-card">
+          <h5>Deploy</h5>
+          <div class="tech-name">Vercel</div>
+          <div class="tech-ver">emrdv.vercel.app</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">13</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 14: 개발 로드맵
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-roadmap dark-slide">
+    <div class="slide-inner">
+      <div class="section-label">Section 08</div>
+      <div class="slide-divider"></div>
+      <div class="section-title" style="color:#fff;">개발 로드맵</div>
+      <p style="font-size:15px; color:rgba(255,255,255,0.4); margin-bottom:40px;">프로젝트 재개 시 단계별 개발 우선순위.</p>
+
+      <div class="roadmap-phases">
+        <div class="phase-card">
+          <div class="phase-label">Phase 1 — 핵심 완성</div>
+          <h4>인증 필수 기능</h4>
+          <ul>
+            <li><span class="p-dot p-done"></span>환자 등록/관리 (A001~A003)</li>
+            <li><span class="p-dot p-done"></span>처방 기록/관리 (A004~A006)</li>
+            <li><span class="p-dot p-done"></span>활력징후 기록 (A012)</li>
+            <li><span class="p-dot p-done"></span>SOAP 차트 (A014 일부)</li>
+            <li><span class="p-dot p-prog"></span>수납/빌링 완성 (Billing)</li>
+            <li><span class="p-dot p-prog"></span>검사 관리 완성 (Lab)</li>
+            <li><span class="p-dot p-todo"></span>약물알레르기 경고 (A009)</li>
+            <li><span class="p-dot p-todo"></span>진단목록 KCD 연계 (A007)</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-label">Phase 2 — 인증 준비</div>
+          <h4>보안/표준 적용</h4>
+          <ul>
+            <li><span class="p-dot p-todo"></span>접근 권한 관리 (F002)</li>
+            <li><span class="p-dot p-todo"></span>고유식별정보 암호화 (F005)</li>
+            <li><span class="p-dot p-todo"></span>개인정보 마스킹 (F006)</li>
+            <li><span class="p-dot p-todo"></span>접속기록 생성 (F008)</li>
+            <li><span class="p-dot p-todo"></span>전자서명 (F010)</li>
+            <li><span class="p-dot p-todo"></span>KCD-8 표준 연계 (E004)</li>
+            <li><span class="p-dot p-todo"></span>EDI 의약품코드 (E007)</li>
+            <li><span class="p-dot p-todo"></span>의무기록 11종 서식 (A014)</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-label">Phase 3 — 확장</div>
+          <h4>고도화 & 연동</h4>
+          <ul>
+            <li><span class="p-dot p-todo"></span>임상의사결정지원 (A017~A020)</li>
+            <li><span class="p-dot p-todo"></span>진료정보교류 (A021~A025)</li>
+            <li><span class="p-dot p-todo"></span>대기 TV 연동</li>
+            <li><span class="p-dot p-todo"></span>키오스크/카드리더기 연동</li>
+            <li><span class="p-dot p-todo"></span>PACS 영상 연결 (A011)</li>
+            <li><span class="p-dot p-todo"></span>환자 포털 (A026~A027)</li>
+            <li><span class="p-dot p-todo"></span>FHIR 기반 데이터 교류</li>
+            <li><span class="p-dot p-todo"></span>마약류 관리</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">14</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 15: 필요 문서 목록
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-docs">
+    <div class="slide-inner">
+      <div class="section-label">Section 08 — Documents</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">제작 필요 문서 목록</div>
+      <p class="section-desc">EMR 인증 신청 및 프로젝트 관리를 위해 작성이 필요한 문서.</p>
+
+      <div class="doc-grid">
+        <div class="doc-card">
+          <h4>인증 신청 문서</h4>
+          <div class="doc-desc">보건복지부 제품인증 신청 시 필수 제출</div>
+          <ul>
+            <li><span class="doc-check"></span>전자의무기록시스템 제품인증 신청서</li>
+            <li><span class="doc-check"></span>전자의무기록시스템 명세서</li>
+            <li><span class="doc-check"></span>자가점검 결과서</li>
+            <li><span class="doc-check"></span>인증기준 면제신청서 (해당 시)</li>
+            <li><span class="doc-check"></span>사업자등록증</li>
+            <li><span class="doc-check"></span>소프트웨어사업자 신고번호</li>
+          </ul>
+        </div>
+        <div class="doc-card">
+          <h4>기능 정의서</h4>
+          <div class="doc-desc">72개 인증기준별 기능 구현 명세</div>
+          <ul>
+            <li><span class="doc-check"></span>진료정보관리 기능 정의서 (A001~A016)</li>
+            <li><span class="doc-check"></span>임상의사결정지원 기능 정의서 (A017~A020)</li>
+            <li><span class="doc-check"></span>의료기관 정보공유 기능 정의서 (A021~A025)</li>
+            <li><span class="doc-check"></span>환자 정보제공 기능 정의서 (A026~A027)</li>
+          </ul>
+        </div>
+        <div class="doc-card">
+          <h4>보안/표준 문서</h4>
+          <div class="doc-desc">보안관리 및 표준관리 인증기준 적합성 증빙</div>
+          <ul>
+            <li><span class="doc-check"></span>보안관리 적합성 보고서 (F001~F012)</li>
+            <li><span class="doc-check"></span>표준관리 적용 명세서 (E001~E008)</li>
+            <li><span class="doc-check"></span>개인정보보호 영향평가서</li>
+            <li><span class="doc-check"></span>접근 권한 매트릭스</li>
+          </ul>
+        </div>
+        <div class="doc-card">
+          <h4>프로젝트 문서</h4>
+          <div class="doc-desc">내부 관리 및 개발 진행을 위한 문서</div>
+          <ul>
+            <li><span class="doc-check"></span>요구사항 명세서 (SRS)</li>
+            <li><span class="doc-check"></span>데이터베이스 설계서</li>
+            <li><span class="doc-check"></span>API 명세서</li>
+            <li><span class="doc-check"></span>UI/UX 와이어프레임</li>
+            <li><span class="doc-check"></span>테스트 계획서 및 결과서</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-block" style="margin-top: 24px;">
+        <h5>현재 보유 자료</h5>
+        <div class="two-col">
+          <ul>
+            <li>(유형1) 신규 제품인증 — 인증기준 72개 항목 전체</li>
+            <li>(유형1) 신규 제품인증 해설서 — 세부항목별 해설</li>
+          </ul>
+          <ul>
+            <li>전자의무기록시스템 제품인증 (갱신)신청서</li>
+            <li>개발 완료 EMR 프로토타입 (emrdv.vercel.app)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">15</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 16: 잔여 작업 상세 일정 추정
+  ═══════════════════════════════════════════ -->
+  <div class="slide" style="background:#fff;">
+    <div class="slide-inner">
+      <div class="section-label">Section 09 — Effort Estimation</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">잔여 작업량 & 일정 추정</div>
+      <p class="section-desc">Claude + 개발자 1인 협업 기준. 하루 8시간 풀타임, 기획 → 개발 → QA 포함.</p>
+
+      <div class="cert-table-wrap">
+        <table class="cert-table">
+          <thead>
+            <tr>
+              <th style="width:24%">작업 항목</th>
+              <th style="width:10%">기획</th>
+              <th style="width:10%">프론트</th>
+              <th style="width:10%">백엔드</th>
+              <th style="width:8%">QA</th>
+              <th style="width:10%">합계</th>
+              <th style="width:28%">비고</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#f0fff0;">
+              <td colspan="7" class="cert-category-header" style="background:#222;">A. Mock → API 연결 (UI 완성, 백엔드 존재)</td>
+            </tr>
+            <tr>
+              <td>환자 상세 → API 연결</td>
+              <td>-</td>
+              <td>0.5d</td>
+              <td>-</td>
+              <td>0.3d</td>
+              <td><strong>0.8d</strong></td>
+              <td>API 존재, fetch 연결만 필요</td>
+            </tr>
+            <tr>
+              <td>처방전 관리 → API 연결</td>
+              <td>-</td>
+              <td>0.5d</td>
+              <td>-</td>
+              <td>0.3d</td>
+              <td><strong>0.8d</strong></td>
+              <td>API 존재, fetch 연결만 필요</td>
+            </tr>
+            <tr>
+              <td>매출 통계 → API 연결</td>
+              <td>-</td>
+              <td>0.5d</td>
+              <td>0.3d</td>
+              <td>0.2d</td>
+              <td><strong>1.0d</strong></td>
+              <td>통계 API 약간 수정 필요</td>
+            </tr>
+            <tr>
+              <td>대시보드 집계 데이터</td>
+              <td>0.3d</td>
+              <td>0.5d</td>
+              <td>0.5d</td>
+              <td>0.2d</td>
+              <td><strong>1.5d</strong></td>
+              <td>집계 API 신규 개발 필요</td>
+            </tr>
+            <tr style="background:#f0f0ff;">
+              <td colspan="7" class="cert-category-header" style="background:#222;">B. API 존재, UI 개발 필요</td>
+            </tr>
+            <tr>
+              <td>수납/빌링 페이지</td>
+              <td>0.5d</td>
+              <td>2.0d</td>
+              <td>0.3d</td>
+              <td>0.5d</td>
+              <td><strong>3.3d</strong></td>
+              <td>API 완료, 복잡한 UI 기획+개발</td>
+            </tr>
+            <tr>
+              <td>검사실 (Lab) 페이지</td>
+              <td>0.5d</td>
+              <td>1.5d</td>
+              <td>0.3d</td>
+              <td>0.5d</td>
+              <td><strong>2.8d</strong></td>
+              <td>API 완료, UI 기획+개발</td>
+            </tr>
+            <tr style="background:#fff5f0;">
+              <td colspan="7" class="cert-category-header" style="background:#222;">C. 신규 기획 + 풀스택 개발</td>
+            </tr>
+            <tr>
+              <td>인증 시스템 (로그인/권한)</td>
+              <td>0.5d</td>
+              <td>1.0d</td>
+              <td>1.5d</td>
+              <td>0.5d</td>
+              <td><strong>3.5d</strong></td>
+              <td>JWT/세션 + 역할 기반 접근 제어</td>
+            </tr>
+            <tr>
+              <td>설정 저장 기능</td>
+              <td>0.2d</td>
+              <td>0.5d</td>
+              <td>0.5d</td>
+              <td>0.3d</td>
+              <td><strong>1.5d</strong></td>
+              <td>병원정보/계정/알림 CRUD</td>
+            </tr>
+            <tr>
+              <td>알림 시스템</td>
+              <td>0.5d</td>
+              <td>0.5d</td>
+              <td>1.0d</td>
+              <td>0.3d</td>
+              <td><strong>2.3d</strong></td>
+              <td>알림 모델 + 실시간 or 폴링</td>
+            </tr>
+            <tr>
+              <td>수납/진료 통계 페이지</td>
+              <td>0.3d</td>
+              <td>1.0d</td>
+              <td>1.0d</td>
+              <td>0.3d</td>
+              <td><strong>2.6d</strong></td>
+              <td>집계 쿼리 + 차트 UI</td>
+            </tr>
+            <tr>
+              <td>전자서명</td>
+              <td>0.5d</td>
+              <td>1.0d</td>
+              <td>1.0d</td>
+              <td>0.5d</td>
+              <td><strong>3.0d</strong></td>
+              <td>Canvas 서명 + 저장/검증</td>
+            </tr>
+            <tr>
+              <td>관리자 페이지</td>
+              <td>0.5d</td>
+              <td>1.5d</td>
+              <td>1.0d</td>
+              <td>0.3d</td>
+              <td><strong>3.3d</strong></td>
+              <td>사용자/권한/시스템 관리</td>
+            </tr>
+            <tr>
+              <td>약물 라이브러리</td>
+              <td>0.3d</td>
+              <td>1.0d</td>
+              <td>0.5d</td>
+              <td>0.3d</td>
+              <td><strong>2.1d</strong></td>
+              <td>약물 DB + 검색/관리 UI</td>
+            </tr>
+            <tr>
+              <td>마약류 관리</td>
+              <td>0.5d</td>
+              <td>1.0d</td>
+              <td>0.5d</td>
+              <td>0.3d</td>
+              <td><strong>2.3d</strong></td>
+              <td>규제 요건 반영 필요</td>
+            </tr>
+            <tr style="background:#f5f5f5;">
+              <td colspan="7" class="cert-category-header" style="background:#222;">D. 인증 추가 기능</td>
+            </tr>
+            <tr>
+              <td>동명이인 구분 (A003)</td>
+              <td>0.2d</td>
+              <td>0.5d</td>
+              <td>0.3d</td>
+              <td>0.2d</td>
+              <td><strong>1.2d</strong></td>
+              <td>구분자 UI + 알림 로직</td>
+            </tr>
+            <tr>
+              <td>다중 등록번호 통합 (A002)</td>
+              <td>0.3d</td>
+              <td>0.5d</td>
+              <td>0.5d</td>
+              <td>0.3d</td>
+              <td><strong>1.6d</strong></td>
+              <td>병합/연계 로직 구현</td>
+            </tr>
+            <tr>
+              <td>사회력/가족력 (A015,16)</td>
+              <td>0.3d</td>
+              <td>0.5d</td>
+              <td>0.5d</td>
+              <td>0.2d</td>
+              <td><strong>1.5d</strong></td>
+              <td>스키마 추가 + UI</td>
+            </tr>
+            <tr>
+              <td>의무기록 서식 확장 (A014)</td>
+              <td>0.5d</td>
+              <td>1.5d</td>
+              <td>0.5d</td>
+              <td>0.5d</td>
+              <td><strong>3.0d</strong></td>
+              <td>11종 서식 중 나머지 10종</td>
+            </tr>
+            <tr style="background:#111; color:#fff;">
+              <td><strong>합계</strong></td>
+              <td><strong>5.9d</strong></td>
+              <td><strong>14.5d</strong></td>
+              <td><strong>9.7d</strong></td>
+              <td><strong>5.0d</strong></td>
+              <td><strong>35.1d</strong></td>
+              <td><strong>약 7주 (풀타임 기준)</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="page-num">16</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 17: 간트 차트 (타임라인)
+  ═══════════════════════════════════════════ -->
+  <div class="slide" style="background:#111;">
+    <div class="slide-inner">
+      <div class="section-label" style="color:rgba(255,255,255,0.7);">Section 09 — Timeline</div>
+      <div class="slide-divider" style="background:rgba(255,255,255,0.5);"></div>
+      <div class="section-title" style="color:#fff;">프로젝트 타임라인 (Gantt)</div>
+      <p style="font-size:15px; color:rgba(255,255,255,0.7); margin-bottom:40px;">프로젝트 재개 시 7주 스프린트 계획. Claude + 개발자 1인 풀타임 기준.</p>
+
+      <!-- CSS Gantt Chart -->
+      <div style="width:100%; overflow-x:auto;">
+        <div style="min-width:900px;">
+          <!-- Header -->
+          <div style="display:grid; grid-template-columns: 200px repeat(7, 1fr); gap:0; margin-bottom:4px;">
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.9); padding:8px 12px;">작업</div>
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); padding:8px 8px; text-align:center; border-left:1px solid rgba(255,255,255,0.1);">Week 1</div>
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); padding:8px 8px; text-align:center; border-left:1px solid rgba(255,255,255,0.1);">Week 2</div>
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); padding:8px 8px; text-align:center; border-left:1px solid rgba(255,255,255,0.1);">Week 3</div>
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); padding:8px 8px; text-align:center; border-left:1px solid rgba(255,255,255,0.1);">Week 4</div>
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); padding:8px 8px; text-align:center; border-left:1px solid rgba(255,255,255,0.1);">Week 5</div>
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); padding:8px 8px; text-align:center; border-left:1px solid rgba(255,255,255,0.1);">Week 6</div>
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); padding:8px 8px; text-align:center; border-left:1px solid rgba(255,255,255,0.1);">Week 7</div>
+          </div>
+
+          <!-- Sprint 1: Quick Wins -->
+          <div style="font-size:10px; font-weight:800; color:rgba(255,255,255,0.7); padding:12px 12px 4px; letter-spacing:2px;">SPRINT 1 — QUICK WINS (Mock→API 연결)</div>
+
+          <div style="display:grid; grid-template-columns: 200px repeat(7, 1fr); gap:0; border-bottom:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:11px; color:rgba(255,255,255,0.9); padding:6px 12px;">환자상세/처방 API연결</div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.6); height:18px; border-radius:4px; width:60%;"></div></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+          </div>
+          <div style="display:grid; grid-template-columns: 200px repeat(7, 1fr); gap:0; border-bottom:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:11px; color:rgba(255,255,255,0.9); padding:6px 12px;">통계/대시보드 API연결</div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.6); height:18px; border-radius:4px; width:40%; margin-left:60%;"></div></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.6); height:18px; border-radius:4px; width:30%;"></div></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+          </div>
+
+          <!-- Sprint 2: Core -->
+          <div style="font-size:10px; font-weight:800; color:rgba(255,255,255,0.7); padding:12px 12px 4px; letter-spacing:2px;">SPRINT 2 — 핵심 기능 (인증 + 빌링 + Lab)</div>
+
+          <div style="display:grid; grid-template-columns: 200px repeat(7, 1fr); gap:0; border-bottom:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:11px; color:rgba(255,255,255,0.9); padding:6px 12px;">인증 시스템 (로그인/권한)</div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.4); height:18px; border-radius:4px; width:70%; margin-left:30%;"></div></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.4); height:18px; border-radius:4px; width:50%;"></div></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+          </div>
+          <div style="display:grid; grid-template-columns: 200px repeat(7, 1fr); gap:0; border-bottom:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:11px; color:rgba(255,255,255,0.9); padding:6px 12px;">수납/빌링 UI</div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.4); height:18px; border-radius:4px; width:100%;"></div></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.4); height:18px; border-radius:4px; width:30%;"></div></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+          </div>
+          <div style="display:grid; grid-template-columns: 200px repeat(7, 1fr); gap:0; border-bottom:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:11px; color:rgba(255,255,255,0.9); padding:6px 12px;">검사실(Lab) UI</div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.4); height:18px; border-radius:4px; width:100%;"></div></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+          </div>
+
+          <!-- Sprint 3: Extended -->
+          <div style="font-size:10px; font-weight:800; color:rgba(255,255,255,0.7); padding:12px 12px 4px; letter-spacing:2px;">SPRINT 3 — 확장 기능</div>
+
+          <div style="display:grid; grid-template-columns: 200px repeat(7, 1fr); gap:0; border-bottom:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:11px; color:rgba(255,255,255,0.9); padding:6px 12px;">설정/알림/전자서명</div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.2); height:18px; border-radius:4px; width:100%;"></div></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.2); height:18px; border-radius:4px; width:40%;"></div></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+          </div>
+          <div style="display:grid; grid-template-columns: 200px repeat(7, 1fr); gap:0; border-bottom:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:11px; color:rgba(255,255,255,0.9); padding:6px 12px;">관리자/약물라이브러리/마약류</div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.2); height:18px; border-radius:4px; width:60%; margin-left:40%;"></div></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.2); height:18px; border-radius:4px; width:80%;"></div></div>
+          </div>
+          <div style="display:grid; grid-template-columns: 200px repeat(7, 1fr); gap:0; border-bottom:1px solid rgba(255,255,255,0.12);">
+            <div style="font-size:11px; color:rgba(255,255,255,0.9); padding:6px 12px;">인증 추가기능 (A002,3,14,15,16)</div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="border-left:1px solid rgba(255,255,255,0.12);"></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.2); height:18px; border-radius:4px; width:100%;"></div></div>
+          </div>
+
+          <!-- QA -->
+          <div style="font-size:10px; font-weight:800; color:rgba(255,255,255,0.7); padding:12px 12px 4px; letter-spacing:2px;">QA & 통합 테스트</div>
+          <div style="display:grid; grid-template-columns: 200px repeat(7, 1fr); gap:0;">
+            <div style="font-size:11px; color:rgba(255,255,255,0.9); padding:6px 12px;">통합 QA (전 스프린트)</div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.08); height:10px; border-radius:2px; width:100%; margin-top:4px;"></div></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.08); height:10px; border-radius:2px; width:100%; margin-top:4px;"></div></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.1); height:10px; border-radius:2px; width:100%; margin-top:4px;"></div></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.1); height:10px; border-radius:2px; width:100%; margin-top:4px;"></div></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.12); height:10px; border-radius:2px; width:100%; margin-top:4px;"></div></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.12); height:10px; border-radius:2px; width:100%; margin-top:4px;"></div></div>
+            <div style="padding:6px 4px; border-left:1px solid rgba(255,255,255,0.12);"><div style="background:rgba(255,255,255,0.15); height:10px; border-radius:2px; width:100%; margin-top:4px;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Stats -->
+      <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:16px; margin-top:40px;">
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:20px; text-align:center;">
+          <div style="font-size:36px; font-weight:900; color:#fff;">35</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.7);">총 작업일 (man-day)</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:20px; text-align:center;">
+          <div style="font-size:36px; font-weight:900; color:#fff;">7</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.7);">주 (풀타임 기준)</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:20px; text-align:center;">
+          <div style="font-size:36px; font-weight:900; color:#fff;">3</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.7);">스프린트</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:20px; text-align:center;">
+          <div style="font-size:36px; font-weight:900; color:#fff;">16</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.7);">작업 항목</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.15);">17</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 18: 작업 비중 분석 (도넛 차트 대체)
+  ═══════════════════════════════════════════ -->
+  <div class="slide" style="background:#fafafa;">
+    <div class="slide-inner">
+      <div class="section-label">Section 09 — Breakdown</div>
+      <div class="slide-divider"></div>
+      <div class="section-title">작업 비중 분석</div>
+      <p class="section-desc">35일 총 공수의 영역별/작업유형별 분배.</p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px;">
+        <!-- 영역별 비중 Bar Chart -->
+        <div style="background:#fff; border:1px solid #eee; border-radius:14px; padding:28px;">
+          <h4 style="font-size:14px; font-weight:700; margin-bottom:20px; color:#111;">영역별 공수 비중</h4>
+
+          <div style="margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;"><span style="color:#666;">프론트엔드</span><span style="font-weight:700; color:#111;">14.5일 (41%)</span></div>
+            <div style="background:#f0f0f0; height:24px; border-radius:6px; overflow:hidden;">
+              <div style="background:#111; height:100%; width:41%; border-radius:6px; display:flex; align-items:center; padding-left:8px; font-size:10px; color:#fff; font-weight:700;">41%</div>
+            </div>
+          </div>
+          <div style="margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;"><span style="color:#666;">백엔드 API</span><span style="font-weight:700; color:#111;">9.7일 (28%)</span></div>
+            <div style="background:#f0f0f0; height:24px; border-radius:6px; overflow:hidden;">
+              <div style="background:#555; height:100%; width:28%; border-radius:6px; display:flex; align-items:center; padding-left:8px; font-size:10px; color:#fff; font-weight:700;">28%</div>
+            </div>
+          </div>
+          <div style="margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;"><span style="color:#666;">기획/설계</span><span style="font-weight:700; color:#111;">5.9일 (17%)</span></div>
+            <div style="background:#f0f0f0; height:24px; border-radius:6px; overflow:hidden;">
+              <div style="background:#999; height:100%; width:17%; border-radius:6px; display:flex; align-items:center; padding-left:8px; font-size:10px; color:#fff; font-weight:700;">17%</div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;"><span style="color:#666;">QA/테스트</span><span style="font-weight:700; color:#111;">5.0일 (14%)</span></div>
+            <div style="background:#f0f0f0; height:24px; border-radius:6px; overflow:hidden;">
+              <div style="background:#ccc; height:100%; width:14%; border-radius:6px; display:flex; align-items:center; padding-left:8px; font-size:10px; color:#666; font-weight:700;">14%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 스프린트별 비중 -->
+        <div style="background:#fff; border:1px solid #eee; border-radius:14px; padding:28px;">
+          <h4 style="font-size:14px; font-weight:700; margin-bottom:20px; color:#111;">스프린트별 공수 분배</h4>
+
+          <div style="margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;"><span style="color:#666;">Sprint 1 — Quick Wins</span><span style="font-weight:700; color:#111;">4.1일</span></div>
+            <div style="background:#f0f0f0; height:24px; border-radius:6px; overflow:hidden;">
+              <div style="background:#111; height:100%; width:12%; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:10px; color:#fff; font-weight:700;">W1~2</div>
+            </div>
+            <div style="font-size:10px; color:#999; margin-top:4px;">Mock→API 연결, 즉시 효과 확인 가능한 작업</div>
+          </div>
+          <div style="margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;"><span style="color:#666;">Sprint 2 — Core</span><span style="font-weight:700; color:#111;">16.1일</span></div>
+            <div style="background:#f0f0f0; height:24px; border-radius:6px; overflow:hidden;">
+              <div style="background:#555; height:100%; width:46%; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:10px; color:#fff; font-weight:700;">W2~4</div>
+            </div>
+            <div style="font-size:10px; color:#999; margin-top:4px;">인증/빌링/Lab — 가장 큰 공수 구간</div>
+          </div>
+          <div style="margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;"><span style="color:#666;">Sprint 3 — Extended</span><span style="font-weight:700; color:#111;">14.9일</span></div>
+            <div style="background:#f0f0f0; height:24px; border-radius:6px; overflow:hidden;">
+              <div style="background:#999; height:100%; width:42%; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:10px; color:#fff; font-weight:700;">W5~7</div>
+            </div>
+            <div style="font-size:10px; color:#999; margin-top:4px;">확장 기능 + 인증 추가 항목</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress visualization -->
+      <div style="margin-top:32px; background:#fff; border:1px solid #eee; border-radius:14px; padding:28px;">
+        <h4 style="font-size:14px; font-weight:700; margin-bottom:16px; color:#111;">현재 진행률 vs 완료 후 예상</h4>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+          <div>
+            <div style="font-size:11px; color:#999; margin-bottom:6px;">현재 (프로젝트 보류 시점)</div>
+            <div style="background:#f0f0f0; height:32px; border-radius:8px; overflow:hidden; position:relative;">
+              <div style="background:#111; height:100%; width:38%; border-radius:8px;"></div>
+              <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:12px; font-weight:800; color:#666;">38% 완료</div>
+            </div>
+            <div style="display:flex; gap:16px; margin-top:8px; font-size:10px; color:#999;">
+              <span>DB 스키마 설계 완료</span>
+              <span>핵심 API 6개 연동</span>
+              <span>UI 13페이지 완성</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px; color:#999; margin-bottom:6px;">7주 후 (전체 완료 시)</div>
+            <div style="background:#f0f0f0; height:32px; border-radius:8px; overflow:hidden; position:relative;">
+              <div style="background:#111; height:100%; width:100%; border-radius:8px;"></div>
+              <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:12px; font-weight:800; color:#fff;">100% 완료</div>
+            </div>
+            <div style="display:flex; gap:16px; margin-top:8px; font-size:10px; color:#999;">
+              <span>전체 API 연동</span>
+              <span>21개 페이지 완성</span>
+              <span>인증 시스템 포함</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">18</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SLIDE 19: CLOSING
+  ═══════════════════════════════════════════ -->
+  <div class="slide slide-closing dark-slide">
+    <div class="slide-inner" style="text-align:center; position:relative; z-index:1;">
+      <div class="section-label" style="margin-bottom:40px;">Conclusion</div>
+      <h2 style="font-size:48px; font-weight:900; margin-bottom:24px; letter-spacing:-1px;">EMR 프로젝트 현황 요약</h2>
+      <p style="font-size:16px; color:rgba(255,255,255,0.4); line-height:1.8; max-width:650px; margin:0 auto 48px;">
+        정부 인증 기준 72개 항목 리서치 완료<br>
+        KIMES 2026 경쟁사 분석 및 시장 인사이트 확보<br>
+        DB 스키마 19개 모델 설계 + 4회 마이그레이션 완료<br>
+        핵심 API 6개 실 DB 연동, UI 13페이지 완성<br>
+        프로젝트 재개 시 <strong style="color:rgba(255,255,255,0.7);">7주(35일)</strong>로 전체 완성 가능
+      </p>
+
+      <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-bottom:48px;">
+        <div style="text-align:center;">
+          <div style="font-size:52px; font-weight:900; color:#fff;">72</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.3);">인증기준 리서치</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:52px; font-weight:900; color:#fff;">38%</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.3);">현재 진행률</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:52px; font-weight:900; color:#fff;">19</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.3);">DB 모델</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:52px; font-weight:900; color:#fff;">7W</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.3);">완성까지</div>
+        </div>
+      </div>
+
+      <!-- Key Insight Box -->
+      <div style="max-width:700px; margin:0 auto; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:24px 32px; text-align:left;">
+        <div style="font-size:12px; font-weight:700; color:rgba(255,255,255,0.3); letter-spacing:1px; margin-bottom:8px;">KEY INSIGHT</div>
+        <p style="font-size:14px; color:rgba(255,255,255,0.5); line-height:1.7; text-align:left;">
+          DB 설계와 핵심 API는 이미 구현되어 있어, 잔여 작업의 <strong style="color:rgba(255,255,255,0.8);">41%가 프론트엔드</strong>(기존 Mock→API 연결 + 신규 UI)입니다.
+          Sprint 1(1~2주차)의 Quick Wins만으로도 환자관리/예약/차트/CRM 전체가 실 데이터로 동작하게 됩니다.
+        </p>
+      </div>
+
+      <div style="margin-top:48px; color:rgba(255,255,255,0.15); font-size:12px; font-weight:500; letter-spacing:2px;">
+        PROJECT STATUS: HOLD (TEMPORARY) &middot; 2026.03
+      </div>
+    </div>
+    <div class="page-num" style="color:rgba(255,255,255,0.15);">19</div>
+  </div>
+
+</body>
+</html>
