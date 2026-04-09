@@ -749,9 +749,10 @@ html, body { overflow: auto !important; height: auto !important; cursor: auto !i
 
 /* Slide 5: 왼쪽 정렬 */
 .s5w { align-items: flex-start !important; }
-.s5-right { align-items: flex-start !important; }
-.s5-right .chart-wrap { margin: 0 !important; }
-.s5-right > div:first-child { text-align: left !important; }
+#s5right { align-items: flex-start !important; display: flex !important; flex-direction: column !important; }
+#s5right > div { margin-left: 0 !important; margin-right: auto !important; }
+#s5right .chart-wrap { margin-left: 0 !important; }
+#s5right canvas { display: block !important; margin-left: 0 !important; }
 
 /* Remove 협의 필요 labels from government slides */
 .mc-budget { display: none !important; }
@@ -1124,9 +1125,9 @@ html, body { overflow: auto !important; height: auto !important; cursor: auto !i
         <strong style="color:#D97706">핵심 논리:</strong> 청년이 <strong style="color:#14213D">만들고</strong>, 시니어가 AI로 <strong style="color:#14213D">팔고 알린다.</strong> 경력 다양성이 오히려 마케팅·기획 역량의 원천.
       </div>
     </div>
-    <div class="s5-right" id="s5right">
-      <div>
-        <div style="text-align:center;font-size:13px;color:#A0A0A0;margin-bottom:12px;font-weight:600;">참가자 구성 (80명)</div>
+    <div class="s5-right" id="s5right" style="align-items:flex-start!important;">
+      <div style="margin-left:0;margin-right:auto;">
+        <div style="text-align:left;font-size:13px;color:#A0A0A0;margin-bottom:12px;font-weight:600;">참가자 구성 (80명)</div>
         <div class="chart-wrap">
           <canvas id="chart5" width="260" height="260"></canvas>
           <div class="chart-center"><span class="cn">80명</span><span class="cl">전국 모집</span></div>
