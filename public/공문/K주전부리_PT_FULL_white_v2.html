@@ -743,6 +743,17 @@ html, body { overflow: auto !important; height: auto !important; cursor: auto !i
 /* Slide 1: hide cube */
 .cs { display: none !important; }
 
+/* Slide 2: SVG circle clipping fix */
+.s2-venn svg { overflow: visible !important; }
+.s2-venn { padding: 16px; }
+
+/* Slide 5: 패키징 왼쪽 정렬 */
+.s5-right { align-items: flex-start !important; }
+
+/* Remove 협의 필요 labels from government slides */
+.mc-budget { display: none !important; }
+.panel-budget { display: none !important; }
+
 /* Slide 4: scale down flow nodes to fit width */
 #s4 { padding: 0 2vw !important; }
 .s4h { margin-bottom: 28px !important; }
@@ -1251,7 +1262,7 @@ html, body { overflow: auto !important; height: auto !important; cursor: auto !i
         </div>
         <div class="bg-item">
           <div class="bg-top"><span class="bg-name">카카오 (현물)</span><span><span class="bg-amt">2.9억</span><span class="bg-pct">23%</span></span></div>
-          <div class="bg-bar-wrap"><div class="bg-bar" id="bb1" style="background:#FFFFFF;width:0%"></div></div>
+          <div class="bg-bar-wrap"><div class="bg-bar" id="bb1" style="background:#D97706;width:0%"></div></div>
           <div class="bg-desc">AI캠퍼스 · 메이커스 · 플랫폼 현물 기여</div>
         </div>
         <div class="bg-item">
@@ -1348,7 +1359,7 @@ html, body { overflow: auto !important; height: auto !important; cursor: auto !i
     <div class="s10h" id="s10h">
       <div class="bcrum">정부 부처 협력 &nbsp;›&nbsp; <span>행정안전부 (1순위)</span></div>
       <div style="display:flex;justify-content:space-between;align-items:baseline;">
-        <div class="sec-title">행정안전부 &nbsp;<span style="color:#D97706;font-size:22px;">협의 필요</span></div>
+        <div class="sec-title">행정안전부</div>
         <span class="badge">소멸기금 × 지역자산 활성화</span>
       </div>
     </div>
@@ -1399,9 +1410,9 @@ html, body { overflow: auto !important; height: auto !important; cursor: auto !i
           <div class="mini-item">민간 협력 공공 디지털 자산(앱) 확보</div>
         </div>
         <div class="mini-section"><div class="mini-title">협조 요청</div>
-          <div class="mini-req"><div class="n">1</div><div>AI 교육 강사비 위탁계약 <strong style="color:#D97706">협의 필요</strong></div></div>
-          <div class="mini-req"><div class="n">2</div><div>콘텐츠 제작 지원비 <strong style="color:#D97706">협의 필요</strong></div></div>
-          <div class="mini-req"><div class="n">3</div><div>베테랑 앱 기부체납 위탁용역 <strong style="color:#D97706">협의 필요</strong></div></div>
+          <div class="mini-req"><div class="n">1</div><div>AI 교육 강사비 위탁계약</div></div>
+          <div class="mini-req"><div class="n">2</div><div>콘텐츠 제작 지원비</div></div>
+          <div class="mini-req"><div class="n">3</div><div>베테랑 앱 기부체납 위탁용역</div></div>
           <div class="mini-req"><div class="n">4</div><div>커리큘럼 전국 보급 검토</div></div>
         </div>
         <div class="mini-section"><div class="mini-title">기대 효과</div>
@@ -1459,7 +1470,7 @@ html, body { overflow: auto !important; height: auto !important; cursor: auto !i
     </div>
     <div class="three-panel">
       <div class="tp" id="tp0">
-        <div class="tp-head"><div class="tp-name">고용노동부</div><div class="tp-meta">4순위 &nbsp;·&nbsp; <span style="color:#D97706;">협의 필요</span></div></div>
+        <div class="tp-head"><div class="tp-name">고용노동부</div><div class="tp-meta">4순위</div></div>
         <div>
           <div class="tp-section-title">정책 과제</div>
           <div class="tp-items"><div class="tp-item">시니어 일자리 질적 전환 (단순→전문)</div><div class="tp-item">AI 직업훈련 신규 과정 개설 필요</div></div>
@@ -1481,7 +1492,7 @@ html, body { overflow: auto !important; height: auto !important; cursor: auto !i
         </div>
       </div>
       <div class="tp" id="tp1">
-        <div class="tp-head"><div class="tp-name">방송통신위원회</div><div class="tp-meta">5순위 &nbsp;·&nbsp; <span style="color:#D97706;">협의 필요</span></div></div>
+        <div class="tp-head"><div class="tp-name">방송통신위원회</div><div class="tp-meta">5순위</div></div>
         <div>
           <div class="tp-section-title">정책 과제</div>
           <div class="tp-items"><div class="tp-item">미디어센터 이용률 실적 필요</div><div class="tp-item">AI 미디어 리터러시 실전 교육 수요</div></div>
@@ -1504,7 +1515,7 @@ html, body { overflow: auto !important; height: auto !important; cursor: auto !i
       <div class="tp" id="tp2" style="opacity:.75">
         <div class="tp-head">
           <div class="tp-name">국토교통부</div>
-          <div class="tp-meta">6순위 &nbsp;·&nbsp; <span style="color:#D97706;">협의 필요</span></div>
+          <div class="tp-meta">6순위</div>
         </div>
         <div>
           <div class="tp-section-title">정책 과제</div>
