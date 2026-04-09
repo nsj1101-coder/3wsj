@@ -6,29 +6,188 @@
 <title>3w_sj</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+body { overflow: hidden; font-family: Tahoma, "Trebuchet MS", sans-serif; width: 100vw; height: 100vh; background: #000; }
 
-body {
-  overflow: hidden;
-  font-family: Tahoma, "Trebuchet MS", sans-serif;
-  width: 100vw; height: 100vh;
-  background: #000;
+/* ================================================
+   LOGIN SCREEN — Windows XP (pixel-accurate)
+   ================================================ */
+#loginScreen {
+  position: fixed; inset: 0; z-index: 99999;
+  display: flex; flex-direction: column;
+  background: radial-gradient(ellipse 120% 100% at 38% 48%,
+    #7090e0 0%, #5878d0 30%, #3a5cc0 65%, #2848b0 100%);
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+  transition: opacity 0.7s ease;
 }
 
-/* ===== DESKTOP ===== */
+/* Top thin strip */
+.xp-top-strip {
+  height: 22px; flex-shrink: 0;
+  background: linear-gradient(to bottom, #1424a0 0%, #1830b0 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Main content row */
+.xp-main {
+  flex: 1; display: flex; overflow: hidden;
+}
+
+/* Left panel */
+.xp-left {
+  flex: 0 0 42%;
+  display: flex; align-items: center; justify-content: center;
+}
+.xp-logo-block { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
+
+/* XP flag logo SVG container */
+.xp-flag { width: 72px; height: 64px; margin-bottom: 2px; }
+
+.xp-ms-word {
+  color: rgba(255,255,255,0.85); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.5px; margin-bottom: 1px;
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+}
+.xp-windows-text {
+  color: #fff; font-size: 34px; font-style: italic; font-weight: 400;
+  letter-spacing: 0.5px; line-height: 1;
+  text-shadow: 1px 1px 3px rgba(0,0,50,0.4);
+  display: flex; align-items: baseline; gap: 4px;
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+}
+.xp-xp-text {
+  color: #ff9f00; font-size: 18px; font-style: italic; font-weight: bold;
+}
+.xp-tagline-sep {
+  width: 100%; height: 1px; background: rgba(255,255,255,0.3);
+  margin: 10px 0 10px;
+}
+.xp-tagline {
+  color: rgba(255,255,255,0.92); font-size: 15px; font-style: italic;
+  font-weight: 300; text-shadow: 1px 1px 2px rgba(0,0,40,0.4);
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+}
+
+/* Vertical divider */
+.xp-vdiv {
+  width: 1px; flex-shrink: 0; margin: 28px 0;
+  background: linear-gradient(to bottom,
+    transparent 0%, rgba(255,255,255,0.45) 12%,
+    rgba(255,255,255,0.55) 50%, rgba(255,255,255,0.45) 88%, transparent 100%);
+}
+
+/* Right panel */
+.xp-right {
+  flex: 1; display: flex; align-items: center;
+  padding-left: 64px;
+}
+.xp-user-list { display: flex; flex-direction: column; gap: 4px; }
+
+/* User tile */
+.xp-user-tile {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 8px 12px 8px 8px; cursor: default;
+  border-radius: 4px; min-width: 320px;
+}
+.xp-user-tile:hover { background: rgba(255,255,255,0.06); }
+.xp-avatar {
+  width: 48px; height: 48px; flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.5); overflow: hidden;
+}
+.xp-user-info { flex: 1; padding-top: 2px; }
+.xp-uname {
+  color: #fff; font-size: 16px; font-weight: normal;
+  text-shadow: 1px 1px 2px rgba(0,0,40,0.5); margin-bottom: 4px;
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+}
+.xp-pw-hint {
+  color: rgba(255,255,255,0.75); font-size: 11px; font-style: italic;
+  margin-bottom: 6px; font-family: "Trebuchet MS", Tahoma, sans-serif;
+}
+.xp-pw-row { display: flex; align-items: center; gap: 4px; }
+#pwInput {
+  width: 160px; height: 26px;
+  border: 2px inset; border-color: #8090c0 #c8d4f0 #c8d4f0 #8090c0;
+  padding: 0 6px; font-size: 13px; font-family: Tahoma;
+  background: #fff; color: #000; outline: none;
+}
+#pwInput:focus { border-color: #4a6ad8 #b0c0e8 #b0c0e8 #4a6ad8; }
+#pwInput:disabled { background: #ddd; color: #888; cursor: not-allowed; }
+.xp-go-btn {
+  width: 28px; height: 26px;
+  background: linear-gradient(to bottom, #60b840, #3a9020);
+  border: 1px solid #2a7010;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #fff; font-size: 14px; font-weight: bold;
+}
+.xp-go-btn:hover { background: linear-gradient(to bottom, #70c850, #4aa030); }
+.xp-go-btn:active { filter: brightness(0.85); }
+.xp-help-btn {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: linear-gradient(to bottom, #6090d8, #3060b0);
+  border: 1px solid #2050a0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #fff; font-size: 12px; font-weight: bold;
+}
+.xp-err {
+  color: #ffee55; font-size: 11px; min-height: 15px; margin-top: 5px;
+  font-family: Tahoma, sans-serif;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+/* Lock overlay */
+#lockOverlay {
+  display: none; position: absolute; inset: 0;
+  background: rgba(10,15,60,0.92);
+  align-items: center; justify-content: center;
+  flex-direction: column; gap: 10px; border-radius: 4px; z-index: 10;
+}
+
+/* Bottom strip */
+.xp-bottom-strip {
+  height: 52px; flex-shrink: 0;
+  background: linear-gradient(to bottom, #1424a0 0%, #101890 100%);
+  border-top: 2px solid #f0a000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 18px;
+}
+.xp-power-wrap {
+  display: flex; align-items: center; gap: 10px;
+  cursor: pointer;
+}
+.xp-power-icon {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #f08020, #c04010);
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; color: #fff;
+}
+.xp-power-label {
+  color: #fff; font-size: 13px; font-weight: bold;
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+}
+.xp-bottom-info {
+  color: rgba(255,255,255,0.75); font-size: 10.5px;
+  text-align: right; line-height: 1.5;
+  font-family: Tahoma, sans-serif;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  15%,45%,75% { transform: translateX(-10px); }
+  30%,60%,90% { transform: translateX(10px); }
+}
+
+/* ================================================
+   DESKTOP
+   ================================================ */
 #desktop {
   width: 100%; height: calc(100vh - 30px);
   background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2832&auto=format&fit=crop') center bottom / cover;
-  padding: 14px;
-  display: flex; flex-direction: column; gap: 10px;
-  align-items: flex-start;
-  position: relative;
+  padding: 14px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start;
 }
-
 .desk-icon {
-  width: 80px;
-  display: flex; flex-direction: column; align-items: center;
-  padding: 6px 4px 4px;
-  cursor: pointer;
+  width: 80px; display: flex; flex-direction: column; align-items: center;
+  padding: 6px 4px 4px; cursor: pointer;
   border: 1px solid transparent; border-radius: 2px;
 }
 .desk-icon:hover { background: rgba(255,255,255,0.12); }
@@ -41,66 +200,54 @@ body {
 }
 .desk-icon.sel .dlbl { background: #0258e8; text-shadow: none; }
 
-/* ===== TASKBAR ===== */
+/* ================================================
+   TASKBAR
+   ================================================ */
 #taskbar {
   position: fixed; bottom: 0; left: 0; right: 0; height: 30px;
   background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #245edb 92%, #333 100%);
-  display: flex; align-items: center; justify-content: space-between;
-  z-index: 9999;
+  display: flex; align-items: center; justify-content: space-between; z-index: 9999;
 }
 #start-btn {
   height: 100%; border: none;
   background: linear-gradient(to bottom, #5cb65c, #3c8d3c);
-  border-radius: 0 14px 14px 0;
-  padding: 0 14px 0 8px;
+  border-radius: 0 14px 14px 0; padding: 0 14px 0 8px;
   display: flex; align-items: center; gap: 6px;
-  cursor: pointer; color: #fff;
-  font-weight: bold; font-style: italic; font-size: 14px;
-  font-family: Tahoma, sans-serif;
+  cursor: pointer; color: #fff; font-weight: bold; font-style: italic;
+  font-size: 14px; font-family: Tahoma, sans-serif;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-  box-shadow: inset 1px 1px rgba(255,255,255,0.3), inset -1px 0 rgba(0,0,0,0.15);
+  box-shadow: inset 1px 1px rgba(255,255,255,0.3);
 }
 #start-btn:active { filter: brightness(0.85); }
-.winlogo {
-  width: 16px; height: 16px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-  transform: skewY(-10deg);
-}
+.winlogo { width: 16px; height: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; transform: skewY(-10deg); }
 .winlogo s { display: block; }
 .winlogo s:nth-child(1) { background: #f04e23; }
 .winlogo s:nth-child(2) { background: #79c539; }
 .winlogo s:nth-child(3) { background: #00a4ef; }
 .winlogo s:nth-child(4) { background: #fdbb00; }
 #clock {
-  height: 100%;
-  background: linear-gradient(to bottom, #108ae5, #0e72bd);
+  height: 100%; background: linear-gradient(to bottom, #108ae5, #0e72bd);
   border-left: 1px solid rgba(255,255,255,0.15);
-  padding: 0 14px;
-  display: flex; align-items: center;
-  color: #fff; font-size: 11px;
+  padding: 0 14px; display: flex; align-items: center; color: #fff; font-size: 11px;
 }
 
-/* ===== EXPLORER WINDOW ===== */
+/* ================================================
+   EXPLORER WINDOW
+   ================================================ */
 .xpwin {
-  position: fixed;
-  left: 50%; top: 50%;
-  transform: translate(-50%, -50%);
+  position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);
   width: 900px; max-width: calc(100vw - 16px);
   height: 570px; max-height: calc(100vh - 60px);
   display: none; flex-direction: column;
-  background: #ece9d8;
-  border: 1px solid #00138c;
+  background: #ece9d8; border: 1px solid #00138c;
   border-radius: 8px 8px 0 0;
   box-shadow: 4px 4px 24px rgba(0,0,0,0.75), inset 0 0 0 1px #2050e0;
   z-index: 1000; overflow: hidden;
 }
 .xpwin.open { display: flex; }
-
-/* Title bar */
 .xptb {
   background: linear-gradient(to bottom, #0058e6 0%, #3a93ff 8%, #288eff 40%, #127dff 88%, #036bfe 100%);
-  padding: 4px 6px 4px 8px;
-  border-radius: 7px 7px 0 0;
+  padding: 4px 6px 4px 8px; border-radius: 7px 7px 0 0;
   display: flex; align-items: center; justify-content: space-between;
   cursor: move; flex-shrink: 0; height: 28px;
 }
@@ -115,50 +262,34 @@ body {
   border: 1px solid rgba(255,255,255,0.5);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; font-size: 10px; color: #222; font-family: Arial;
-  background: linear-gradient(to bottom, #fff 0%, #e8e6d9 100%);
-  line-height: 1;
+  background: linear-gradient(to bottom, #fff 0%, #e8e6d9 100%); line-height: 1;
 }
 .wxbtn:hover { filter: brightness(1.05); }
 .wxbtn-x {
   background: linear-gradient(to bottom, #e98b7e 0%, #d84534 50%, #c42713 51%, #e03b26 100%);
   color: #fff !important; border-color: rgba(255,255,255,0.3);
 }
-.wxbtn-x:hover { filter: brightness(1.1); }
-
-/* Menubar */
 .xpmb {
-  background: #ece9d8; padding: 1px;
-  border-bottom: 1px solid #fff;
+  background: #ece9d8; padding: 1px; border-bottom: 1px solid #fff;
   display: flex; flex-shrink: 0;
 }
 .xpmb span { padding: 3px 8px; font-size: 11px; cursor: default; }
 .xpmb span:hover { background: #316ac5; color: #fff; }
-
-/* Address bar */
 .xpab {
-  background: #ece9d8; padding: 3px 8px;
-  border-bottom: 1px solid #aca899;
-  display: flex; align-items: center; gap: 8px;
-  flex-shrink: 0;
+  background: #ece9d8; padding: 3px 8px; border-bottom: 1px solid #aca899;
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
 }
 .xpab label { font-size: 11px; color: #444; white-space: nowrap; }
 .xpab-input {
-  flex: 1; height: 22px;
-  background: #fff;
+  flex: 1; height: 22px; background: #fff;
   border: 1px solid #999; border-right-color: #e8e6d9; border-bottom-color: #e8e6d9;
   padding: 0 8px; font-size: 11px; font-family: Tahoma; color: #000;
   display: flex; align-items: center;
 }
-
-/* Body layout */
 .xpbody { display: flex; flex: 1; overflow: hidden; }
-
-/* Sidebar */
 .xpsb {
-  width: 172px; flex-shrink: 0;
-  background: #d3e5fa;
-  border-right: 1px solid #99c8fc;
-  padding: 6px 4px; font-size: 11px; overflow-y: auto;
+  width: 172px; flex-shrink: 0; background: #d3e5fa;
+  border-right: 1px solid #99c8fc; padding: 6px 4px; font-size: 11px; overflow-y: auto;
 }
 .xpsb-sec { margin-bottom: 10px; }
 .xpsb-sec h4 {
@@ -168,18 +299,12 @@ body {
   text-transform: uppercase; letter-spacing: 0.3px;
 }
 .xpsb-link {
-  padding: 3px 6px;
-  display: flex; align-items: center; gap: 5px;
+  padding: 3px 6px; display: flex; align-items: center; gap: 5px;
   color: #003399; cursor: pointer; font-size: 11px;
 }
 .xpsb-link:hover { background: rgba(255,255,255,0.6); }
 .xpsb-link svg { width: 16px; height: 14px; flex-shrink: 0; }
-#detailPane {
-  padding: 6px; font-size: 10px; color: #444; line-height: 1.6;
-  word-break: break-word;
-}
-
-/* File area */
+#detailPane { padding: 6px; font-size: 10px; color: #444; line-height: 1.6; word-break: break-word; }
 .xpfc {
   flex: 1; background: #fff;
   border-top: 1px solid #aca899; border-left: 1px solid #aca899;
@@ -189,27 +314,16 @@ body {
 .xpfc::-webkit-scrollbar { width: 16px; background: #e3e3e3; }
 .xpfc::-webkit-scrollbar-thumb { background: #c2c2c2; border: 1px solid; border-color: #f0eeeb #888 #888 #f0eeeb; }
 .xpfc::-webkit-scrollbar-button { display: block; height: 16px; background: #e3e3e3; border: 1px outset #e8e8e8; }
-
-.fgrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 112px);
-  gap: 4px;
-}
+.fgrid { display: grid; grid-template-columns: repeat(auto-fill, 112px); gap: 4px; }
 .fitem {
   width: 112px; padding: 8px 4px 6px;
   display: flex; flex-direction: column; align-items: center;
-  cursor: pointer;
-  border: 1px solid transparent; border-radius: 2px;
+  cursor: pointer; border: 1px solid transparent; border-radius: 2px;
 }
 .fitem:hover { background: rgba(49,106,197,0.08); border-color: rgba(49,106,197,0.35); }
 .fitem.sel { background: rgba(49,106,197,0.22); border-color: rgba(49,106,197,0.8); }
 .fitem svg { width: 40px; height: 40px; display: block; margin-bottom: 5px; }
-.fitem .fn {
-  font-size: 11px; color: #000; text-align: center;
-  line-height: 1.3; font-family: Tahoma; max-width: 104px;
-}
-
-/* Status bar */
+.fitem .fn { font-size: 11px; color: #000; text-align: center; line-height: 1.3; font-family: Tahoma; max-width: 104px; }
 .xpst {
   background: #ece9d8; border-top: 1px solid #aca899;
   padding: 3px 8px; font-size: 11px; color: #444;
@@ -221,6 +335,108 @@ body {
 </head>
 <body>
 
+<!-- ================================================ LOGIN SCREEN ================================================ -->
+<div id="loginScreen">
+
+  <!-- Top thin strip -->
+  <div class="xp-top-strip"></div>
+
+  <!-- Main content -->
+  <div class="xp-main">
+
+    <!-- LEFT: Windows XP logo + tagline -->
+    <div class="xp-left">
+      <div class="xp-logo-block">
+        <!-- Windows XP flag logo (SVG pinwheel) -->
+        <svg class="xp-flag" viewBox="0 0 72 64" xmlns="http://www.w3.org/2000/svg">
+          <!-- Red panel top-left -->
+          <path d="M34 30 C28 28 16 22 6 8 C12 18 22 26 34 30Z" fill="#f25022"/>
+          <path d="M34 30 C22 26 12 28 4 36 C10 30 22 30 34 30Z" fill="#f25022" opacity="0.7"/>
+          <!-- Green panel top-right -->
+          <path d="M38 30 C50 26 60 18 66 8 C58 22 48 28 38 30Z" fill="#7fba00"/>
+          <path d="M38 30 C50 30 62 30 68 36 C60 28 50 26 38 30Z" fill="#7fba00" opacity="0.7"/>
+          <!-- Blue panel bottom-left -->
+          <path d="M34 34 C22 38 12 46 4 58 C12 46 22 38 34 34Z" fill="#00a4ef"/>
+          <path d="M34 34 C22 38 10 42 4 36 C12 38 22 36 34 34Z" fill="#00a4ef" opacity="0.7"/>
+          <!-- Yellow panel bottom-right -->
+          <path d="M38 34 C50 38 60 46 68 58 C60 46 50 38 38 34Z" fill="#ffb900"/>
+          <path d="M38 34 C50 36 60 38 68 36 C62 42 50 38 38 34Z" fill="#ffb900" opacity="0.7"/>
+        </svg>
+
+        <div class="xp-ms-word">Microsoft<sup style="font-size:7px">®</sup></div>
+        <div class="xp-windows-text">
+          Windows<span class="xp-xp-text">XP</span>
+        </div>
+        <div class="xp-tagline-sep"></div>
+        <div class="xp-tagline">사용자 이름을 클릭하면 시작합니다</div>
+      </div>
+    </div>
+
+    <!-- Vertical divider -->
+    <div class="xp-vdiv"></div>
+
+    <!-- RIGHT: user list -->
+    <div class="xp-right">
+      <div class="xp-user-list">
+        <div class="xp-user-tile" id="userTile" style="position:relative;">
+          <!-- Chess piece avatar -->
+          <div class="xp-avatar">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+              <rect width="48" height="48" fill="#6b4c11"/>
+              <rect width="48" height="48" fill="#7d5c20" opacity="0.6"/>
+              <!-- King piece -->
+              <rect x="21" y="6"  width="6" height="2" fill="#e8c860" rx="0.5"/>
+              <rect x="23" y="4"  width="2" height="6" fill="#e8c860"/>
+              <ellipse cx="24" cy="16" rx="5" ry="4" fill="#e8c860"/>
+              <polygon points="19,20 29,20 31,36 17,36" fill="#e8c860"/>
+              <rect x="15" y="36" width="18" height="3" fill="#e8c860" rx="1"/>
+              <rect x="17" y="39" width="14" height="2" fill="#c8a840" rx="0.5"/>
+              <!-- Small piece right -->
+              <ellipse cx="38" cy="30" rx="4" ry="3" fill="#d4b050" opacity="0.8"/>
+              <polygon points="35,33 41,33 42,42 34,42" fill="#d4b050" opacity="0.8"/>
+              <rect x="33" y="42" width="10" height="2" fill="#b89030" rx="0.5" opacity="0.8"/>
+            </svg>
+          </div>
+
+          <div class="xp-user-info">
+            <div class="xp-uname">3w_sj</div>
+            <div class="xp-pw-hint">암호를 입력하세요</div>
+            <div class="xp-pw-row">
+              <input type="password" id="pwInput" maxlength="20"
+                onkeydown="if(event.key==='Enter')tryLogin()" autofocus>
+              <div class="xp-go-btn" onclick="tryLogin()">&#9658;</div>
+              <div class="xp-help-btn">?</div>
+            </div>
+            <div class="xp-err" id="pwErr"></div>
+          </div>
+
+          <!-- Lock overlay -->
+          <div id="lockOverlay" style="display:none; position:absolute; inset:0; background:rgba(10,15,60,0.9); align-items:center; justify-content:center; flex-direction:column; gap:8px; border-radius:4px;">
+            <div style="font-size:36px;">🔒</div>
+            <div style="color:#ff5555; font-size:13px; font-weight:bold;">접근 차단됨</div>
+            <div style="color:rgba(255,255,255,0.6); font-size:10px; text-align:center; line-height:1.5;">비밀번호 3회 오류<br>관리자에게 문의하세요</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /xp-main -->
+
+  <!-- Bottom strip -->
+  <div class="xp-bottom-strip">
+    <div class="xp-power-wrap" onclick="alert('컴퓨터를 끄려면 로그인이 필요합니다.')">
+      <div class="xp-power-icon">⏻</div>
+      <span class="xp-power-label">컴퓨터 끄기</span>
+    </div>
+    <div class="xp-bottom-info">
+      로그온하면 계정을 추가하거나 변경할 수 있습니다.<br>
+      제어판을 열고 사용자 계정을 클릭하세요.
+    </div>
+  </div>
+
+</div>
+
+<!-- ================================================ DESKTOP ================================================ -->
 <div id="desktop"></div>
 
 <div id="taskbar">
@@ -248,17 +464,14 @@ body {
       <div class="wxbtn wxbtn-x" id="closeBtn">✕</div>
     </div>
   </div>
-
   <div class="xpmb">
     <span>파일(F)</span><span>편집(E)</span><span>보기(V)</span>
     <span>즐겨찾기(A)</span><span>도구(T)</span><span>도움말(H)</span>
   </div>
-
   <div class="xpab">
     <label>주소(D)</label>
     <div class="xpab-input" id="addrBar">C:\3wsj\보고서</div>
   </div>
-
   <div class="xpbody">
     <div class="xpsb">
       <div class="xpsb-sec">
@@ -267,24 +480,14 @@ body {
           <svg viewBox="0 0 16 14"><rect x="0" y="3" width="16" height="9" rx="1" fill="#FFBB00"/><path d="M0 3 H6 L8 1 H12 Q14 1 15 3 H0Z" fill="#F5C343"/></svg>
           새 폴더 만들기
         </div>
-        <div class="xpsb-link">
-          <svg viewBox="0 0 16 14"><circle cx="8" cy="7" r="6" fill="#4a9de0"/><ellipse cx="8" cy="7" rx="3" ry="6" fill="none" stroke="#fff" stroke-width="0.9"/><line x1="2" y1="7" x2="14" y2="7" stroke="#fff" stroke-width="0.9"/></svg>
-          이 파일 게시
-        </div>
       </div>
       <div class="xpsb-sec">
         <h4>다른 위치</h4>
         <div class="xpsb-link" onclick="openFolder('reports')">
-          <svg viewBox="0 0 16 14"><rect x="0" y="3" width="16" height="9" rx="1" fill="#FFBB00"/><path d="M0 3 H6 L8 1 H12 Q14 1 15 3 H0Z" fill="#F5C343"/></svg>
-          보고서
+          <svg viewBox="0 0 16 14"><rect x="0" y="3" width="16" height="9" rx="1" fill="#FFBB00"/><path d="M0 3 H6 L8 1 H12 Q14 1 15 3 H0Z" fill="#F5C343"/></svg>보고서
         </div>
         <div class="xpsb-link" onclick="openFolder('external')">
-          <svg viewBox="0 0 16 14"><rect x="0" y="3" width="16" height="9" rx="1" fill="#FFBB00"/><path d="M0 3 H6 L8 1 H12 Q14 1 15 3 H0Z" fill="#F5C343"/></svg>
-          외부용
-        </div>
-        <div class="xpsb-link">
-          <svg viewBox="0 0 16 14"><rect x="1" y="1" width="14" height="10" rx="1" fill="#aaa"/><rect x="2" y="2" width="12" height="8" fill="#87ceeb"/><rect x="3" y="11" width="10" height="2" fill="#888" rx="1"/></svg>
-          내 컴퓨터
+          <svg viewBox="0 0 16 14"><rect x="0" y="3" width="16" height="9" rx="1" fill="#FFBB00"/><path d="M0 3 H6 L8 1 H12 Q14 1 15 3 H0Z" fill="#F5C343"/></svg>외부용
         </div>
       </div>
       <div class="xpsb-sec">
@@ -292,12 +495,10 @@ body {
         <div id="detailPane">항목을 선택하면 여기에 세부 정보가 표시됩니다.</div>
       </div>
     </div>
-
     <div class="xpfc">
       <div class="fgrid" id="fileGrid"></div>
     </div>
   </div>
-
   <div class="xpst">
     <span id="stCount">0개 항목</span>
     <span id="stSel"></span>
@@ -305,45 +506,103 @@ body {
 </div>
 
 <script>
-// ======== DATA ========
+/* ================================================
+   LOGIN LOGIC
+   ================================================ */
+const PASS = '1101';
+let attempts = 0;
+let locked = false;
+
+// Session check — skip login if already authed this session
+if (sessionStorage.getItem('3wsj_auth') === '1') {
+  document.getElementById('loginScreen').style.display = 'none';
+}
+
+function tryLogin() {
+  if (locked) return;
+  const val = document.getElementById('pwInput').value;
+
+  if (val === PASS) {
+    sessionStorage.setItem('3wsj_auth', '1');
+    const ls = document.getElementById('loginScreen');
+    ls.style.opacity = '0';
+    setTimeout(() => ls.style.display = 'none', 700);
+  } else {
+    attempts++;
+    document.getElementById('pwInput').value = '';
+
+    if (attempts >= 3) {
+      locked = true;
+      document.getElementById('pwInput').disabled = true;
+      document.getElementById('pwErr').textContent = '';
+      document.getElementById('lockOverlay').style.display = 'flex';
+      spamAlerts();
+    } else {
+      const remaining = 3 - attempts;
+      document.getElementById('pwErr').textContent =
+        `암호가 잘못되었습니다. ${remaining}번의 기회가 남았습니다.`;
+      const tile = document.getElementById('userTile');
+      tile.style.animation = 'shake 0.45s';
+      tile.addEventListener('animationend', () => tile.style.animation = '', { once: true });
+    }
+  }
+}
+
+function spamAlerts() {
+  const msgs = [
+    '⛔ 접속 거부 — 비밀번호 오류 횟수 초과',
+    '🔒 보안 경고: 무단 접근 시도가 감지되었습니다',
+    '⚠️ 시스템 잠금 — 관리자에게 문의하세요',
+    '❌ ACCESS DENIED — 비밀번호 3회 오류',
+    '🚨 경고: 이 접근 시도는 기록됩니다',
+    '🛑 계정이 잠겼습니다 — ACCOUNT LOCKED',
+    '⛔ 보안 정책 위반: 접근 불가',
+    '🔴 시스템 보안 차단 활성화됨',
+  ];
+  for (let i = 0; i < 20; i++) {
+    alert(msgs[i % msgs.length]);
+  }
+}
+
+/* ================================================
+   FOLDER DATA
+   ================================================ */
 const FOLDERS = {
   reports: {
-    label: '보고서',
-    path: 'C:\\3wsj\\보고서',
+    label: '보고서', path: 'C:\\3wsj\\보고서',
     files: [
-      { name: 'EMR 프로젝트 보고서',    type: 'doc', href: './emr-project-report.html' },
-      { name: 'KIMES Expo 보고서',       type: 'doc', href: './kimes-expo-report.html' },
-      { name: '리파인 의원 보고서',      type: 'doc', href: './refine-clinic-report.html' },
-      { name: '회사소개서 (2026)',        type: 'web', href: './company-profile.html' },
-      { name: 'K-주전부리 PT FULL',      type: 'ppt', href: './공문/K주전부리_PT_FULL.html' },
-      { name: '행안부 제안서',            type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_행안부_제안서_슬라이드_v2.html' },
-      { name: '문체부 제안서',            type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_문체부_제안서_슬라이드.html' },
-      { name: '고용부 제안서',            type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_고용부_제안서_슬라이드_1.html' },
-      { name: '중기부 제안서',            type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_중기부_제안서_슬라이드_1.html' },
-      { name: '방통위 제안서',            type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_방통위_제안서_슬라이드_1.html' },
-      { name: '국토부 제안서',            type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_국토부_제안서_슬라이드_1.html' },
-      { name: '4/8 내부회의 QnA',        type: 'txt', href: './공문/회의/K주전부리_내부정리_QnA_20260408.html' },
+      { name: 'EMR 프로젝트 보고서',   type: 'doc', href: './emr-project-report.html' },
+      { name: 'KIMES Expo 보고서',      type: 'doc', href: './kimes-expo-report.html' },
+      { name: '리파인 의원 보고서',     type: 'doc', href: './refine-clinic-report.html' },
+      { name: '회사소개서 (2026)',       type: 'web', href: './company-profile.html' },
+      { name: 'K-주전부리 PT FULL',     type: 'ppt', href: './공문/K주전부리_PT_FULL.html' },
+      { name: '행안부 제안서',           type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_행안부_제안서_슬라이드_v2.html' },
+      { name: '문체부 제안서',           type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_문체부_제안서_슬라이드.html' },
+      { name: '고용부 제안서',           type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_고용부_제안서_슬라이드_1.html' },
+      { name: '중기부 제안서',           type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_중기부_제안서_슬라이드_1.html' },
+      { name: '방통위 제안서',           type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_방통위_제안서_슬라이드_1.html' },
+      { name: '국토부 제안서',           type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_국토부_제안서_슬라이드_1.html' },
+      { name: '4/8 내부회의 QnA',       type: 'txt', href: './공문/회의/K주전부리_내부정리_QnA_20260408.html' },
     ]
   },
   external: {
-    label: '외부용',
-    path: 'C:\\3wsj\\외부용',
+    label: '외부용', path: 'C:\\3wsj\\외부용',
     files: [
-      { name: 'MediChart EMR',    type: 'url', href: 'https://emrdv.vercel.app/login' },
-      { name: 'MediW (RS_dv)',    type: 'url', href: 'https://rs-dv.vercel.app' },
+      { name: 'MediChart EMR',   type: 'url', href: 'https://emrdv.vercel.app/login' },
+      { name: 'MediW (RS_dv)',   type: 'url', href: 'https://rs-dv.vercel.app' },
     ]
   }
 };
 
-// ======== ICONS ========
+/* ================================================
+   ICONS
+   ================================================ */
 const ICON = {
   folder: `<svg viewBox="0 0 48 42" xmlns="http://www.w3.org/2000/svg">
     <path d="M2 38V14Q2 12 4 12H20L23 9Q24 8 25 8H44Q46 8 46 10V38Q46 40 44 40H4Q2 40 2 38Z" fill="#F5C343"/>
     <path d="M2 18H46V38Q46 40 44 40H4Q2 40 2 38V18Z" fill="#FFBB00"/>
     <rect x="2" y="18" width="44" height="2" fill="#D08800" opacity="0.35"/>
-    <rect x="2" y="36" width="44" height="2" fill="#D08800" opacity="0.2"/>
   </svg>`,
-
   doc: `<svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
     <polygon points="4,2 28,2 36,10 36,46 4,46" fill="#fff"/>
     <polygon points="28,2 28,10 36,10" fill="#d0d0d0"/>
@@ -355,7 +614,6 @@ const ICON = {
     <rect x="9" y="32" width="15" height="2" fill="#4a8fd8" rx="1"/>
     <text x="20" y="13" font-size="7" fill="#4a8fd8" text-anchor="middle" font-family="Arial" font-weight="bold">HTML</text>
   </svg>`,
-
   ppt: `<svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
     <rect x="2" y="2" width="36" height="44" rx="2" fill="#C83C08"/>
     <rect x="2" y="2" width="36" height="22" rx="2" fill="#D85020"/>
@@ -364,9 +622,7 @@ const ICON = {
     <rect x="19" y="24" width="2" height="11" fill="rgba(255,255,255,0.4)"/>
     <rect x="10" y="35" width="20" height="3" fill="rgba(255,255,255,0.4)" rx="1"/>
     <rect x="5" y="39" width="30" height="2" fill="rgba(255,255,255,0.25)" rx="1"/>
-    <rect x="5" y="43" width="24" height="2" fill="rgba(255,255,255,0.25)" rx="1"/>
   </svg>`,
-
   web: `<svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
     <polygon points="4,2 28,2 36,10 36,46 4,46" fill="#fff"/>
     <polygon points="28,2 28,10 36,10" fill="#d0d0d0"/>
@@ -378,9 +634,7 @@ const ICON = {
     <line x1="9" y1="30" x2="31" y2="30" stroke="#0054E3" stroke-width="1"/>
     <line x1="11" y1="23" x2="29" y2="23" stroke="#0054E3" stroke-width="0.8"/>
     <line x1="11" y1="37" x2="29" y2="37" stroke="#0054E3" stroke-width="0.8"/>
-    <line x1="20" y1="19" x2="20" y2="41" stroke="#0054E3" stroke-width="1"/>
   </svg>`,
-
   txt: `<svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
     <polygon points="4,2 28,2 36,10 36,46 4,46" fill="#fffff4"/>
     <polygon points="28,2 28,10 36,10" fill="#e8e8d0"/>
@@ -392,9 +646,7 @@ const ICON = {
     <rect x="9" y="28" width="16" height="1.5" fill="#888" rx="0.5"/>
     <rect x="9" y="32" width="19" height="1.5" fill="#888" rx="0.5"/>
     <rect x="9" y="36" width="13" height="1.5" fill="#888" rx="0.5"/>
-    <rect x="9" y="40" width="17" height="1.5" fill="#888" rx="0.5"/>
   </svg>`,
-
   url: `<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
     <circle cx="20" cy="20" r="18" fill="#1a55cc"/>
     <circle cx="20" cy="20" r="18" fill="none" stroke="#0c3a96" stroke-width="1"/>
@@ -403,13 +655,14 @@ const ICON = {
     <line x1="4" y1="12" x2="36" y2="12" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
     <line x1="4" y1="28" x2="36" y2="28" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
     <line x1="20" y1="2" x2="20" y2="38" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/>
-    <text x="20" y="25" font-size="8" fill="#fff" text-anchor="middle" font-family="Arial" font-weight="bold" opacity="0.9">www</text>
+    <text x="20" y="25" font-size="8" fill="#fff" text-anchor="middle" font-family="Arial" font-weight="bold">www</text>
   </svg>`,
 };
 
-// ======== DESKTOP ICONS ========
+/* ================================================
+   DESKTOP ICONS
+   ================================================ */
 const desktop = document.getElementById('desktop');
-
 ['reports', 'external'].forEach(id => {
   const f = FOLDERS[id];
   const el = document.createElement('div');
@@ -423,12 +676,13 @@ const desktop = document.getElementById('desktop');
   });
   desktop.appendChild(el);
 });
-
 desktop.addEventListener('click', () => {
   document.querySelectorAll('.desk-icon').forEach(i => i.classList.remove('sel'));
 });
 
-// ======== WINDOW LOGIC ========
+/* ================================================
+   EXPLORER WINDOW
+   ================================================ */
 const win = document.getElementById('win');
 const winTitle = document.getElementById('winTitle');
 const addrBar = document.getElementById('addrBar');
@@ -469,13 +723,13 @@ function openFolder(id) {
     win.style.top = '50%';
   }
   win.classList.add('open');
-  win.style.zIndex = 1000;
 }
 
-// ======== DRAGGABLE ========
+/* ================================================
+   DRAG
+   ================================================ */
 const titleBar = document.getElementById('titleBar');
-let isDragging = false;
-let dragInitX, dragInitY;
+let isDragging = false, dragInitX, dragInitY;
 
 titleBar.addEventListener('mousedown', e => {
   if (e.target.classList.contains('wxbtn')) return;
@@ -488,17 +742,17 @@ titleBar.addEventListener('mousedown', e => {
   dragInitY = e.clientY - rect.top;
   e.preventDefault();
 });
-
 document.addEventListener('mousemove', e => {
   if (!isDragging) return;
   e.preventDefault();
   win.style.left = (e.clientX - dragInitX) + 'px';
   win.style.top = (e.clientY - dragInitY) + 'px';
 });
-
 document.addEventListener('mouseup', () => { isDragging = false; });
 
-// ======== CLOCK ========
+/* ================================================
+   CLOCK
+   ================================================ */
 function tick() {
   const d = new Date();
   let h = d.getHours(), m = d.getMinutes();
