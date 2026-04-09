@@ -1,167 +1,513 @@
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>3w_sj Index</title>
-    <style>
-      :root {
-        --bg: #ffffff;
-        --text: #0a0a0a;
-        --muted: #64748b;
-        --border: #e5e7eb;
-        --secondary: #f1f5f9;
-      }
-      body {
-        margin: 0;
-        padding: 40px 16px;
-        font-family: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-      }
-      .wrap {
-        max-width: 980px;
-        margin: 0 auto;
-      }
-      h1 {
-        margin: 0;
-        font-size: 28px;
-        letter-spacing: -0.5px;
-      }
-      p {
-        margin: 10px 0 0;
-        color: var(--muted);
-      }
-      .section {
-        margin: 24px 0 34px;
-      }
-      .section h2 {
-        margin: 0 0 12px;
-        font-size: 18px;
-      }
-      .hint {
-        margin: 0 0 14px;
-        font-size: 12px;
-        color: var(--muted);
-      }
-      .grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
-      @media (min-width: 768px) {
-        .grid {
-          grid-template-columns: 2fr 2fr;
-        }
-      }
-      .card {
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 16px;
-        background: #fff;
-      }
-      .badge {
-        display: inline-block;
-        font-size: 12px;
-        padding: 6px 10px;
-        border-radius: 999px;
-        background: var(--secondary);
-        color: #0f172a;
-        margin-bottom: 10px;
-      }
-      h3 {
-        margin: 0 0 8px;
-        font-size: 16px;
-      }
-      .desc {
-        margin: 0 0 12px;
-        font-size: 13px;
-        color: var(--muted);
-      }
-      .btn {
-        display: inline-block;
-        text-decoration: none;
-        font-weight: 600;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 10px 12px;
-        color: var(--text);
-        background: #fff;
-      }
-      .btn:hover {
-        background: var(--secondary);
-      }
-      footer {
-        margin-top: 24px;
-        font-size: 12px;
-        color: var(--muted);
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <header>
-        <h1>3w_sj</h1>
-        <p>보고서 리스트 + 외부 페이지 모음</p>
-      </header>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3w_sj</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 
-      <div class="section">
-        <h2>보고서</h2>
-        <div class="hint">아래 항목은 새 창에서 열립니다.</div>
-        <div class="grid">
-          <div class="card">
-            <div class="badge">보고서</div>
-            <h3>EMR 프로젝트 보고서</h3>
-            <p class="desc">EMR 프로젝트 진행 결과/정리 문서.</p>
-            <a class="btn" href="./emr-project-report.html" target="_blank" rel="noopener noreferrer">열기</a>
-          </div>
-          <div class="card">
-            <div class="badge">보고서</div>
-            <h3>KIMES Expo 보고서</h3>
-            <p class="desc">KIMES Expo 관련 자료 정리본.</p>
-            <a class="btn" href="./kimes-expo-report.html" target="_blank" rel="noopener noreferrer">열기</a>
-          </div>
-          <div class="card">
-            <div class="badge">사이트</div>
-            <h3>회사소개서(Company Profile)</h3>
-            <p class="desc">회사소개서 HTML 랜딩(2026 버전).</p>
-            <a class="btn" href="./company-profile.html" target="_blank" rel="noopener noreferrer">열기</a>
-          </div>
-          <div class="card">
-            <div class="badge">보고서</div>
-            <h3>리파인 의원 프로젝트 보고서</h3>
-            <p class="desc">피부과 의원 웹사이트 구축 진행 현황 보고서.</p>
-            <a class="btn" href="./refine-clinic-report.html" target="_blank" rel="noopener noreferrer">열기</a>
-          </div>
-        </div>
-      </div>
+body {
+  overflow: hidden;
+  font-family: Tahoma, "Trebuchet MS", sans-serif;
+  width: 100vw; height: 100vh;
+  background: #000;
+}
 
-      <div class="section">
-        <h2>페이지(외부)</h2>
-        <div class="hint">아래 항목은 새 창에서 열립니다.</div>
-        <div class="grid">
-          <div class="card">
-            <div class="badge">EMR</div>
-            <h3>MediChart EMR</h3>
-            <p class="desc">로그인 페이지로 이동합니다.</p>
-            <a
-              class="btn"
-              href="https://emrdv.vercel.app/login"
-              target="_blank"
-              rel="noopener noreferrer"
-            >열기</a>
-          </div>
-          <div class="card">
-            <div class="badge">MediW</div>
-            <h3>MediW</h3>
-            <p class="desc">메인 플랫폼 페이지로 이동합니다.</p>
-            <a class="btn" href="https://rs-dv.vercel.app" target="_blank" rel="noopener noreferrer">열기</a>
-          </div>
-        </div>
-      </div>
+/* ===== DESKTOP ===== */
+#desktop {
+  width: 100%; height: calc(100vh - 30px);
+  background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2832&auto=format&fit=crop') center bottom / cover;
+  padding: 14px;
+  display: flex; flex-direction: column; gap: 10px;
+  align-items: flex-start;
+  position: relative;
+}
 
-      <footer>© 3w_sj</footer>
+.desk-icon {
+  width: 80px;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 6px 4px 4px;
+  cursor: pointer;
+  border: 1px solid transparent; border-radius: 2px;
+}
+.desk-icon:hover { background: rgba(255,255,255,0.12); }
+.desk-icon.sel { background: rgba(49,106,197,0.45); border-color: rgba(255,255,255,0.65); }
+.desk-icon svg { width: 48px; height: 44px; display: block; margin-bottom: 5px; }
+.desk-icon .dlbl {
+  color: #fff; font-size: 11px; text-align: center; line-height: 1.3;
+  text-shadow: 1px 1px 1px #000, -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000;
+  padding: 1px 3px; max-width: 76px;
+}
+.desk-icon.sel .dlbl { background: #0258e8; text-shadow: none; }
+
+/* ===== TASKBAR ===== */
+#taskbar {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 30px;
+  background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #245edb 92%, #333 100%);
+  display: flex; align-items: center; justify-content: space-between;
+  z-index: 9999;
+}
+#start-btn {
+  height: 100%; border: none;
+  background: linear-gradient(to bottom, #5cb65c, #3c8d3c);
+  border-radius: 0 14px 14px 0;
+  padding: 0 14px 0 8px;
+  display: flex; align-items: center; gap: 6px;
+  cursor: pointer; color: #fff;
+  font-weight: bold; font-style: italic; font-size: 14px;
+  font-family: Tahoma, sans-serif;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  box-shadow: inset 1px 1px rgba(255,255,255,0.3), inset -1px 0 rgba(0,0,0,0.15);
+}
+#start-btn:active { filter: brightness(0.85); }
+.winlogo {
+  width: 16px; height: 16px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  transform: skewY(-10deg);
+}
+.winlogo s { display: block; }
+.winlogo s:nth-child(1) { background: #f04e23; }
+.winlogo s:nth-child(2) { background: #79c539; }
+.winlogo s:nth-child(3) { background: #00a4ef; }
+.winlogo s:nth-child(4) { background: #fdbb00; }
+#clock {
+  height: 100%;
+  background: linear-gradient(to bottom, #108ae5, #0e72bd);
+  border-left: 1px solid rgba(255,255,255,0.15);
+  padding: 0 14px;
+  display: flex; align-items: center;
+  color: #fff; font-size: 11px;
+}
+
+/* ===== EXPLORER WINDOW ===== */
+.xpwin {
+  position: fixed;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px; max-width: calc(100vw - 16px);
+  height: 570px; max-height: calc(100vh - 60px);
+  display: none; flex-direction: column;
+  background: #ece9d8;
+  border: 1px solid #00138c;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 4px 4px 24px rgba(0,0,0,0.75), inset 0 0 0 1px #2050e0;
+  z-index: 1000; overflow: hidden;
+}
+.xpwin.open { display: flex; }
+
+/* Title bar */
+.xptb {
+  background: linear-gradient(to bottom, #0058e6 0%, #3a93ff 8%, #288eff 40%, #127dff 88%, #036bfe 100%);
+  padding: 4px 6px 4px 8px;
+  border-radius: 7px 7px 0 0;
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: move; flex-shrink: 0; height: 28px;
+}
+.xptb-l {
+  color: #fff; font-size: 12px; font-weight: bold;
+  text-shadow: 1px 1px 0 rgba(0,0,80,0.5);
+  display: flex; align-items: center; gap: 6px;
+}
+.xptb-r { display: flex; gap: 2px; }
+.wxbtn {
+  width: 21px; height: 21px; border-radius: 3px;
+  border: 1px solid rgba(255,255,255,0.5);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 10px; color: #222; font-family: Arial;
+  background: linear-gradient(to bottom, #fff 0%, #e8e6d9 100%);
+  line-height: 1;
+}
+.wxbtn:hover { filter: brightness(1.05); }
+.wxbtn-x {
+  background: linear-gradient(to bottom, #e98b7e 0%, #d84534 50%, #c42713 51%, #e03b26 100%);
+  color: #fff !important; border-color: rgba(255,255,255,0.3);
+}
+.wxbtn-x:hover { filter: brightness(1.1); }
+
+/* Menubar */
+.xpmb {
+  background: #ece9d8; padding: 1px;
+  border-bottom: 1px solid #fff;
+  display: flex; flex-shrink: 0;
+}
+.xpmb span { padding: 3px 8px; font-size: 11px; cursor: default; }
+.xpmb span:hover { background: #316ac5; color: #fff; }
+
+/* Address bar */
+.xpab {
+  background: #ece9d8; padding: 3px 8px;
+  border-bottom: 1px solid #aca899;
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+}
+.xpab label { font-size: 11px; color: #444; white-space: nowrap; }
+.xpab-input {
+  flex: 1; height: 22px;
+  background: #fff;
+  border: 1px solid #999; border-right-color: #e8e6d9; border-bottom-color: #e8e6d9;
+  padding: 0 8px; font-size: 11px; font-family: Tahoma; color: #000;
+  display: flex; align-items: center;
+}
+
+/* Body layout */
+.xpbody { display: flex; flex: 1; overflow: hidden; }
+
+/* Sidebar */
+.xpsb {
+  width: 172px; flex-shrink: 0;
+  background: #d3e5fa;
+  border-right: 1px solid #99c8fc;
+  padding: 6px 4px; font-size: 11px; overflow-y: auto;
+}
+.xpsb-sec { margin-bottom: 10px; }
+.xpsb-sec h4 {
+  background: linear-gradient(to right, #1e4aaa, #3060d0);
+  color: #fff; font-size: 10px; font-weight: bold;
+  padding: 3px 6px; margin-bottom: 3px;
+  text-transform: uppercase; letter-spacing: 0.3px;
+}
+.xpsb-link {
+  padding: 3px 6px;
+  display: flex; align-items: center; gap: 5px;
+  color: #003399; cursor: pointer; font-size: 11px;
+}
+.xpsb-link:hover { background: rgba(255,255,255,0.6); }
+.xpsb-link svg { width: 16px; height: 14px; flex-shrink: 0; }
+#detailPane {
+  padding: 6px; font-size: 10px; color: #444; line-height: 1.6;
+  word-break: break-word;
+}
+
+/* File area */
+.xpfc {
+  flex: 1; background: #fff;
+  border-top: 1px solid #aca899; border-left: 1px solid #aca899;
+  border-bottom: 1px solid #f0eeeb; border-right: 1px solid #f0eeeb;
+  margin: 2px; overflow-y: auto; padding: 10px;
+}
+.xpfc::-webkit-scrollbar { width: 16px; background: #e3e3e3; }
+.xpfc::-webkit-scrollbar-thumb { background: #c2c2c2; border: 1px solid; border-color: #f0eeeb #888 #888 #f0eeeb; }
+.xpfc::-webkit-scrollbar-button { display: block; height: 16px; background: #e3e3e3; border: 1px outset #e8e8e8; }
+
+.fgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 112px);
+  gap: 4px;
+}
+.fitem {
+  width: 112px; padding: 8px 4px 6px;
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer;
+  border: 1px solid transparent; border-radius: 2px;
+}
+.fitem:hover { background: rgba(49,106,197,0.08); border-color: rgba(49,106,197,0.35); }
+.fitem.sel { background: rgba(49,106,197,0.22); border-color: rgba(49,106,197,0.8); }
+.fitem svg { width: 40px; height: 40px; display: block; margin-bottom: 5px; }
+.fitem .fn {
+  font-size: 11px; color: #000; text-align: center;
+  line-height: 1.3; font-family: Tahoma; max-width: 104px;
+}
+
+/* Status bar */
+.xpst {
+  background: #ece9d8; border-top: 1px solid #aca899;
+  padding: 3px 8px; font-size: 11px; color: #444;
+  flex-shrink: 0; display: flex; align-items: center; gap: 20px;
+}
+.xpst span { border-right: 1px inset #aca899; padding-right: 20px; }
+.xpst span:last-child { border-right: none; padding-right: 0; }
+</style>
+</head>
+<body>
+
+<div id="desktop"></div>
+
+<div id="taskbar">
+  <button id="start-btn">
+    <div class="winlogo"><s></s><s></s><s></s><s></s></div>
+    start
+  </button>
+  <div id="clock"></div>
+</div>
+
+<!-- Explorer Window -->
+<div class="xpwin" id="win">
+  <div class="xptb" id="titleBar">
+    <div class="xptb-l">
+      <svg width="16" height="14" viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="3" width="16" height="9" rx="1" fill="#FFBB00"/>
+        <path d="M0 3 H6 L8 1 H12 Q14 1 15 3 H0Z" fill="#F5C343"/>
+        <rect x="0" y="4.5" width="16" height="1" fill="#E09400" opacity="0.35"/>
+      </svg>
+      <span id="winTitle">3wsj — 보고서</span>
     </div>
-  </body>
-</html>
+    <div class="xptb-r">
+      <div class="wxbtn">_</div>
+      <div class="wxbtn" style="font-size:12px">□</div>
+      <div class="wxbtn wxbtn-x" id="closeBtn">✕</div>
+    </div>
+  </div>
 
+  <div class="xpmb">
+    <span>파일(F)</span><span>편집(E)</span><span>보기(V)</span>
+    <span>즐겨찾기(A)</span><span>도구(T)</span><span>도움말(H)</span>
+  </div>
+
+  <div class="xpab">
+    <label>주소(D)</label>
+    <div class="xpab-input" id="addrBar">C:\3wsj\보고서</div>
+  </div>
+
+  <div class="xpbody">
+    <div class="xpsb">
+      <div class="xpsb-sec">
+        <h4>파일 및 폴더 작업</h4>
+        <div class="xpsb-link">
+          <svg viewBox="0 0 16 14"><rect x="0" y="3" width="16" height="9" rx="1" fill="#FFBB00"/><path d="M0 3 H6 L8 1 H12 Q14 1 15 3 H0Z" fill="#F5C343"/></svg>
+          새 폴더 만들기
+        </div>
+        <div class="xpsb-link">
+          <svg viewBox="0 0 16 14"><circle cx="8" cy="7" r="6" fill="#4a9de0"/><ellipse cx="8" cy="7" rx="3" ry="6" fill="none" stroke="#fff" stroke-width="0.9"/><line x1="2" y1="7" x2="14" y2="7" stroke="#fff" stroke-width="0.9"/></svg>
+          이 파일 게시
+        </div>
+      </div>
+      <div class="xpsb-sec">
+        <h4>다른 위치</h4>
+        <div class="xpsb-link" onclick="openFolder('reports')">
+          <svg viewBox="0 0 16 14"><rect x="0" y="3" width="16" height="9" rx="1" fill="#FFBB00"/><path d="M0 3 H6 L8 1 H12 Q14 1 15 3 H0Z" fill="#F5C343"/></svg>
+          보고서
+        </div>
+        <div class="xpsb-link" onclick="openFolder('external')">
+          <svg viewBox="0 0 16 14"><rect x="0" y="3" width="16" height="9" rx="1" fill="#FFBB00"/><path d="M0 3 H6 L8 1 H12 Q14 1 15 3 H0Z" fill="#F5C343"/></svg>
+          외부용
+        </div>
+        <div class="xpsb-link">
+          <svg viewBox="0 0 16 14"><rect x="1" y="1" width="14" height="10" rx="1" fill="#aaa"/><rect x="2" y="2" width="12" height="8" fill="#87ceeb"/><rect x="3" y="11" width="10" height="2" fill="#888" rx="1"/></svg>
+          내 컴퓨터
+        </div>
+      </div>
+      <div class="xpsb-sec">
+        <h4>세부 정보</h4>
+        <div id="detailPane">항목을 선택하면 여기에 세부 정보가 표시됩니다.</div>
+      </div>
+    </div>
+
+    <div class="xpfc">
+      <div class="fgrid" id="fileGrid"></div>
+    </div>
+  </div>
+
+  <div class="xpst">
+    <span id="stCount">0개 항목</span>
+    <span id="stSel"></span>
+  </div>
+</div>
+
+<script>
+// ======== DATA ========
+const FOLDERS = {
+  reports: {
+    label: '보고서',
+    path: 'C:\\3wsj\\보고서',
+    files: [
+      { name: 'EMR 프로젝트 보고서',    type: 'doc', href: './emr-project-report.html' },
+      { name: 'KIMES Expo 보고서',       type: 'doc', href: './kimes-expo-report.html' },
+      { name: '리파인 의원 보고서',      type: 'doc', href: './refine-clinic-report.html' },
+      { name: '회사소개서 (2026)',        type: 'web', href: './company-profile.html' },
+      { name: 'K-주전부리 PT FULL',      type: 'ppt', href: './공문/K주전부리_PT_FULL.html' },
+      { name: '행안부 제안서',            type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_행안부_제안서_슬라이드_v2.html' },
+      { name: '문체부 제안서',            type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_문체부_제안서_슬라이드.html' },
+      { name: '고용부 제안서',            type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_고용부_제안서_슬라이드_1.html' },
+      { name: '중기부 제안서',            type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_중기부_제안서_슬라이드_1.html' },
+      { name: '방통위 제안서',            type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_방통위_제안서_슬라이드_1.html' },
+      { name: '국토부 제안서',            type: 'ppt', href: './공문/부처별 제안서 슬라이드(초안)/K주전부리_국토부_제안서_슬라이드_1.html' },
+      { name: '4/8 내부회의 QnA',        type: 'txt', href: './공문/회의/K주전부리_내부정리_QnA_20260408.html' },
+    ]
+  },
+  external: {
+    label: '외부용',
+    path: 'C:\\3wsj\\외부용',
+    files: [
+      { name: 'MediChart EMR',    type: 'url', href: 'https://emrdv.vercel.app/login' },
+      { name: 'MediW (RS_dv)',    type: 'url', href: 'https://rs-dv.vercel.app' },
+    ]
+  }
+};
+
+// ======== ICONS ========
+const ICON = {
+  folder: `<svg viewBox="0 0 48 42" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 38V14Q2 12 4 12H20L23 9Q24 8 25 8H44Q46 8 46 10V38Q46 40 44 40H4Q2 40 2 38Z" fill="#F5C343"/>
+    <path d="M2 18H46V38Q46 40 44 40H4Q2 40 2 38V18Z" fill="#FFBB00"/>
+    <rect x="2" y="18" width="44" height="2" fill="#D08800" opacity="0.35"/>
+    <rect x="2" y="36" width="44" height="2" fill="#D08800" opacity="0.2"/>
+  </svg>`,
+
+  doc: `<svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="4,2 28,2 36,10 36,46 4,46" fill="#fff"/>
+    <polygon points="28,2 28,10 36,10" fill="#d0d0d0"/>
+    <polyline points="4,2 28,2" fill="none" stroke="#bbb" stroke-width="0.8"/>
+    <polyline points="4,2 4,46 36,46 36,10 28,2 28,10 36,10" fill="none" stroke="#bbb" stroke-width="0.8"/>
+    <rect x="9" y="17" width="22" height="2" fill="#4a8fd8" rx="1"/>
+    <rect x="9" y="22" width="18" height="2" fill="#4a8fd8" rx="1"/>
+    <rect x="9" y="27" width="20" height="2" fill="#4a8fd8" rx="1"/>
+    <rect x="9" y="32" width="15" height="2" fill="#4a8fd8" rx="1"/>
+    <text x="20" y="13" font-size="7" fill="#4a8fd8" text-anchor="middle" font-family="Arial" font-weight="bold">HTML</text>
+  </svg>`,
+
+  ppt: `<svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="2" width="36" height="44" rx="2" fill="#C83C08"/>
+    <rect x="2" y="2" width="36" height="22" rx="2" fill="#D85020"/>
+    <rect x="6" y="5" width="28" height="18" rx="1" fill="rgba(255,255,255,0.92)"/>
+    <text x="20" y="18" font-size="13" fill="#C83C08" text-anchor="middle" font-family="Arial" font-weight="bold">PT</text>
+    <rect x="19" y="24" width="2" height="11" fill="rgba(255,255,255,0.4)"/>
+    <rect x="10" y="35" width="20" height="3" fill="rgba(255,255,255,0.4)" rx="1"/>
+    <rect x="5" y="39" width="30" height="2" fill="rgba(255,255,255,0.25)" rx="1"/>
+    <rect x="5" y="43" width="24" height="2" fill="rgba(255,255,255,0.25)" rx="1"/>
+  </svg>`,
+
+  web: `<svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="4,2 28,2 36,10 36,46 4,46" fill="#fff"/>
+    <polygon points="28,2 28,10 36,10" fill="#d0d0d0"/>
+    <polyline points="4,2 28,2" fill="none" stroke="#bbb" stroke-width="0.8"/>
+    <polyline points="4,2 4,46 36,46 36,10 28,2 28,10 36,10" fill="none" stroke="#bbb" stroke-width="0.8"/>
+    <circle cx="20" cy="30" r="12" fill="#e8f0fe"/>
+    <circle cx="20" cy="30" r="11" fill="none" stroke="#0054E3" stroke-width="1.2"/>
+    <ellipse cx="20" cy="30" rx="5.5" ry="11" fill="none" stroke="#0054E3" stroke-width="1"/>
+    <line x1="9" y1="30" x2="31" y2="30" stroke="#0054E3" stroke-width="1"/>
+    <line x1="11" y1="23" x2="29" y2="23" stroke="#0054E3" stroke-width="0.8"/>
+    <line x1="11" y1="37" x2="29" y2="37" stroke="#0054E3" stroke-width="0.8"/>
+    <line x1="20" y1="19" x2="20" y2="41" stroke="#0054E3" stroke-width="1"/>
+  </svg>`,
+
+  txt: `<svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="4,2 28,2 36,10 36,46 4,46" fill="#fffff4"/>
+    <polygon points="28,2 28,10 36,10" fill="#e8e8d0"/>
+    <polyline points="4,2 28,2" fill="none" stroke="#bbb" stroke-width="0.8"/>
+    <polyline points="4,2 4,46 36,46 36,10 28,2 28,10 36,10" fill="none" stroke="#bbb" stroke-width="0.8"/>
+    <rect x="9" y="16" width="22" height="1.5" fill="#888" rx="0.5"/>
+    <rect x="9" y="20" width="18" height="1.5" fill="#888" rx="0.5"/>
+    <rect x="9" y="24" width="20" height="1.5" fill="#888" rx="0.5"/>
+    <rect x="9" y="28" width="16" height="1.5" fill="#888" rx="0.5"/>
+    <rect x="9" y="32" width="19" height="1.5" fill="#888" rx="0.5"/>
+    <rect x="9" y="36" width="13" height="1.5" fill="#888" rx="0.5"/>
+    <rect x="9" y="40" width="17" height="1.5" fill="#888" rx="0.5"/>
+  </svg>`,
+
+  url: `<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="20" cy="20" r="18" fill="#1a55cc"/>
+    <circle cx="20" cy="20" r="18" fill="none" stroke="#0c3a96" stroke-width="1"/>
+    <ellipse cx="20" cy="20" rx="7.5" ry="18" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/>
+    <line x1="2" y1="20" x2="38" y2="20" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/>
+    <line x1="4" y1="12" x2="36" y2="12" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+    <line x1="4" y1="28" x2="36" y2="28" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+    <line x1="20" y1="2" x2="20" y2="38" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/>
+    <text x="20" y="25" font-size="8" fill="#fff" text-anchor="middle" font-family="Arial" font-weight="bold" opacity="0.9">www</text>
+  </svg>`,
+};
+
+// ======== DESKTOP ICONS ========
+const desktop = document.getElementById('desktop');
+
+['reports', 'external'].forEach(id => {
+  const f = FOLDERS[id];
+  const el = document.createElement('div');
+  el.className = 'desk-icon';
+  el.innerHTML = ICON.folder + `<span class="dlbl">${f.label}</span>`;
+  el.addEventListener('click', e => {
+    e.stopPropagation();
+    document.querySelectorAll('.desk-icon').forEach(i => i.classList.remove('sel'));
+    el.classList.add('sel');
+    openFolder(id);
+  });
+  desktop.appendChild(el);
+});
+
+desktop.addEventListener('click', () => {
+  document.querySelectorAll('.desk-icon').forEach(i => i.classList.remove('sel'));
+});
+
+// ======== WINDOW LOGIC ========
+const win = document.getElementById('win');
+const winTitle = document.getElementById('winTitle');
+const addrBar = document.getElementById('addrBar');
+const fileGrid = document.getElementById('fileGrid');
+const stCount = document.getElementById('stCount');
+const stSel = document.getElementById('stSel');
+const detailPane = document.getElementById('detailPane');
+
+document.getElementById('closeBtn').onclick = () => win.classList.remove('open');
+
+function openFolder(id) {
+  const f = FOLDERS[id];
+  winTitle.textContent = `3wsj — ${f.label}`;
+  addrBar.textContent = f.path;
+  stCount.textContent = `${f.files.length}개 항목`;
+  stSel.textContent = '';
+  detailPane.innerHTML = `<strong>${f.label}</strong><br>${f.files.length}개 항목`;
+
+  fileGrid.innerHTML = '';
+  f.files.forEach(file => {
+    const el = document.createElement('div');
+    el.className = 'fitem';
+    el.innerHTML = (ICON[file.type] || ICON.doc) + `<span class="fn">${file.name}</span>`;
+    el.addEventListener('click', e => {
+      e.stopPropagation();
+      document.querySelectorAll('.fitem').forEach(i => i.classList.remove('sel'));
+      el.classList.add('sel');
+      stSel.textContent = `"${file.name}" 선택됨`;
+      detailPane.innerHTML = `<strong>${file.name}</strong><br><span style="color:#555;font-size:10px">${file.type.toUpperCase()} 파일</span>`;
+      window.open(file.href, '_blank');
+    });
+    fileGrid.appendChild(el);
+  });
+
+  if (!win.classList.contains('open')) {
+    win.style.transform = 'translate(-50%, -50%)';
+    win.style.left = '50%';
+    win.style.top = '50%';
+  }
+  win.classList.add('open');
+  win.style.zIndex = 1000;
+}
+
+// ======== DRAGGABLE ========
+const titleBar = document.getElementById('titleBar');
+let isDragging = false;
+let dragInitX, dragInitY;
+
+titleBar.addEventListener('mousedown', e => {
+  if (e.target.classList.contains('wxbtn')) return;
+  isDragging = true;
+  const rect = win.getBoundingClientRect();
+  win.style.transform = 'none';
+  win.style.left = rect.left + 'px';
+  win.style.top = rect.top + 'px';
+  dragInitX = e.clientX - rect.left;
+  dragInitY = e.clientY - rect.top;
+  e.preventDefault();
+});
+
+document.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  e.preventDefault();
+  win.style.left = (e.clientX - dragInitX) + 'px';
+  win.style.top = (e.clientY - dragInitY) + 'px';
+});
+
+document.addEventListener('mouseup', () => { isDragging = false; });
+
+// ======== CLOCK ========
+function tick() {
+  const d = new Date();
+  let h = d.getHours(), m = d.getMinutes();
+  const ap = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  document.getElementById('clock').textContent = `${h}:${m.toString().padStart(2,'0')} ${ap}`;
+}
+setInterval(tick, 1000);
+tick();
+</script>
+</body>
+</html>

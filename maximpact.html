@@ -1,0 +1,1874 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maximpact | AI Web Development Team</title>
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap');
+
+        :root {
+            --bg-dark: #0a0a0f;
+            --electric-blue: #22D3EE;
+            --accent-glow: rgba(34, 211, 238, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Plus+Jakarta+Sans', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .font-tech { font-family: 'Space+Grotesk', sans-serif; }
+
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #22D3EE; border-radius: 10px; }
+
+        
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--electric-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+        #cursor-glow {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.15s ease-out;
+        }
+
+        
+        .scene {
+            width: 300px;
+            height: 300px;
+            perspective: 1200px;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 20s infinite linear;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--electric-blue);
+            background: rgba(34, 211, 238, 0.05);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--electric-blue);
+            box-shadow: inset 0 0 30px var(--accent-glow);
+        }
+
+        .front  { transform: rotateY(0deg) translateZ(150px); }
+        .back   { transform: rotateY(180deg) translateZ(150px); }
+        .right  { transform: rotateY(90deg) translateZ(150px); }
+        .left   { transform: rotateY(-90deg) translateZ(150px); }
+        .top    { transform: rotateX(90deg) translateZ(150px); }
+        .bottom { transform: rotateX(-90deg) translateZ(150px); }
+
+        @keyframes rotateCube {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-blue {
+            background: rgba(34, 211, 238, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+        }
+
+        
+        .diagonal-card {
+            clip-path: polygon(0% 0%, 90% 0%, 100% 10%, 100% 100%, 10% 100%, 0% 90%);
+        }
+
+        
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95) rotateX(10deg);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1) rotateX(0);
+        }
+
+        
+        .pipeline-node {
+            position: relative;
+        }
+        .pipeline-line {
+            height: 2px;
+            background: linear-gradient(90deg, var(--electric-blue), transparent);
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .pipeline-pulse {
+            width: 20px;
+            height: 2px;
+            background: white;
+            position: absolute;
+            animation: pulse-flow 3s infinite linear;
+        }
+        @keyframes pulse-flow {
+            0% { left: -20px; }
+            100% { left: 100%; }
+        }
+
+        
+        .tilt-card {
+            transition: transform 0.3s ease;
+        }
+        .tilt-card:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(5deg) scale(1.02);
+            border-color: var(--electric-blue);
+        }
+
+        
+        .logo-text {
+            letter-spacing: -2px;
+        }
+    </style>
+
+  <style type="text/css">
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}/*
+! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+.fixed {
+  position: fixed;
+}
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+.inset-0 {
+  inset: 0px;
+}
+.-right-20 {
+  right: -5rem;
+}
+.-top-20 {
+  top: -5rem;
+}
+.bottom-10 {
+  bottom: 2.5rem;
+}
+.bottom-20 {
+  bottom: 5rem;
+}
+.bottom-4 {
+  bottom: 1rem;
+}
+.left-10 {
+  left: 2.5rem;
+}
+.left-20 {
+  left: 5rem;
+}
+.left-4 {
+  left: 1rem;
+}
+.right-20 {
+  right: 5rem;
+}
+.right-4 {
+  right: 1rem;
+}
+.top-0 {
+  top: 0px;
+}
+.top-1\/2 {
+  top: 50%;
+}
+.top-20 {
+  top: 5rem;
+}
+.-z-10 {
+  z-index: -10;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-50 {
+  z-index: 50;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.mb-12 {
+  margin-bottom: 3rem;
+}
+.mb-16 {
+  margin-bottom: 4rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-20 {
+  margin-bottom: 5rem;
+}
+.mb-32 {
+  margin-bottom: 8rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-20 {
+  margin-top: 5rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mt-8 {
+  margin-top: 2rem;
+}
+.flex {
+  display: flex;
+}
+.grid {
+  display: grid;
+}
+.hidden {
+  display: none;
+}
+.h-1 {
+  height: 0.25rem;
+}
+.h-12 {
+  height: 3rem;
+}
+.h-24 {
+  height: 6rem;
+}
+.h-32 {
+  height: 8rem;
+}
+.h-40 {
+  height: 10rem;
+}
+.h-60 {
+  height: 15rem;
+}
+.h-64 {
+  height: 16rem;
+}
+.h-\[400px\] {
+  height: 400px;
+}
+.h-full {
+  height: 100%;
+}
+.h-px {
+  height: 1px;
+}
+.h-screen {
+  height: 100vh;
+}
+.min-h-screen {
+  min-height: 100vh;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.w-12 {
+  width: 3rem;
+}
+.w-24 {
+  width: 6rem;
+}
+.w-32 {
+  width: 8rem;
+}
+.w-40 {
+  width: 10rem;
+}
+.w-60 {
+  width: 15rem;
+}
+.w-64 {
+  width: 16rem;
+}
+.w-full {
+  width: 100%;
+}
+.max-w-2xl {
+  max-width: 42rem;
+}
+.max-w-4xl {
+  max-width: 56rem;
+}
+.max-w-7xl {
+  max-width: 80rem;
+}
+.max-w-xl {
+  max-width: 36rem;
+}
+.max-w-xs {
+  max-width: 20rem;
+}
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+.-rotate-12 {
+  --tw-rotate: -12deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.rotate-45 {
+  --tw-rotate: 45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+@keyframes pulse {
+
+  50% {
+    opacity: .5;
+  }
+}
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.appearance-none {
+  appearance: none;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-end {
+  align-items: flex-end;
+}
+.items-center {
+  align-items: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-10 {
+  gap: 2.5rem;
+}
+.gap-12 {
+  gap: 3rem;
+}
+.gap-16 {
+  gap: 4rem;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.gap-6 {
+  gap: 1.5rem;
+}
+.gap-8 {
+  gap: 2rem;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.rounded {
+  border-radius: 0.25rem;
+}
+.rounded-full {
+  border-radius: 9999px;
+}
+.border {
+  border-width: 1px;
+}
+.border-2 {
+  border-width: 2px;
+}
+.border-4 {
+  border-width: 4px;
+}
+.border-b {
+  border-bottom-width: 1px;
+}
+.border-t {
+  border-top-width: 1px;
+}
+.border-cyan-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 211 238 / var(--tw-border-opacity, 1));
+}
+.border-cyan-400\/20 {
+  border-color: rgb(34 211 238 / 0.2);
+}
+.border-cyan-400\/30 {
+  border-color: rgb(34 211 238 / 0.3);
+}
+.border-cyan-400\/50 {
+  border-color: rgb(34 211 238 / 0.5);
+}
+.border-slate-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(51 65 85 / var(--tw-border-opacity, 1));
+}
+.border-white\/10 {
+  border-color: rgb(255 255 255 / 0.1);
+}
+.border-white\/20 {
+  border-color: rgb(255 255 255 / 0.2);
+}
+.border-white\/5 {
+  border-color: rgb(255 255 255 / 0.05);
+}
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+.bg-black\/40 {
+  background-color: rgb(0 0 0 / 0.4);
+}
+.bg-cyan-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 211 238 / var(--tw-bg-opacity, 1));
+}
+.bg-cyan-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 182 212 / var(--tw-bg-opacity, 1));
+}
+.bg-cyan-500\/10 {
+  background-color: rgb(6 182 212 / 0.1);
+}
+.bg-slate-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 116 139 / var(--tw-bg-opacity, 1));
+}
+.bg-slate-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(51 65 85 / var(--tw-bg-opacity, 1));
+}
+.bg-slate-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity, 1));
+}
+.bg-slate-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 23 42 / var(--tw-bg-opacity, 1));
+}
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+.bg-white\/10 {
+  background-color: rgb(255 255 255 / 0.1);
+}
+.bg-white\/5 {
+  background-color: rgb(255 255 255 / 0.05);
+}
+.p-1 {
+  padding: 0.25rem;
+}
+.p-10 {
+  padding: 2.5rem;
+}
+.p-12 {
+  padding: 3rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-5 {
+  padding: 1.25rem;
+}
+.p-8 {
+  padding: 2rem;
+}
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+.py-32 {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+.pt-10 {
+  padding-top: 2.5rem;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+.text-8xl {
+  font-size: 6rem;
+  line-height: 1;
+}
+.text-\[10px\] {
+  font-size: 10px;
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.font-black {
+  font-weight: 900;
+}
+.font-bold {
+  font-weight: 700;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.lowercase {
+  text-transform: lowercase;
+}
+.leading-relaxed {
+  line-height: 1.625;
+}
+.tracking-\[0\.5em\] {
+  letter-spacing: 0.5em;
+}
+.tracking-tighter {
+  letter-spacing: -0.05em;
+}
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+.text-cyan-400 {
+  --tw-text-opacity: 1;
+  color: rgb(34 211 238 / var(--tw-text-opacity, 1));
+}
+.text-slate-400 {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity, 1));
+}
+.text-slate-500 {
+  --tw-text-opacity: 1;
+  color: rgb(100 116 139 / var(--tw-text-opacity, 1));
+}
+.text-slate-600 {
+  --tw-text-opacity: 1;
+  color: rgb(71 85 105 / var(--tw-text-opacity, 1));
+}
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.text-white\/10 {
+  color: rgb(255 255 255 / 0.1);
+}
+.text-white\/20 {
+  color: rgb(255 255 255 / 0.2);
+}
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-50 {
+  opacity: 0.5;
+}
+.mix-blend-difference {
+  mix-blend-mode: difference;
+}
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.blur-3xl {
+  --tw-blur: blur(64px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.backdrop-filter {
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.duration-700 {
+  transition-duration: 700ms;
+}
+.hover\:scale-105:hover {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.hover\:bg-cyan-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 211 238 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-cyan-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 182 212 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-cyan-500\/20:hover {
+  background-color: rgb(6 182 212 / 0.2);
+}
+.hover\:bg-cyan-500\/5:hover {
+  background-color: rgb(6 182 212 / 0.05);
+}
+.hover\:bg-white\/10:hover {
+  background-color: rgb(255 255 255 / 0.1);
+}
+.hover\:text-black:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+.hover\:text-cyan-400:hover {
+  --tw-text-opacity: 1;
+  color: rgb(34 211 238 / var(--tw-text-opacity, 1));
+}
+.focus\:border-cyan-400:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 211 238 / var(--tw-border-opacity, 1));
+}
+.group:hover .group-hover\:-rotate-12 {
+  --tw-rotate: -12deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:rotate-12 {
+  --tw-rotate: 12deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:scale-110 {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:scale-\[0\.98\] {
+  --tw-scale-x: 0.98;
+  --tw-scale-y: 0.98;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:text-cyan-400\/50 {
+  color: rgb(34 211 238 / 0.5);
+}
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+@media (min-width: 768px) {
+
+  .md\:block {
+    display: block;
+  }
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\:flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .md\:text-7xl {
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+
+  .md\:text-9xl {
+    font-size: 8rem;
+    line-height: 1;
+  }
+
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}* {
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
+    }
+
+    *::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+  </style></head>
+<body class="w-full min-h-screen">
+
+    <div id="custom-cursor"></div>
+    <div id="cursor-glow"></div>
+
+    
+    <nav class="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference">
+        <div class="logo-text text-2xl font-black text-white">maximpact</div>
+        <div class="hidden md:flex gap-10 text-sm font-tech uppercase tracking-widest text-slate-400">
+            <a href="#services" class="hover:text-cyan-400 transition-colors">Services</a>
+            <a href="#portfolio" class="hover:text-cyan-400 transition-colors">Portfolio</a>
+            <a href="#team" class="hover:text-cyan-400 transition-colors">Team</a>
+            <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+        </div>
+        <button class="glass-blue px-6 py-2 rounded-full text-xs font-tech tracking-tighter hover:bg-cyan-500/20 transition-all border-cyan-400/50">
+            START_PROJECT
+        </button>
+    </nav>
+
+    
+    <section class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+        <div class="grid-bg"></div>
+        
+        <div class="scene mb-12">
+            <div class="cube">
+                <div class="cube-face front">maximpact</div>
+                <div class="cube-face back">AI DEV</div>
+                <div class="cube-face right">FUTURE</div>
+                <div class="cube-face left">IMPACT</div>
+                <div class="cube-face top">HIGH END</div>
+                <div class="cube-face bottom">BOUTIQUE</div>
+            </div>
+        </div>
+
+        <div class="text-center z-10 px-4">
+            <h1 class="text-7xl md:text-9xl font-black mb-4 tracking-tighter lowercase">maximpact</h1>
+            <p class="text-cyan-400 font-tech tracking-[0.5em] text-sm md:text-base uppercase mb-8">Engineering Superior AI Experiences</p>
+            <div class="flex gap-4 justify-center">
+                <a href="#contact" class="bg-cyan-500 text-black px-10 py-4 font-bold text-lg hover:scale-105 transition-transform diagonal-card flex items-center gap-2">
+                    INITIATE CONTACT <i class="ph ph-arrow-right"></i>
+                </a>
+                <button class="glass px-10 py-4 font-bold text-lg hover:bg-white/10 transition-colors diagonal-card">
+                    VIEW REEL
+                </button>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-10 flex flex-col gap-4 text-xs font-tech text-slate-500 opacity-50">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-px bg-slate-500"></div>
+                LATENCY: 12ms
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-px bg-slate-500"></div>
+                REGION: SEOUL_KR
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="py-20 px-8 grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto reveal">
+        <div class="flex flex-col items-center text-center">
+            <span class="text-8xl font-black text-white mb-2 font-tech">05</span>
+            <span class="text-cyan-400 font-tech tracking-widest uppercase">Maintenance Contracts</span>
+            <p class="text-slate-500 text-sm mt-4">Long-term stability and continuous AI optimization for our core partners.</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+            <span class="text-8xl font-black text-cyan-400 mb-2 font-tech">100%</span>
+            <span class="text-white font-tech tracking-widest uppercase">Client Retention</span>
+            <p class="text-slate-500 text-sm mt-4">Zero churn since inception. Every client becomes a long-term collaborator.</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+            <span class="text-8xl font-black text-white mb-2 font-tech">00</span>
+            <span class="text-cyan-400 font-tech tracking-widest uppercase">Claim Rate</span>
+            <p class="text-slate-500 text-sm mt-4">Pristine delivery records with enterprise-grade quality assurance.</p>
+        </div>
+    </section>
+
+    
+    <section id="services" class="py-32 px-8 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div>
+                    <h2 class="text-5xl md:text-7xl font-black lowercase mb-4">the stack_</h2>
+                    <p class="text-slate-400 max-w-xl font-tech">Specialized architectural patterns designed for the AI era. We don't just build websites; we build intelligence-driven infrastructure.</p>
+                </div>
+                <div class="text-cyan-400 text-sm font-tech border-b border-cyan-400/30 pb-2">SERVICES.JSON</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="glass-blue p-8 diagonal-card tilt-card group">
+                    <div class="w-12 h-12 bg-cyan-400 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+                        <i class="ph ph-chart-line-up text-black text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase font-tech">ERP / CRM / CMS</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Integrated management systems powered by automated intelligence to streamline complex business operations.</p>
+                </div>
+                
+                <div class="glass-blue p-8 diagonal-card tilt-card group">
+                    <div class="w-12 h-12 bg-white flex items-center justify-center mb-6 group-hover:-rotate-12 transition-transform">
+                        <i class="ph ph-shopping-cart-simple text-black text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase font-tech">MARKETPLACE</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">High-performance commerce engines with personalized recommendation algorithms and real-time inventory.</p>
+                </div>
+                
+                <div class="glass-blue p-8 diagonal-card tilt-card group">
+                    <div class="w-12 h-12 bg-cyan-400 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+                        <i class="ph ph-browsers text-black text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase font-tech">CUSTOM WEB</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Bespoke digital experiences that push the boundaries of standard web frameworks.</p>
+                </div>
+                
+                <div class="glass p-8 diagonal-card tilt-card group">
+                    <div class="w-12 h-12 bg-slate-700 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+                        <i class="ph ph-database text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase font-tech">DATA ANALYSIS</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Processing massive datasets into actionable visual insights using custom-trained LLMs.</p>
+                </div>
+                
+                <div class="glass p-8 diagonal-card tilt-card group">
+                    <div class="w-12 h-12 bg-slate-700 flex items-center justify-center mb-6 group-hover:-rotate-12 transition-transform">
+                        <i class="ph ph-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase font-tech">UNI PROJECTS</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Complex academic prototypes and graduation research systems requiring high technical rigor.</p>
+                </div>
+                
+                <div class="glass p-8 diagonal-card tilt-card group">
+                    <div class="w-12 h-12 bg-slate-700 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+                        <i class="ph ph-device-mobile text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase font-tech">RESPONSIVE</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Omni-channel experiences that feel native across all devices and screen sizes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="portfolio" class="bg-white/5 py-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-8 mb-16 flex justify-between items-center">
+            <h2 class="text-6xl font-black lowercase">proof_</h2>
+            <div class="flex gap-4">
+                <button class="w-12 h-12 border border-white/20 flex items-center justify-center hover:bg-cyan-500 hover:text-black transition-all"><i class="ph ph-caret-left"></i></button>
+                <button class="w-12 h-12 border border-white/20 flex items-center justify-center hover:bg-cyan-500 hover:text-black transition-all"><i class="ph ph-caret-right"></i></button>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-10">
+            
+            <div class="relative group cursor-pointer reveal">
+                <div class="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
+                <div class="flex flex-col md:flex-row items-center gap-12 px-8">
+                    <div class="w-full md:w-1/2 overflow-hidden h-[400px] glass relative transform group-hover:scale-[0.98] transition-transform duration-700">
+                        <div class="absolute inset-0 flex items-center justify-center text-4xl font-black text-white/10 uppercase">Tax Platform</div>
+                        <div class="absolute bottom-4 left-4 glass-blue p-4 text-xs font-tech">ARCH: NEXT.JS + AI AGENT</div>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="text-cyan-400 font-tech">01 // ENTERPRISE</span>
+                        <h3 class="text-5xl font-black mt-2 mb-4">Tax Automation System</h3>
+                        <p class="text-slate-400 mb-6">Fully automated tax filing and matching platform for freelance professionals with AI-driven document scanning.</p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">FINTECH</span>
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">OCR</span>
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">STRETCH API</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="relative group cursor-pointer reveal">
+                <div class="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
+                <div class="flex flex-col md:flex-row-reverse items-center gap-12 px-8">
+                    <div class="w-full md:w-1/2 overflow-hidden h-[400px] glass relative transform group-hover:scale-[0.98] transition-transform duration-700">
+                        <div class="absolute inset-0 flex items-center justify-center text-4xl font-black text-white/10 uppercase">Interior Match</div>
+                        <div class="absolute bottom-4 right-4 glass-blue p-4 text-xs font-tech">ENGINE: STABLE DIFFUSION</div>
+                    </div>
+                    <div class="w-full md:w-1/2 text-right">
+                        <span class="text-cyan-400 font-tech">02 // PLATFORM</span>
+                        <h3 class="text-5xl font-black mt-2 mb-4">Interior Design Hub</h3>
+                        <p class="text-slate-400 mb-6">Connecting users with designers through a generative AI matching engine that analyzes spatial preferences.</p>
+                        <div class="flex gap-2 justify-end">
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">VISUAL AI</span>
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">MATCHMAKING</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="relative group cursor-pointer reveal">
+                <div class="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
+                <div class="flex flex-col md:flex-row items-center gap-12 px-8">
+                    <div class="w-full md:w-1/2 overflow-hidden h-[400px] glass relative transform group-hover:scale-[0.98] transition-transform duration-700">
+                        <div class="absolute inset-0 flex items-center justify-center text-4xl font-black text-white/10 uppercase">Hospital CRM</div>
+                        <div class="absolute bottom-4 left-4 glass-blue p-4 text-xs font-tech">REAL-TIME: WEBSOCKETS</div>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="text-cyan-400 font-tech">03 // HEALTHCARE</span>
+                        <h3 class="text-5xl font-black mt-2 mb-4">Hospital Reservation v2</h3>
+                        <p class="text-slate-400 mb-6">Omni-channel patient reservation and clinic management system with automated diagnostic scheduling.</p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">MEDTECH</span>
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">SCHEDULING</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="team" class="py-32 px-8 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-6xl font-black lowercase mb-20 text-center">the human_pipeline</h2>
+            
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12 mb-32 relative">
+                
+                <div class="absolute w-full h-1 bg-slate-900 top-1/2 -z-10 hidden md:block">
+                    <div class="pipeline-pulse"></div>
+                </div>
+
+                
+                <div class="flex flex-col items-center group">
+                    <div class="w-32 h-32 rounded-full border-4 border-cyan-400 p-1 mb-6 transform group-hover:scale-110 transition-transform">
+                        <div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center text-3xl font-black">J</div>
+                    </div>
+                    <h4 class="text-2xl font-bold uppercase font-tech">J</h4>
+                    <p class="text-cyan-400 text-sm font-tech">CEO / LEAD ARCHITECT</p>
+                </div>
+                
+                <div class="flex flex-col items-center group">
+                    <div class="w-24 h-24 rounded-full border-2 border-slate-700 p-1 mb-6 transform group-hover:scale-110 transition-transform">
+                        <div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center text-2xl font-black">S</div>
+                    </div>
+                    <h4 class="text-xl font-bold uppercase font-tech">S</h4>
+                    <p class="text-slate-500 text-sm font-tech">PROJECT MANAGER</p>
+                </div>
+                
+                <div class="flex flex-col items-center group">
+                    <div class="w-24 h-24 rounded-full border-2 border-slate-700 p-1 mb-6 transform group-hover:scale-110 transition-transform">
+                        <div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center text-2xl font-black">K</div>
+                    </div>
+                    <h4 class="text-xl font-bold uppercase font-tech">K</h4>
+                    <p class="text-slate-500 text-sm font-tech">BACKEND ENGINEER</p>
+                </div>
+                
+                <div class="flex flex-col items-center group">
+                    <div class="w-24 h-24 rounded-full border-2 border-slate-700 p-1 mb-6 transform group-hover:scale-110 transition-transform">
+                        <div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center text-2xl font-black">L</div>
+                    </div>
+                    <h4 class="text-xl font-bold uppercase font-tech">L</h4>
+                    <p class="text-slate-500 text-sm font-tech">FRONTEND ENGINEER</p>
+                </div>
+                
+                <div class="flex flex-col items-center group">
+                    <div class="w-24 h-24 rounded-full border-2 border-slate-700 p-1 mb-6 transform group-hover:scale-110 transition-transform">
+                        <div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center text-2xl font-black">P</div>
+                    </div>
+                    <h4 class="text-xl font-bold uppercase font-tech">P</h4>
+                    <p class="text-slate-500 text-sm font-tech">UX/UI DESIGNER</p>
+                </div>
+            </div>
+
+            
+            <div class="glass p-12 diagonal-card text-center relative overflow-hidden reveal">
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
+                <h3 class="text-3xl font-black uppercase mb-4 font-tech">+ GLOBAL FREELANCER NETWORK</h3>
+                <p class="text-slate-400 max-w-2xl mx-auto">Our core team is supported by a curated network of specialized contractors, enabling us to scale any project horizontally at unprecedented speeds.</p>
+                <div class="mt-8 flex justify-center gap-12">
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold text-cyan-400">20+</span>
+                        <span class="text-xs font-tech text-slate-500">EXPERT NODES</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold text-cyan-400">24/7</span>
+                        <span class="text-xs font-tech text-slate-500">AVAILABILITY</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="py-32 px-8">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-6xl font-black lowercase mb-20">the process_</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="glass p-10 flex flex-col gap-6 group hover:bg-cyan-500/5 transition-all">
+                    <span class="text-4xl font-black text-white/20 font-tech group-hover:text-cyan-400/50 transition-colors">01</span>
+                    <h4 class="text-2xl font-bold font-tech uppercase">Consulting</h4>
+                    <p class="text-slate-400 text-sm">Deep architectural analysis and feasibility study for your AI implementation.</p>
+                </div>
+                <div class="glass p-10 flex flex-col gap-6 group hover:bg-cyan-500/5 transition-all">
+                    <span class="text-4xl font-black text-white/20 font-tech group-hover:text-cyan-400/50 transition-colors">02</span>
+                    <h4 class="text-2xl font-bold font-tech uppercase">Design</h4>
+                    <p class="text-slate-400 text-sm">High-fidelity 3D modeling and futuristic interface design optimized for interaction.</p>
+                </div>
+                <div class="glass p-10 flex flex-col gap-6 group hover:bg-cyan-500/5 transition-all">
+                    <span class="text-4xl font-black text-white/20 font-tech group-hover:text-cyan-400/50 transition-colors">03</span>
+                    <h4 class="text-2xl font-bold font-tech uppercase">Development</h4>
+                    <p class="text-slate-400 text-sm">Rapid agile sprints utilizing modern tech stacks and custom LLM integrations.</p>
+                </div>
+                <div class="glass p-10 flex flex-col gap-6 group hover:bg-cyan-500/5 transition-all">
+                    <span class="text-4xl font-black text-white/20 font-tech group-hover:text-cyan-400/50 transition-colors">04</span>
+                    <h4 class="text-2xl font-bold font-tech uppercase">Deployment</h4>
+                    <p class="text-slate-400 text-sm">Automated CI/CD pipelines with robust security auditing and performance scaling.</p>
+                </div>
+            </div>
+
+            
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="flex gap-6 items-start">
+                    <div class="w-12 h-12 bg-cyan-400 flex-shrink-0 flex items-center justify-center">
+                        <i class="ph ph-shield-check text-black text-2xl"></i>
+                    </div>
+                    <div>
+                        <h5 class="text-xl font-bold mb-2 uppercase font-tech">Security-First Protocol</h5>
+                        <p class="text-slate-400 text-sm">Every line of code is audited for vulnerabilities. We handle sensitive enterprise data with military-grade encryption standards.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="w-12 h-12 bg-white flex-shrink-0 flex items-center justify-center">
+                        <i class="ph ph-lightning text-black text-2xl"></i>
+                    </div>
+                    <div>
+                        <h5 class="text-xl font-bold mb-2 uppercase font-tech">Agile Momentum</h5>
+                        <p class="text-slate-400 text-sm">Weekly releases and rapid prototyping. We move fast to ensure you're always ahead of the market curve.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="contact" class="py-32 px-8 relative overflow-hidden bg-white/5">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-7xl font-black lowercase mb-4">get_in_touch</h2>
+                <p class="text-cyan-400 font-tech uppercase tracking-widest">Available for elite collaborations only.</p>
+            </div>
+
+            <form class="flex flex-col gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="relative group">
+                        <input type="text" placeholder="COMPANY_NAME" class="w-full bg-black/40 border border-white/10 p-5 font-tech focus:border-cyan-400 outline-none transition-all diagonal-card">
+                    </div>
+                    <div class="relative group">
+                        <input type="email" placeholder="EMAIL_ADDRESS" class="w-full bg-black/40 border border-white/10 p-5 font-tech focus:border-cyan-400 outline-none transition-all diagonal-card">
+                    </div>
+                </div>
+                <div class="relative group">
+                    <select class="w-full bg-black/40 border border-white/10 p-5 font-tech focus:border-cyan-400 outline-none transition-all appearance-none diagonal-card">
+                        <option value="" disabled="" selected="">PROJECT_TYPE</option>
+                        <option>ERP / CRM</option>
+                        <option>CUSTOM AI INTEGRATION</option>
+                        <option>PLATFORM DEVELOPMENT</option>
+                        <option>MAINTENANCE</option>
+                    </select>
+                </div>
+                <div class="relative group">
+                    <textarea rows="5" placeholder="MISSION_DESCRIPTION" class="w-full bg-black/40 border border-white/10 p-5 font-tech focus:border-cyan-400 outline-none transition-all diagonal-card"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-cyan-500 text-black py-6 font-black text-xl hover:bg-cyan-400 transition-all diagonal-card flex items-center justify-center gap-4">
+                    TRANSMIT REQUEST <i class="ph ph-paper-plane-tilt"></i>
+                </button>
+            </form>
+        </div>
+
+        
+        <div class="absolute top-20 right-20 w-40 h-40 glass border-cyan-400/20 rotate-45 -z-10 animate-pulse"></div>
+        <div class="absolute bottom-20 left-20 w-60 h-60 glass border-cyan-400/20 -rotate-12 -z-10"></div>
+    </section>
+
+    
+    <footer class="py-20 px-8 border-t border-white/10 bg-black">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div>
+                <div class="logo-text text-4xl font-black mb-6">maximpact</div>
+                <p class="text-slate-500 font-tech text-sm max-w-xs">Building the architectural backbone of the next digital era. AI-first development for leaders.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-16">
+                <div class="flex flex-col gap-4">
+                    <span class="font-tech text-cyan-400 text-xs">SOCIALS</span>
+                    <a href="#" class="text-sm hover:text-cyan-400 transition-colors">GitHub</a>
+                    <a href="#" class="text-sm hover:text-cyan-400 transition-colors">LinkedIn</a>
+                    <a href="#" class="text-sm hover:text-cyan-400 transition-colors">X (Twitter)</a>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <span class="font-tech text-cyan-400 text-xs">OFFICE</span>
+                    <p class="text-sm text-slate-400">SEOUL, KOREA<br>GANYNAMED DIST.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <span class="font-tech text-cyan-400 text-xs">CONTACT</span>
+                    <p class="text-sm text-slate-400">HELLO@MAXIMPACT.DEV</p>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-20 pt-10 border-t border-white/5 flex justify-between items-center text-[10px] font-tech text-slate-600">
+            <span>© 2024 MAXIMPACT. ALL SYSTEMS OPERATIONAL.</span>
+            <div class="flex gap-4">
+                <span>PRIVACY_POLICY</span>
+                <span>SYSTEMS_STATUS</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        
+        const cursor = document.getElementById('custom-cursor');
+        const glow = document.getElementById('cursor-glow');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        
+        document.querySelectorAll('a, button, input, textarea, select, .tilt-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(4)';
+                cursor.style.backgroundColor = 'transparent';
+                cursor.style.border = '1px solid #22D3EE';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.backgroundColor = '#22D3EE';
+                cursor.style.border = 'none';
+            });
+        });
+
+        
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        
+        const magnetButtons = document.querySelectorAll('.diagonal-card');
+        magnetButtons.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.05)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0) scale(1)';
+            });
+        });
+
+        
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const xRotation = ((y - rect.height / 2) / rect.height) * 20;
+                const yRotation = ((x - rect.width / 2) / rect.width) * -20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) scale(1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            });
+        });
+    </script>
+
+</body></html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K-주전부리 — 중소벤처기업부 협력 제안</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+:root{--bg:#f9f7f3;--ink:#14213d;--red:#c0392b;--blue:#1a6fa8;--orange:#d4731a;--green:#1e7e5a;--yellow:#f4c430;--purple:#7b2d8e;--paper:#fffef9;--muted:#5a5a72;--light:#eceae4;--border:#d9d5cc;--accent:#d4731a;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}
+html,body{height:100%;overflow:hidden;background:#111;}body{font-family:'Pretendard',sans-serif;}
+.deck{position:relative;width:100%;height:100%;overflow:hidden;}.slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s;}.slide.active{opacity:1;pointer-events:auto;}.si{width:960px;height:540px;position:relative;overflow:hidden;border-radius:2px;box-shadow:0 8px 40px rgba(0,0,0,0.4);}
+.nav{position:fixed;bottom:20px;right:30px;z-index:100;display:flex;gap:8px;align-items:center;}.nav button{width:36px;height:36px;border:none;border-radius:50%;background:rgba(255,255,255,0.12);color:#fff;font-size:16px;cursor:pointer;}.nav button:hover{background:rgba(255,255,255,0.25);}.nav .counter{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.5);margin:0 6px;}
+.dk{background:linear-gradient(135deg,#14213d 0%,#1a3a5c 50%,#14213d 100%);color:#fff;}.lt{background:var(--bg);color:var(--ink);}
+.foot{position:absolute;bottom:0;left:0;right:0;height:28px;background:var(--ink);display:flex;align-items:center;padding:0 32px;}.foot span{font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.35);}.foot-a{background:var(--accent);}
+.tag{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:2.5px;}.serif{font-family:'Noto Serif KR',serif;}.mono{font-family:'JetBrains Mono',monospace;}
+.sh{padding:16px 40px 12px;border-bottom:1px solid var(--border);}.sh .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:20px;background:var(--accent);color:#fff;font-family:'JetBrains Mono',monospace;font-size:9px;border-radius:2px;margin-right:10px;font-weight:700;vertical-align:middle;}.sh h2{display:inline;font-family:'Noto Serif KR',serif;font-size:20px;font-weight:700;vertical-align:middle;}
+table{width:100%;border-collapse:collapse;font-size:10.5px;}thead th{background:var(--ink);color:#fff;font-weight:600;text-align:left;padding:6px 8px;font-size:9.5px;}tbody td{padding:5px 8px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6;}.alt td{background:rgba(237,242,247,0.5);}
+.callout{border-left:3px solid var(--accent);background:rgba(212,115,26,0.04);padding:10px 14px;border-radius:0 4px 4px 0;font-size:10.5px;line-height:1.7;}
+.stats{display:flex;gap:8px;}.stat{flex:1;background:var(--paper);border-radius:4px;padding:12px 10px;text-align:center;border-top:3px solid var(--accent);box-shadow:0 1px 3px rgba(0,0,0,0.05);}.stat .v{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;line-height:1.2;}.stat .l{font-size:9px;color:var(--muted);margin-top:3px;line-height:1.35;}
+.flow{display:flex;gap:0;align-items:stretch;}.flow-item{flex:1;border-top:3px solid var(--border);border-radius:4px;padding:8px 4px;text-align:center;background:var(--paper);box-shadow:0 1px 2px rgba(0,0,0,0.04);}.flow-item h5{font-size:10px;font-weight:700;margin-bottom:1px;}.flow-item p{font-size:8.5px;color:var(--muted);}.flow-arrow{display:flex;align-items:center;padding:0 1px;color:var(--border);font-size:12px;}
+.tier{margin-bottom:10px;}.tier-label{font-family:'JetBrains Mono',monospace;font-size:7.5px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:5px;}.tier-row{display:flex;gap:6px;}
+.cbox{flex:1;border-radius:4px;padding:10px;text-align:center;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);}.cbox h4{font-size:12px;font-weight:700;margin-bottom:2px;}.cbox p{font-size:9px;color:rgba(255,255,255,0.45);line-height:1.4;}.cbox.primary{border-color:rgba(26,111,168,0.5);background:rgba(26,111,168,0.12);}.cbox.accent{border-color:rgba(244,196,48,0.4);background:rgba(244,196,48,0.06);}.cbox.accent h4{color:var(--yellow);}.cbox.support{border-color:rgba(30,126,90,0.3);background:rgba(30,126,90,0.06);}.cbox.highlight{border-color:var(--yellow);border-width:1.5px;}.cbox.highlight h4{color:var(--yellow);}
+.arrows{text-align:center;color:rgba(255,255,255,0.15);font-size:12px;margin:4px 0;letter-spacing:12px;}
+.kp-row{display:flex;gap:14px;margin-top:12px;}.kp{flex:1;}.kp h5{font-size:11px;font-weight:700;margin-bottom:3px;}.kp p{font-size:9px;color:var(--muted);line-height:1.5;}
+.req{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;}.req-num{width:28px;height:28px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;flex-shrink:0;}.req-body h5{font-size:12px;font-weight:700;margin-bottom:1px;}.req-body p{font-size:10px;color:var(--muted);line-height:1.5;}
+@media print{html,body{overflow:visible;height:auto;background:#fff;}.nav{display:none;}.deck{position:static;}.slide{position:static;opacity:1;pointer-events:auto;page-break-after:always;}.si{box-shadow:none;width:100%;height:auto;min-height:540px;}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 1: COVER -->
+<div class="slide active"><div class="si dk" style="padding:44px;">
+  <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent);"></div>
+  <div style="position:absolute;left:44px;top:60px;width:3px;height:50px;background:var(--accent);"></div>
+  <p class="tag" style="color:rgba(255,255,255,0.4);margin-bottom:10px;margin-left:16px;">지역 특산물 기반 소자본 프랜차이즈 창업 실증</p>
+  <h1 class="serif" style="font-size:44px;line-height:1.25;margin-left:16px;"><span style="color:var(--yellow);">K-주전부리</span><br>활성화 사업</h1>
+  <p style="font-size:17px;color:rgba(255,255,255,0.5);margin:14px 0 28px 16px;">중소벤처기업부 협력 제안</p>
+  <div style="display:flex;gap:8px;margin-left:16px;flex-wrap:wrap;">
+    <span class="mono" style="font-size:8.5px;padding:4px 12px;border:1px solid rgba(255,255,255,0.15);border-radius:20px;color:rgba(255,255,255,0.55);">예비창업자 20팀 전국 모집</span>
+    <span class="mono" style="font-size:8.5px;padding:4px 12px;border:1px solid rgba(255,255,255,0.15);border-radius:20px;color:rgba(255,255,255,0.55);">자부담 0원</span>
+    <span class="mono" style="font-size:8.5px;padding:4px 12px;border:1px solid rgba(255,255,255,0.15);border-radius:20px;color:rgba(255,255,255,0.55);">카카오메이커스 시장검증</span>
+    <span class="mono" style="font-size:8.5px;padding:4px 12px;border:1px solid rgba(255,255,255,0.15);border-radius:20px;color:rgba(255,255,255,0.55);">프랜차이즈 100개+</span>
+  </div>
+  <div style="position:absolute;bottom:44px;left:60px;border-top:1px solid rgba(255,255,255,0.08);padding-top:14px;"><span class="mono" style="font-size:10px;color:rgba(255,255,255,0.3);">2026.04 &nbsp;|&nbsp; (주)쓰리더블유 &nbsp;|&nbsp; 담당 PM 박민환</span></div>
+  <div class="foot foot-a"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; 중소벤처기업부 협력 제안</span></div>
+</div></div>
+
+<!-- 2: 목차 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">INDEX</span><h2>목차</h2></div>
+  <div style="padding:20px 40px;">
+    <div style="display:flex;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--border);"><span class="serif" style="font-size:18px;color:var(--accent);font-weight:700;width:40px;">01</span><div><strong style="font-size:13px;">사업 배경 및 필요성</strong><br><span style="font-size:10px;color:var(--muted);">기존 창업 지원 한계 · K-주전부리의 차별점</span></div></div>
+    <div style="display:flex;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--border);"><span class="serif" style="font-size:18px;color:var(--accent);font-weight:700;width:40px;">02</span><div><strong style="font-size:13px;">사업 개요</strong><br><span style="font-size:10px;color:var(--muted);">전국 모집 → 특산물 배정 → 12주 프로그램 → 컨소시엄</span></div></div>
+    <div style="display:flex;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--border);"><span class="serif" style="font-size:18px;color:var(--accent);font-weight:700;width:40px;">03</span><div><strong style="font-size:13px;">사업 내용 — 창업 파이프라인</strong><br><span style="font-size:10px;color:var(--muted);">제품 개발 · 시장검증 · 파일럿 거점 · 프랜차이즈 · 비용 역산</span></div></div>
+    <div style="display:flex;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--border);"><span class="serif" style="font-size:18px;color:var(--accent);font-weight:700;width:40px;">04</span><div><strong style="font-size:13px;">기대 효과 및 성과 지표</strong><br><span style="font-size:10px;color:var(--muted);">정량 KPI · 프랜차이즈 확장 시나리오</span></div></div>
+    <div style="display:flex;align-items:baseline;padding:13px 0;"><span class="serif" style="font-size:18px;color:var(--accent);font-weight:700;width:40px;">05</span><div><strong style="font-size:13px;">소요 예산 및 협조 요청</strong><br><span style="font-size:10px;color:var(--muted);">약 0.45억 · 기존 프로그램 연계 · 신규 편성 불필요</span></div></div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 3: DIVIDER 배경 -->
+<div class="slide"><div class="si dk" style="display:flex;flex-direction:column;justify-content:center;padding:0 60px;">
+  <div style="position:absolute;left:0;top:0;width:4px;height:100%;background:var(--accent);"></div>
+  <span class="tag" style="color:var(--accent);margin-bottom:12px;">SECTION 01</span>
+  <h2 class="serif" style="font-size:32px;font-weight:700;margin-bottom:8px;">사업 배경 및 필요성</h2>
+  <p style="font-size:13px;color:rgba(255,255,255,0.4);">기존 창업 지원의 한계와 K-주전부리의 접근</p>
+  <div class="foot foot-a"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; 중소벤처기업부 협력 제안</span></div>
+</div></div>
+
+<!-- 4: 현황 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">01</span><h2>인구감소지역 소상공인과 창업의 현실</h2></div>
+  <div style="padding:14px 40px;">
+    <div class="stats" style="margin-bottom:14px;">
+      <div class="stat"><div class="v" style="color:var(--accent);">89곳</div><div class="l">인구감소지역<br>상업 공실률 심화</div></div>
+      <div class="stat" style="border-top-color:var(--red);"><div class="v" style="color:var(--red);">1~2억</div><div class="l">일반 창업<br>초기 비용</div></div>
+      <div class="stat" style="border-top-color:var(--blue);"><div class="v" style="color:var(--blue);">低</div><div class="l">교육 수료 후<br>실제 창업 전환율</div></div>
+      <div class="stat" style="border-top-color:var(--green);"><div class="v" style="color:var(--green);">高</div><div class="l">특산물 품질<br>but 상품화 역량 부재</div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="display:flex;align-items:center;gap:8px;"><div style="width:3px;height:28px;background:var(--red);flex-shrink:0;"></div><span style="font-size:11.5px;">지역 특산물 = 높은 품질이지만 <strong>상품화·유통·브랜딩 역량 부재</strong></span></div>
+      <div style="display:flex;align-items:center;gap:8px;"><div style="width:3px;height:28px;background:var(--red);flex-shrink:0;"></div><span style="font-size:11.5px;">기존 창업 지원: 교육 수료 후 후속 없음 → <strong>실제 창업 전환율 저조</strong></span></div>
+      <div style="display:flex;align-items:center;gap:8px;"><div style="width:3px;height:28px;background:var(--orange);flex-shrink:0;"></div><span style="font-size:11.5px;">인구감소지역은 <strong>인력풀 자체가 부족</strong> → 전국 인재 연결이 현실적 대안</span></div>
+      <div style="display:flex;align-items:center;gap:8px;"><div style="width:3px;height:28px;background:var(--orange);flex-shrink:0;"></div><span style="font-size:11.5px;">시장검증 없이 창업 → 실패율 높음. <strong>수요 확인 후 창업</strong>이 필요</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 5: 차별점 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">01</span><h2>K-주전부리의 접근 — 검증된 후 창업한다</h2></div>
+  <div style="padding:12px 40px;display:flex;gap:12px;">
+    <div style="flex:1;background:#f0eeea;border:1px solid var(--border);border-radius:4px;padding:14px;">
+      <p style="text-align:center;font-size:11px;font-weight:700;color:var(--muted);padding:5px 0 8px;margin:-14px -14px 10px;background:var(--border);border-radius:4px 4px 0 0;">기존 창업 지원</p>
+      <div style="font-size:10.5px;line-height:1.8;">
+        <span style="color:var(--red);">✕</span> 아이디어 → 교육 → (탈락) → 혼자 시도<br>
+        <span style="color:var(--red);">✕</span> 시장검증 없이 창업 → 실패 높음<br>
+        <span style="color:var(--red);">✕</span> 초기 비용 1~2억 진입 장벽<br>
+        <span style="color:var(--red);">✕</span> 개인 역량 의존 → 지속성 불확실<br>
+        <span style="color:var(--red);">✕</span> 특산물 연계 어려움
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;font-size:22px;color:var(--accent);font-weight:700;">→</div>
+    <div style="flex:1;background:var(--paper);border:1px solid var(--accent);border-radius:4px;padding:14px;">
+      <p style="text-align:center;font-size:11px;font-weight:700;color:#fff;padding:5px 0 8px;margin:-14px -14px 10px;background:var(--accent);border-radius:4px 4px 0 0;">K-주전부리</p>
+      <div style="font-size:10.5px;line-height:1.8;">
+        <span style="color:var(--green);">✓</span> 교육→해커톤→<strong>카카오메이커스 검증→거점→확장</strong><br>
+        <span style="color:var(--green);">✓</span> <strong>수요 확인 후</strong> 거점 오픈 = 리스크 최소<br>
+        <span style="color:var(--green);">✓</span> 참여팀 <strong>자부담 0원</strong> 구조<br>
+        <span style="color:var(--green);">✓</span> <strong>프랜차이즈 시스템</strong> → 개인 역량 무관<br>
+        <span style="color:var(--green);">✓</span> 농협·카카오 연계 <strong>유통 즉시 확보</strong>
+      </div>
+    </div>
+  </div>
+  <div style="padding:0 40px;"><div class="callout" style="margin-top:4px;">
+    <strong style="color:var(--accent);">전국 모집:</strong> 어디서든 지원 가능한 예비창업자가 인구감소지역 특산물을 배정받아 상품화합니다. 결과물(상품·브랜드·거점)은 해당 지역에 착지합니다. 창업 비용 약 <strong>4,800만 원, 정부 지원 시 2,000만 원 이하</strong>.
+  </div></div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 6: DIVIDER 사업 개요 -->
+<div class="slide"><div class="si dk" style="display:flex;flex-direction:column;justify-content:center;padding:0 60px;">
+  <div style="position:absolute;left:0;top:0;width:4px;height:100%;background:var(--accent);"></div>
+  <span class="tag" style="color:var(--accent);margin-bottom:12px;">SECTION 02</span>
+  <h2 class="serif" style="font-size:32px;font-weight:700;margin-bottom:8px;">사업 개요</h2>
+  <p style="font-size:13px;color:rgba(255,255,255,0.4);">전국 모집 → 지역 특산물 배정 → 지정 장소 교육 → 폐교 거점</p>
+  <div class="foot foot-a"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; 중소벤처기업부 협력 제안</span></div>
+</div></div>
+
+<!-- 7: 사업 구조 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">02</span><h2>사업 기본 정보</h2></div>
+  <div style="padding:10px 40px;">
+    <table>
+      <tbody>
+        <tr class="alt"><td style="width:14%;font-weight:700;color:var(--accent);">사업명</td><td>K-주전부리 활성화 사업</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent);">참여 규모</td><td>시니어 60명 + 청년 20명 = <strong>80명, 20팀 (전국 공개 모집)</strong></td></tr>
+        <tr class="alt"><td style="font-weight:700;color:var(--accent);">참가 방식</td><td>참가자에게 인구감소지역 5곳 특산물을 <strong>배정</strong> → 해당 특산물로 상품 기획·개발</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent);">교육 장소</td><td>지정 장소 (카카오 AI캠퍼스 등, <strong>해당 지역 한정 아님</strong>)</td></tr>
+        <tr class="alt"><td style="font-weight:700;color:var(--accent);">파일럿 거점</td><td>인구감소지역 <strong>폐교·폐가</strong> 등 유휴 공간 전환 5곳 (규모 유동적)</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent);">컨소시엄</td><td><strong>지방시대위(MOU 완료)</strong> · 카카오 · 숙명여대 · 농협 · 농민신문</td></tr>
+        <tr class="alt"><td style="font-weight:700;color:var(--accent);">시니어 역할</td><td>3가지 전문 역할: 프론트엔드 개발자 / 디자이너 / 콘텐츠 마케터</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent);">핵심 목표</td><td>해커톤 검증 레시피 → 소자본 프랜차이즈 모델 → 전국 확장</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 8: 12주 흐름 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">02</span><h2>12주 프로그램 — 창업 파이프라인</h2></div>
+  <div style="padding:14px 40px;">
+    <div class="flow">
+      <div class="flow-item" style="background:var(--light);"><p style="font-weight:700;font-size:8px;">03~06월</p><h5>전국 모집</h5><p>특산물 배정</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item" style="border-top-color:var(--blue);background:rgba(26,111,168,0.06);"><p style="font-weight:700;font-size:8px;">07~08월</p><h5>AI 교육</h5><p>1~6주</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item" style="border-top-color:var(--blue);background:rgba(26,111,168,0.06);"><p style="font-weight:700;font-size:8px;">09월</p><h5>해커톤</h5><p>시제품 완성</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item" style="border-top-color:var(--accent);background:rgba(212,115,26,0.06);"><p style="font-weight:700;font-size:8px;color:var(--accent);">중기부</p><h5 style="color:var(--accent);">시장검증</h5><p>카카오메이커스</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item" style="border-top-color:var(--green);"><p style="font-weight:700;font-size:8px;">11월</p><h5>거점 오픈</h5><p>폐교 5곳</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item" style="border-top-color:var(--accent);background:rgba(212,115,26,0.06);"><p style="font-weight:700;font-size:8px;color:var(--accent);">중기부</p><h5 style="color:var(--accent);">프랜차이즈</h5><p>전국 확장</p></div>
+    </div>
+    <div style="border-top:1px solid var(--border);margin-top:14px;padding-top:12px;">
+      <div class="kp-row">
+        <div class="kp"><h5 style="color:var(--accent);">카카오메이커스 시장검증</h5><p>해커톤 결과물 20팀 전량 론칭. AI 자동생성 상세페이지 + 참여팀 콘텐츠로 실제 수요 확인. 수요 데이터 기반 거점 오픈 결정.</p></div>
+        <div class="kp"><h5 style="color:var(--green);">폐교·폐가 파일럿 거점</h5><p>폐교를 체험+판매+카페 복합 공간으로 전환. 플래그십 거점. 6개월 운영 데이터(매출·원가·회전율) 수집.</p></div>
+        <div class="kp"><h5 style="color:var(--accent);">프랜차이즈 전국 확장</h5><p>파일럿(폐교) → 2단계 빈점포 소형 가맹 → 2027년 30개 → 2028년 100개+. 자부담 0원 창업 모델.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 9: 컨소시엄 -->
+<div class="slide"><div class="si dk" style="padding:28px 40px;">
+  <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);"></div>
+  <h2 class="serif" style="font-size:20px;font-weight:700;margin-bottom:4px;">컨소시엄 구조</h2>
+  <p style="font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:12px;">민관학 4자 협력 체계</p>
+  <div class="tier"><div class="tier-label">TIER 1 — 공공 기반</div><div class="tier-row"><div class="cbox accent" style="flex:1;"><h4>지방시대위원회 (대통령 직속) — MOU 완료</h4><p>지역 선정 · 관계부처 총동원 · MOU 공문</p></div></div></div>
+  <div class="arrows">▼ &nbsp; ▼ &nbsp; ▼</div>
+  <div class="tier"><div class="tier-label">TIER 2 — 핵심 실행 주체</div><div class="tier-row"><div class="cbox primary"><h4>3W (쓰리더블유)</h4><p>주관 · 기술 · 운영 총괄</p></div><div class="cbox accent"><h4>카카오</h4><p>주최 · 해커톤 · 유통 · 브랜딩</p></div><div class="cbox support"><h4>숙명여대</h4><p>산학연 · 교육 설계</p></div></div></div>
+  <div class="arrows">▼ &nbsp; ▼ &nbsp; ▼ &nbsp; ▼ &nbsp; ▼ &nbsp; ▼</div>
+  <div class="tier"><div class="tier-label">TIER 3 — 관계부처 (6개)</div><div class="tier-row"><div class="cbox"><h4 style="font-size:10px;">문체부</h4></div><div class="cbox"><h4 style="font-size:10px;">고용부</h4></div><div class="cbox highlight"><h4 style="font-size:10px;">중기부</h4></div><div class="cbox"><h4 style="font-size:10px;">행안부</h4></div><div class="cbox"><h4 style="font-size:10px;">국토부</h4></div><div class="cbox"><h4 style="font-size:10px;">방통위</h4></div></div></div>
+  <div class="arrows">▼ &nbsp; ▼ &nbsp; ▼ &nbsp; ▼</div>
+  <div class="tier"><div class="tier-label">TIER 4 — 협력기관</div><div class="tier-row"><div class="cbox support"><h4 style="font-size:10px;">농협중앙회</h4><p>ESG · 식재료</p></div><div class="cbox support"><h4 style="font-size:10px;">농민신문</h4><p>홍보 · PR</p></div><div class="cbox support"><h4 style="font-size:10px;">한식진흥원</h4><p>레시피</p></div><div class="cbox support"><h4 style="font-size:10px;">KCDF</h4><p>디자인</p></div></div></div>
+  <div class="foot foot-a"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; 중소벤처기업부 협력 제안</span></div>
+</div></div>
+
+<!-- 10: DIVIDER 사업내용 -->
+<div class="slide"><div class="si dk" style="display:flex;flex-direction:column;justify-content:center;padding:0 60px;">
+  <div style="position:absolute;left:0;top:0;width:4px;height:100%;background:var(--accent);"></div>
+  <span class="tag" style="color:var(--accent);margin-bottom:12px;">SECTION 03</span>
+  <h2 class="serif" style="font-size:32px;font-weight:700;margin-bottom:8px;">창업 파이프라인 상세</h2>
+  <p style="font-size:13px;color:rgba(255,255,255,0.4);">제품 개발 → 시장검증 → 파일럿 거점 → 프랜차이즈 확장 → 비용 역산</p>
+  <div class="foot foot-a"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; 중소벤처기업부 협력 제안</span></div>
+</div></div>
+
+<!-- 11: 제품 개발 + 시장검증 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">03</span><h2>제품 개발 6단계 + 카카오메이커스 시장검증</h2></div>
+  <div style="padding:10px 40px;display:flex;gap:16px;">
+    <div style="flex:1;">
+      <p style="font-size:10px;color:var(--muted);margin-bottom:5px;font-weight:700;">제품 개발 6단계</p>
+      <div style="display:flex;flex-direction:column;gap:3px;">
+        <div style="display:flex;gap:6px;font-size:10px;padding:6px 8px;background:var(--paper);border-radius:3px;border-left:3px solid var(--accent);"><strong style="color:var(--accent);width:14px;">①</strong> 지역 식재료 발굴 (농협·지자체 연계, 교육장 조달)</div>
+        <div style="display:flex;gap:6px;font-size:10px;padding:6px 8px;background:var(--paper);border-radius:3px;border-left:3px solid var(--accent);"><strong style="color:var(--accent);width:14px;">②</strong> 레시피 개발 (한식진흥원 무상 컨설팅)</div>
+        <div style="display:flex;gap:6px;font-size:10px;padding:6px 8px;background:var(--paper);border-radius:3px;border-left:3px solid var(--accent);"><strong style="color:var(--accent);width:14px;">③</strong> 해커톤 — 시제품 + AI 콘텐츠 동시 완성 (카카오 AI캠퍼스)</div>
+        <div style="display:flex;gap:6px;font-size:10px;padding:6px 8px;background:var(--paper);border-radius:3px;border-left:3px solid var(--accent);"><strong style="color:var(--accent);width:14px;">④</strong> 식품안전 검사 (지자체 보건소)</div>
+        <div style="display:flex;gap:6px;font-size:10px;padding:6px 8px;background:var(--paper);border-radius:3px;border-left:3px solid var(--accent);"><strong style="color:var(--accent);width:14px;">⑤</strong> 소량 생산 20종 × 500개 (농협 + 소공인 특화자금)</div>
+        <div style="display:flex;gap:6px;font-size:10px;padding:6px 8px;background:var(--paper);border-radius:3px;border-left:3px solid var(--accent);"><strong style="color:var(--accent);width:14px;">⑥</strong> 패키징 표준 디자인 20종 (KCDF 무상 매칭)</div>
+      </div>
+    </div>
+    <div style="flex:1;">
+      <p style="font-size:10px;color:var(--muted);margin-bottom:5px;font-weight:700;">카카오메이커스 시장검증</p>
+      <div style="background:var(--paper);border:1px solid var(--border);border-radius:4px;padding:12px;margin-bottom:8px;">
+        <p style="font-size:10.5px;line-height:1.6;">해커톤 결과물 <strong>20팀 전량</strong> 카카오메이커스 론칭. AI 자동생성 상세페이지 + 참여팀 콘텐츠로 실제 소비 반응 확인.</p>
+        <p style="font-size:10px;color:var(--muted);margin-top:6px;">펀딩 달성률 · 주문 수 · 재구매율 → <strong>수요 데이터 기반</strong> 거점 오픈 결정. 우수 제품은 카카오한입 브랜드 단독 론칭.</p>
+      </div>
+      <p style="font-size:10px;color:var(--muted);margin-bottom:4px;font-weight:700;">자부담 0원 구조</p>
+      <div style="font-size:9.5px;color:var(--muted);line-height:1.7;">
+        교육(문체부) · 활동비(지자체+중기부) · 생산(농협+소공인 융자) · 패키징(KCDF 무상) · 유통(카카오 무료) · 거점(폐교 무상)
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 12: 프랜차이즈 + 비용 역산 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">03</span><h2>프랜차이즈 2단계 + 창업 비용 역산</h2></div>
+  <div style="padding:8px 40px;display:flex;gap:16px;">
+    <div style="flex:1;">
+      <p style="font-size:10px;color:var(--muted);margin-bottom:5px;font-weight:700;">2단계 확장 로드맵</p>
+      <table style="font-size:10px;">
+        <thead><tr><th>단계</th><th>시기</th><th>내용</th><th>규모</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:700;color:var(--green);">파일럿</td><td>2026.11~</td><td>폐교·폐가 거점</td><td>5곳 (플래그십)</td></tr>
+          <tr class="alt"><td style="font-weight:700;color:var(--accent);">1차 가맹</td><td>2027 상반기</td><td>빈점포 소형 가맹</td><td>20~30개</td></tr>
+          <tr><td style="font-weight:700;color:var(--accent);">공급망</td><td>2027 하반기</td><td>농협 가공공장</td><td>50개</td></tr>
+          <tr class="alt" style="background:rgba(212,115,26,0.06);"><td style="font-weight:700;color:var(--red);">전국 확장</td><td>2028~</td><td>WorkB POS 통합</td><td style="font-weight:700;color:var(--accent);">100개+</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:9px;color:var(--muted);margin-top:4px;">1단계 폐교 = 플래그십/체험형<br>2단계 빈점포 = 소형 판매 가맹점</p>
+    </div>
+    <div style="flex:1;">
+      <p style="font-size:10px;color:var(--muted);margin-bottom:5px;font-weight:700;">창업 비용 역산 (2단계 빈점포 기준)</p>
+      <table style="font-size:10px;">
+        <thead><tr><th>항목</th><th>일반 창업</th><th>K-주전부리</th></tr></thead>
+        <tbody>
+          <tr><td>인테리어</td><td style="color:var(--red);">5,000~8,000만</td><td style="color:var(--green);font-weight:700;">3,000만</td></tr>
+          <tr class="alt"><td>설비</td><td style="color:var(--red);">2,000~3,000만</td><td style="color:var(--green);font-weight:700;">800만</td></tr>
+          <tr><td>재료비</td><td>500~1,000만</td><td>500만</td></tr>
+          <tr class="alt"><td>가맹비</td><td>1,000~3,000만</td><td style="color:var(--green);font-weight:700;">500만</td></tr>
+          <tr><td>임대보증금</td><td>2,000~5,000만</td><td style="color:var(--green);font-weight:700;">0원</td></tr>
+          <tr style="background:rgba(212,115,26,0.06);"><td style="font-weight:700;">합계</td><td style="color:var(--red);font-weight:700;">1~2억</td><td style="color:var(--green);font-weight:700;">약 4,800만</td></tr>
+          <tr style="background:rgba(30,126,90,0.08);"><td style="font-weight:700;" colspan="2">정부 지원 적용 시</td><td style="color:var(--green);font-weight:700;font-size:13px;">2,000만 이하</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 13: 기대 효과 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">04</span><h2>기대 효과 및 성과 지표</h2></div>
+  <div style="padding:10px 40px;">
+    <div class="stats" style="margin-bottom:12px;">
+      <div class="stat"><div class="v" style="color:var(--accent);">20팀</div><div class="l">예비창업자<br>육성</div></div>
+      <div class="stat" style="border-top-color:var(--green);"><div class="v" style="color:var(--green);">20종</div><div class="l">시제품<br>시장검증</div></div>
+      <div class="stat" style="border-top-color:var(--blue);"><div class="v" style="color:var(--blue);">5곳</div><div class="l">파일럿 거점<br>(폐교·폐가)</div></div>
+      <div class="stat" style="border-top-color:var(--red);"><div class="v" style="color:var(--red);">100개+</div><div class="l">프랜차이즈<br>(2028)</div></div>
+      <div class="stat" style="border-top-color:var(--green);"><div class="v" style="color:var(--green);">1건</div><div class="l">프랜차이즈<br>모델 개발</div></div>
+    </div>
+    <table>
+      <thead><tr><th style="width:25%;">지표</th><th style="width:35%;">1기 (2026)</th><th>2기~ (2027~28)</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:700;color:var(--accent);">시제품 시장검증</td><td>20종 (카카오메이커스 매출 데이터)</td><td>메뉴 고도화·확장</td></tr>
+        <tr class="alt"><td style="font-weight:700;color:var(--accent);">파일럿 운영 데이터</td><td>6개월 매출·원가·회전율</td><td>표준 운영 매뉴얼 확정</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent);">프랜차이즈 모델</td><td>표준 레시피 + 인테리어 + 운영 매뉴얼 1건</td><td>가맹 사업 등록</td></tr>
+        <tr class="alt"><td style="font-weight:700;color:var(--accent);">가맹 확장</td><td>파일럿 5곳</td><td>30개(2027) → <strong>100개+(2028)</strong></td></tr>
+      </tbody>
+    </table>
+    <div style="background:var(--ink);border-radius:4px;padding:10px 14px;margin-top:6px;">
+      <span style="color:var(--yellow);font-weight:700;font-size:10px;">중기부 관점:</span>
+      <span style="color:rgba(255,255,255,0.65);font-size:10px;"> 기존 프로그램 0.45억 연계로 <strong style="color:#fff;">예비창업자 20팀 + 시장검증 20종 + 프랜차이즈 100개+ 모델</strong>을 만듭니다. 신규 예산 편성 불필요.</span>
+    </div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 14: 예산 + 협조 요청 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">05</span><h2>소요 예산 및 협조 요청</h2></div>
+  <div style="padding:8px 40px;display:flex;gap:16px;">
+    <div style="flex:1;">
+      <div style="background:var(--ink);border-radius:4px;padding:10px 14px;margin-bottom:10px;">
+        <span style="color:var(--yellow);font-weight:700;font-size:10px;" class="mono">기존 프로그램 내 집행 — 신규 예산 불필요</span>
+      </div>
+      <p style="font-size:10px;color:var(--muted);margin-bottom:5px;font-weight:700;">예산 — 약 0.45억</p>
+      <table style="font-size:10px;">
+        <tbody>
+          <tr><td>예비창업자 패키지 활동비</td><td style="width:22%;">3,000만</td><td style="width:26%;">기존 프로그램</td></tr>
+          <tr class="alt"><td>소공인 특화자금 융자</td><td>1,500만</td><td>융자 (매출 상환)</td></tr>
+          <tr><td>소상공인 컨설팅</td><td style="color:var(--green);font-weight:700;">0원</td><td>무상 (법률·세무)</td></tr>
+          <tr style="background:rgba(212,115,26,0.06);"><td style="font-weight:700;">합계</td><td style="font-weight:700;">4,500만</td><td style="font-size:9px;">전체 12.4억 중 3.6%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="flex:1;">
+      <p style="font-size:10px;color:var(--muted);margin-bottom:5px;font-weight:700;">협조 요청 사항</p>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div class="req"><div class="req-num">01</div><div class="req-body"><h5>예비창업자 패키지 연결</h5><p>청년 20명 활동비 (20명×100만×3개월)</p></div></div>
+        <div class="req"><div class="req-num">02</div><div class="req-body"><h5>소공인 특화자금 융자</h5><p>시제품 생산 자금 사전 상담 (연중 수시)</p></div></div>
+        <div class="req"><div class="req-num">03</div><div class="req-body"><h5>소상공인 컨설팅 무상</h5><p>법률·세무·노무 컨설팅 연결</p></div></div>
+        <div class="req"><div class="req-num">04</div><div class="req-body"><h5>프랜차이즈 가맹 컨설팅</h5><p>소상공인시장진흥공단 연결</p></div></div>
+        <div class="req"><div class="req-num">05</div><div class="req-body"><h5>우수 창업 사례 등록</h5><p>1기 성과 발표 시 중기부 사례 검토</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 15: CLOSING -->
+<div class="slide"><div class="si dk" style="display:flex;flex-direction:column;justify-content:center;padding:0 60px;">
+  <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent);"></div>
+  <div style="border-left:3px solid var(--yellow);padding-left:16px;">
+    <p class="serif" style="font-size:22px;color:rgba(255,255,255,0.5);">기존 프로그램 0.45억 연계로</p>
+    <p class="serif" style="font-size:22px;color:var(--yellow);font-weight:700;margin-top:6px;">예비창업자 20팀 · 시장검증 20종</p>
+    <p class="serif" style="font-size:22px;color:var(--yellow);font-weight:700;">전국 프랜차이즈 100개+ 모델</p>
+  </div>
+  <p class="serif" style="font-size:16px;color:rgba(255,255,255,0.4);margin:14px 0 0 19px;">을 만듭니다. 참여팀 자부담 0원. 신규 예산 편성 불필요.</p>
+  <div style="position:absolute;bottom:60px;left:60px;border-top:1px solid rgba(255,255,255,0.08);padding-top:14px;">
+    <p style="font-size:11px;color:rgba(255,255,255,0.3);">(주)쓰리더블유 &nbsp;|&nbsp; 담당 PM 박민환</p>
+    <p style="font-size:11px;color:rgba(255,255,255,0.3);">010-6568-0986 &nbsp;|&nbsp; pmh@3w.ai.kr</p>
+  </div>
+  <div class="foot foot-a"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; 중소벤처기업부 협력 제안</span></div>
+</div></div>
+
+</div>
+<div class="nav"><button onclick="prev()">‹</button><span class="counter"><span id="cur">1</span> / <span id="tot">15</span></span><button onclick="next()">›</button></div>
+<script>const slides=document.querySelectorAll('.slide');let current=0;const total=slides.length;document.getElementById('tot').textContent=total;function show(n){slides[current].classList.remove('active');current=(n+total)%total;slides[current].classList.add('active');document.getElementById('cur').textContent=current+1;}function next(){show(current+1);}function prev(){show(current-1);}document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='Enter'){e.preventDefault();next();}if(e.key==='ArrowLeft'||e.key==='Backspace'){e.preventDefault();prev();}if(e.key==='Home'){e.preventDefault();show(0);}if(e.key==='End'){e.preventDefault();show(total-1);}});let tx=0;document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){d<0?next():prev();}});</script>
+</body></html>
