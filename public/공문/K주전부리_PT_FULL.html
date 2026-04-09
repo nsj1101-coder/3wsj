@@ -1054,23 +1054,28 @@ html, body {
     <div>
       <div class="budget-list" id="budget-list">
         <div class="bg-item">
-          <div class="bg-top"><span class="bg-name">행안부 · 지자체 (소멸기금)</span><span><span class="bg-amt">6.7억</span><span class="bg-pct">54%</span></span></div>
+          <div class="bg-top"><span class="bg-name">행안부 · 지자체 (소멸기금)</span><span><span class="bg-amt">4.7억</span><span class="bg-pct">38%</span></span></div>
           <div class="bg-bar-wrap"><div class="bg-bar" id="bb0" style="background:#FEE500;width:0%"></div></div>
           <div class="bg-desc">이미 배분된 소멸기금 활용 — 신규 예산 요청 아님</div>
         </div>
         <div class="bg-item">
-          <div class="bg-top"><span class="bg-name">농협 · 카카오 (현물)</span><span><span class="bg-amt">2.9억</span><span class="bg-pct">23%</span></span></div>
+          <div class="bg-top"><span class="bg-name">카카오 (현물)</span><span><span class="bg-amt">2.9억</span><span class="bg-pct">23%</span></span></div>
           <div class="bg-bar-wrap"><div class="bg-bar" id="bb1" style="background:#FFFFFF;width:0%"></div></div>
-          <div class="bg-desc">공간 · 식재료 · 플랫폼 현물 기여</div>
+          <div class="bg-desc">AI캠퍼스 · 메이커스 · 플랫폼 현물 기여</div>
+        </div>
+        <div class="bg-item">
+          <div class="bg-top"><span class="bg-name">농협중앙회 (현물)</span><span><span class="bg-amt">2억</span><span class="bg-pct">16%</span></span></div>
+          <div class="bg-bar-wrap"><div class="bg-bar" id="bb2" style="background:#7EC8A4;width:0%"></div></div>
+          <div class="bg-desc">식재료 조달 · ESG 펀드 현물 기여</div>
         </div>
         <div class="bg-item">
           <div class="bg-top"><span class="bg-name">3W 자체 (직접 투입)</span><span><span class="bg-amt">1.2억</span><span class="bg-pct">10%</span></span></div>
-          <div class="bg-bar-wrap"><div class="bg-bar" id="bb2" style="background:#A0A0A0;width:0%"></div></div>
-          <div class="bg-desc">플랫폼 · 운영 · 기획 직접 비용</div>
+          <div class="bg-bar-wrap"><div class="bg-bar" id="bb3" style="background:#A0A0A0;width:0%"></div></div>
+          <div class="bg-desc">플랫폼 개발 기획</div>
         </div>
         <div class="bg-item">
           <div class="bg-top"><span class="bg-name">타 부처 (문체부·중기부)</span><span><span class="bg-amt">1.3억</span><span class="bg-pct">13%</span></span></div>
-          <div class="bg-bar-wrap"><div class="bg-bar" id="bb3" style="background:#505050;width:0%"></div></div>
+          <div class="bg-bar-wrap"><div class="bg-bar" id="bb4" style="background:#505050;width:0%"></div></div>
           <div class="bg-desc">강사비 · 창업패키지 · 기부체납</div>
         </div>
       </div>
@@ -1800,10 +1805,11 @@ function animS8() {
   gsap.to('#donut-wrap', { scale:1, opacity:1, duration:.9, delay:.1, ease:'back.out(1.4)' });
   gsap.to('#budget-list', { x:0, opacity:1, duration:.7, delay:.3, ease:'power3.out' });
   setTimeout(() => {
-    document.getElementById('bb0').style.width = '54%';
+    document.getElementById('bb0').style.width = '38%';
     document.getElementById('bb1').style.width = '23%';
-    document.getElementById('bb2').style.width = '10%';
-    document.getElementById('bb3').style.width = '13%';
+    document.getElementById('bb2').style.width = '16%';
+    document.getElementById('bb3').style.width = '10%';
+    document.getElementById('bb4').style.width = '13%';
   }, 400);
   gsap.to('#budget-note', { y:0, opacity:1, duration:.6, delay:.9, ease:'power3.out' });
   if (!chartsInited.has(8)) {
@@ -1812,10 +1818,10 @@ function animS8() {
       new Chart(document.getElementById('chart8'), {
         type: 'doughnut',
         data: {
-          labels: ['행안부·지자체', '농협·카카오 현물', '3W 자체', '타 부처'],
+          labels: ['행안부·지자체', '카카오 현물', '농협중앙회', '3W 자체', '타 부처'],
           datasets: [{
-            data: [6.7, 2.9, 1.2, 1.6],
-            backgroundColor: ['#FEE500','#FFFFFF','#505050','#A0A0A0'],
+            data: [4.7, 2.9, 2.0, 1.2, 1.6],
+            backgroundColor: ['#FEE500','#FFFFFF','#7EC8A4','#505050','#A0A0A0'],
             borderWidth: 0, hoverOffset: 14
           }]
         },
