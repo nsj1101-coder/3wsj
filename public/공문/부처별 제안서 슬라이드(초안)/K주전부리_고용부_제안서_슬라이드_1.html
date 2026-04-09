@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K-주전부리 — 고용노동부 협력 제안</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+:root{--bg:#f9f7f3;--ink:#14213d;--red:#c0392b;--blue:#1a6fa8;--orange:#d4731a;--green:#1e7e5a;--yellow:#f4c430;--purple:#7b2d8e;--paper:#fffef9;--muted:#5a5a72;--light:#eceae4;--border:#d9d5cc;--accent:#1e7e5a;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important;}
+html,body{height:100%;overflow:hidden;background:#111;}body{font-family:'Pretendard',sans-serif;}
+.deck{position:relative;width:100%;height:100%;overflow:hidden;}.slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s;}.slide.active{opacity:1;pointer-events:auto;}.si{width:960px;height:540px;position:relative;overflow:hidden;border-radius:2px;box-shadow:0 8px 40px rgba(0,0,0,0.4);}
+.nav{position:fixed;bottom:20px;right:30px;z-index:100;display:flex;gap:8px;align-items:center;}.nav button{width:36px;height:36px;border:none;border-radius:50%;background:rgba(255,255,255,0.12);color:#fff;font-size:16px;cursor:pointer;}.nav button:hover{background:rgba(255,255,255,0.25);}.nav .counter{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.5);margin:0 6px;}
+.dk{background:linear-gradient(135deg,#14213d 0%,#1a3a5c 50%,#14213d 100%);color:#fff;}.lt{background:var(--bg);color:var(--ink);}
+.foot{position:absolute;bottom:0;left:0;right:0;height:28px;background:var(--ink);display:flex;align-items:center;padding:0 32px;}.foot span{font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.35);}.foot-a{background:var(--accent);}
+.tag{font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:2.5px;}.serif{font-family:'Noto Serif KR',serif;}.mono{font-family:'JetBrains Mono',monospace;}
+.sh{padding:16px 40px 12px;border-bottom:1px solid var(--border);}.sh .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:20px;background:var(--accent);color:#fff;font-family:'JetBrains Mono',monospace;font-size:9px;border-radius:2px;margin-right:10px;font-weight:700;vertical-align:middle;}.sh h2{display:inline;font-family:'Noto Serif KR',serif;font-size:20px;font-weight:700;vertical-align:middle;}
+table{width:100%;border-collapse:collapse;font-size:10.5px;}thead th{background:var(--ink);color:#fff;font-weight:600;text-align:left;padding:6px 8px;font-size:9.5px;}tbody td{padding:5px 8px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6;}.alt td{background:rgba(237,242,247,0.5);}
+.callout{border-left:3px solid var(--accent);background:rgba(30,126,90,0.04);padding:10px 14px;border-radius:0 4px 4px 0;font-size:10.5px;line-height:1.7;}
+.stats{display:flex;gap:8px;}.stat{flex:1;background:var(--paper);border-radius:4px;padding:12px 10px;text-align:center;border-top:3px solid var(--accent);box-shadow:0 1px 3px rgba(0,0,0,0.05);}.stat .v{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;line-height:1.2;}.stat .l{font-size:9px;color:var(--muted);margin-top:3px;line-height:1.35;}
+.flow{display:flex;gap:0;align-items:stretch;}.flow-item{flex:1;border-top:3px solid var(--border);border-radius:4px;padding:8px 4px;text-align:center;background:var(--paper);box-shadow:0 1px 2px rgba(0,0,0,0.04);}.flow-item h5{font-size:10px;font-weight:700;margin-bottom:1px;}.flow-item p{font-size:8.5px;color:var(--muted);}.flow-arrow{display:flex;align-items:center;padding:0 1px;color:var(--border);font-size:12px;}
+.kp-row{display:flex;gap:14px;margin-top:12px;}.kp{flex:1;}.kp h5{font-size:11px;font-weight:700;margin-bottom:3px;}.kp p{font-size:9px;color:var(--muted);line-height:1.5;}
+.tier{margin-bottom:10px;}.tier-label{font-family:'JetBrains Mono',monospace;font-size:7.5px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:5px;}.tier-row{display:flex;gap:6px;}.cbox{flex:1;border-radius:4px;padding:10px;text-align:center;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);}.cbox h4{font-size:12px;font-weight:700;margin-bottom:2px;}.cbox p{font-size:9px;color:rgba(255,255,255,0.45);line-height:1.4;}.cbox.primary{border-color:rgba(26,111,168,0.5);background:rgba(26,111,168,0.12);}.cbox.accent{border-color:rgba(244,196,48,0.4);background:rgba(244,196,48,0.06);}.cbox.accent h4{color:var(--yellow);}.cbox.support{border-color:rgba(30,126,90,0.3);background:rgba(30,126,90,0.06);}.cbox.highlight{border-color:var(--yellow);border-width:1.5px;}.cbox.highlight h4{color:var(--yellow);}.arrows{text-align:center;color:rgba(255,255,255,0.15);font-size:12px;margin:4px 0;letter-spacing:12px;}
+.req{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;}.req-num{width:28px;height:28px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;flex-shrink:0;}.req-body h5{font-size:12px;font-weight:700;margin-bottom:1px;}.req-body p{font-size:10px;color:var(--muted);line-height:1.5;}
+@media print{html,body{overflow:visible;height:auto;background:#fff;}.nav{display:none;}.deck{position:static;}.slide{position:static;opacity:1;pointer-events:auto;page-break-after:always;}.si{box-shadow:none;width:100%;height:auto;min-height:540px;}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 1: COVER -->
+<div class="slide active"><div class="si dk" style="padding:44px;">
+  <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent);"></div>
+  <div style="position:absolute;left:44px;top:60px;width:3px;height:50px;background:var(--accent);"></div>
+  <p class="tag" style="color:rgba(255,255,255,0.4);margin-bottom:10px;margin-left:16px;">세대융합형 실전 일자리 실증</p>
+  <h1 class="serif" style="font-size:44px;line-height:1.25;margin-left:16px;"><span style="color:var(--yellow);">K-주전부리</span><br>활성화 사업</h1>
+  <p style="font-size:17px;color:rgba(255,255,255,0.5);margin:14px 0 28px 16px;">고용노동부 협력 제안</p>
+  <div style="display:flex;gap:8px;margin-left:16px;flex-wrap:wrap;">
+    <span class="mono" style="font-size:8.5px;padding:4px 12px;border:1px solid rgba(255,255,255,0.15);border-radius:20px;color:rgba(255,255,255,0.55);">시니어 전문 역할 60명</span>
+    <span class="mono" style="font-size:8.5px;padding:4px 12px;border:1px solid rgba(255,255,255,0.15);border-radius:20px;color:rgba(255,255,255,0.55);">세대융합 20팀</span>
+    <span class="mono" style="font-size:8.5px;padding:4px 12px;border:1px solid rgba(255,255,255,0.15);border-radius:20px;color:rgba(255,255,255,0.55);">예산 요청 0원</span>
+    <span class="mono" style="font-size:8.5px;padding:4px 12px;border:1px solid rgba(255,255,255,0.15);border-radius:20px;color:rgba(255,255,255,0.55);">완결형 일자리 파이프라인</span>
+  </div>
+  <div style="position:absolute;bottom:44px;left:60px;border-top:1px solid rgba(255,255,255,0.08);padding-top:14px;"><span class="mono" style="font-size:10px;color:rgba(255,255,255,0.3);">2026.04 &nbsp;|&nbsp; (주)쓰리더블유 &nbsp;|&nbsp; 담당 PM 박민환</span></div>
+  <div class="foot foot-a"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; 고용노동부 협력 제안</span></div>
+</div></div>
+
+<!-- 2: 목차 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">INDEX</span><h2>목차</h2></div>
+  <div style="padding:20px 40px;">
+    <div style="display:flex;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--border);"><span class="serif" style="font-size:18px;color:var(--accent);font-weight:700;width:40px;">01</span><div><strong style="font-size:13px;">사업 배경 및 필요성</strong><br><span style="font-size:10px;color:var(--muted);">시니어 일자리 구조적 문제 · K-주전부리의 접근</span></div></div>
+    <div style="display:flex;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--border);"><span class="serif" style="font-size:18px;color:var(--accent);font-weight:700;width:40px;">02</span><div><strong style="font-size:13px;">사업 개요</strong><br><span style="font-size:10px;color:var(--muted);">전국 모집 → 특산물 배정 → 12주 프로그램 → 컨소시엄</span></div></div>
+    <div style="display:flex;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--border);"><span class="serif" style="font-size:18px;color:var(--accent);font-weight:700;width:40px;">03</span><div><strong style="font-size:13px;">시니어 일자리 설계</strong><br><span style="font-size:10px;color:var(--muted);">3가지 전문 역할 · 세대융합 팀 · 일자리 파이프라인</span></div></div>
+    <div style="display:flex;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--border);"><span class="serif" style="font-size:18px;color:var(--accent);font-weight:700;width:40px;">04</span><div><strong style="font-size:13px;">기대 효과 및 성과 지표</strong><br><span style="font-size:10px;color:var(--muted);">일자리 규모 · 기존 프로그램 연계</span></div></div>
+    <div style="display:flex;align-items:baseline;padding:13px 0;"><span class="serif" style="font-size:18px;color:var(--accent);font-weight:700;width:40px;">05</span><div><strong style="font-size:13px;">협조 요청 — 예산 0원</strong><br><span style="font-size:10px;color:var(--muted);">고용센터 자문 · 기존 프로그램 연계 · 장기 협력</span></div></div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 3: DIVIDER 배경 -->
+<div class="slide"><div class="si dk" style="display:flex;flex-direction:column;justify-content:center;padding:0 60px;">
+  <div style="position:absolute;left:0;top:0;width:4px;height:100%;background:var(--accent);"></div>
+  <span class="tag" style="color:var(--accent);margin-bottom:12px;">SECTION 01</span>
+  <h2 class="serif" style="font-size:32px;font-weight:700;margin-bottom:8px;">사업 배경 및 필요성</h2>
+  <p style="font-size:13px;color:rgba(255,255,255,0.4);">시니어 일자리의 질적 전환 — 공공근로에서 AI 전문 역할로</p>
+  <div class="foot foot-a"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; 고용노동부 협력 제안</span></div>
+</div></div>
+
+<!-- 4: 현황 + 차별점 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">01</span><h2>시니어 일자리의 구조적 문제</h2></div>
+  <div style="padding:14px 40px;">
+    <div class="stats" style="margin-bottom:14px;">
+      <div class="stat"><div class="v" style="color:var(--red);">공공근로</div><div class="l">시니어 일자리 현실<br>단순·저임금·비숙련 편중</div></div>
+      <div class="stat" style="border-top-color:var(--orange);"><div class="v" style="color:var(--orange);">低</div><div class="l">시니어 경험의<br>경제적 가치 전환율</div></div>
+      <div class="stat" style="border-top-color:var(--blue);"><div class="v" style="color:var(--blue);">AI 시대</div><div class="l">시니어 디지털 역량<br>강화 모델 부재</div></div>
+      <div class="stat" style="border-top-color:var(--green);"><div class="v" style="color:var(--green);">K-주전부리</div><div class="l">전문 역할 + AI 도구<br>= 시장 가치 전환</div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="display:flex;align-items:center;gap:8px;"><div style="width:3px;height:28px;background:var(--red);flex-shrink:0;"></div><span style="font-size:11.5px;">시니어 일자리 = 공공근로·단순 보조 편중 → <strong>본인도 자부심 없음</strong></span></div>
+      <div style="display:flex;align-items:center;gap:8px;"><div style="width:3px;height:28px;background:var(--red);flex-shrink:0;"></div><span style="font-size:11.5px;">디지털 전환 시대, 시니어의 경험·지식이 <strong>시장에서 가치화되지 못하는 구조</strong></span></div>
+      <div style="display:flex;align-items:center;gap:8px;"><div style="width:3px;height:28px;background:var(--green);flex-shrink:0;"></div><span style="font-size:11.5px;">K-주전부리: 시니어에게 <strong>3가지 전문 역할</strong>을 부여하고, AI 도구로 <strong>실전 상업 결과물</strong>을 만듦</span></div>
+      <div style="display:flex;align-items:center;gap:8px;"><div style="width:3px;height:28px;background:var(--green);flex-shrink:0;"></div><span style="font-size:11.5px;">교육 → 팀 → 제품 → 판매 → 거점 → 프랜차이즈까지 <strong>완결형 일자리 파이프라인</strong></span></div>
+    </div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 5: DIVIDER 사업 개요 -->
+<div class="slide"><div class="si dk" style="display:flex;flex-direction:column;justify-content:center;padding:0 60px;">
+  <div style="position:absolute;left:0;top:0;width:4px;height:100%;background:var(--accent);"></div>
+  <span class="tag" style="color:var(--accent);margin-bottom:12px;">SECTION 02</span>
+  <h2 class="serif" style="font-size:32px;font-weight:700;margin-bottom:8px;">사업 개요</h2>
+  <p style="font-size:13px;color:rgba(255,255,255,0.4);">전국 모집 → 지역 특산물 배정 → 지정 장소 교육 → 폐교 거점</p>
+  <div class="foot foot-a"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; 고용노동부 협력 제안</span></div>
+</div></div>
+
+<!-- 6: 사업 구조 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">02</span><h2>사업 기본 정보</h2></div>
+  <div style="padding:10px 40px;">
+    <table>
+      <tbody>
+        <tr class="alt"><td style="width:14%;font-weight:700;color:var(--accent);">사업명</td><td>K-주전부리 활성화 사업 — 민관학 협력 12주 집중형 실증</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent);">참여 규모</td><td>시니어 60명 + 청년 20명 = <strong>80명, 20팀 (전국 공개 모집)</strong></td></tr>
+        <tr class="alt"><td style="font-weight:700;color:var(--accent);">참가 방식</td><td>참가자에게 인구감소지역 5곳 특산물 배정 → 지정 장소에서 교육·프로젝트</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent);">교육 장소</td><td>카카오 AI캠퍼스 등 지정 장소 (<strong>해당 지역 한정 아님</strong>)</td></tr>
+        <tr class="alt"><td style="font-weight:700;color:var(--accent);">파일럿 거점</td><td>인구감소지역 <strong>폐교·폐가</strong> 등 유휴 공간 전환 5곳</td></tr>
+        <tr><td style="font-weight:700;color:var(--accent);">컨소시엄</td><td><strong>지방시대위(MOU 완료)</strong> · 카카오 · 숙명여대 · 농협 · 농민신문</td></tr>
+        <tr class="alt"><td style="font-weight:700;color:var(--accent);">핵심 목표</td><td>시니어 AI 전문 역할 양성 + 세대융합 일자리 + 프랜차이즈 일자리 확산</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 7: 12주 흐름 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">02</span><h2>12주 프로그램 — 일자리 파이프라인 관점</h2></div>
+  <div style="padding:14px 40px;">
+    <div class="flow">
+      <div class="flow-item" style="background:var(--light);"><p style="font-weight:700;font-size:8px;">05~06월</p><h5>전국 모집</h5><p>일자리 매칭</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item" style="border-top-color:var(--accent);background:rgba(30,126,90,0.06);"><p style="font-weight:700;font-size:8px;color:var(--accent);">고용</p><h5 style="color:var(--accent);">AI 교육</h5><p>직업훈련</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item" style="border-top-color:var(--accent);background:rgba(30,126,90,0.06);"><p style="font-weight:700;font-size:8px;color:var(--accent);">고용</p><h5 style="color:var(--accent);">해커톤</h5><p>실전 프로젝트</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item" style="border-top-color:var(--orange);background:rgba(212,115,26,0.06);"><p style="font-weight:700;font-size:8px;">10월</p><h5>시장검증</h5><p>창업 실증</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item" style="border-top-color:var(--accent);background:rgba(30,126,90,0.06);"><p style="font-weight:700;font-size:8px;color:var(--accent);">고용</p><h5 style="color:var(--accent);">거점 운영</h5><p>일자리 창출</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item" style="border-top-color:var(--accent);background:rgba(30,126,90,0.06);"><p style="font-weight:700;font-size:8px;color:var(--accent);">고용</p><h5 style="color:var(--accent);">프랜차이즈</h5><p>일자리 확산</p></div>
+    </div>
+    <div style="border-top:1px solid var(--border);margin-top:14px;padding-top:12px;">
+      <div class="kp-row">
+        <div class="kp"><h5 style="color:var(--accent);">전국 모집 시니어 60명</h5><p>거주지와 무관, 역량·의지 기준 선발. 배정받은 지역 특산물로 상품 기획·제작. 현장 탐방 1~2회 포함.</p></div>
+        <div class="kp"><h5 style="color:var(--green);">폐교·폐가 거점 운영</h5><p>인구감소지역 폐교를 복합 거점으로 전환. 운영 인력 채용 → 직접 일자리 창출. 6개월 운영 데이터 수집.</p></div>
+        <div class="kp"><h5 style="color:var(--orange);">프랜차이즈 일자리 확산</h5><p>파일럿(폐교) → 2단계 빈점포 소형 가맹 → 100개+ 전국 확장. 가맹점당 2~3명 고용.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 8: 컨소시엄 -->
+<div class="slide"><div class="si dk" style="padding:28px 40px;">
+  <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);"></div>
+  <h2 class="serif" style="font-size:20px;font-weight:700;margin-bottom:4px;">컨소시엄 구조</h2>
+  <p style="font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:12px;">민관학 4자 협력 체계</p>
+  <div class="tier"><div class="tier-label">TIER 1 — 공공 기반</div><div class="tier-row"><div class="cbox accent" style="flex:1;"><h4>지방시대위원회 (대통령 직속) — MOU 완료</h4><p>지역 선정 · 관계부처 총동원 · MOU 공문</p></div></div></div>
+  <div class="arrows">▼ &nbsp; ▼ &nbsp; ▼</div>
+  <div class="tier"><div class="tier-label">TIER 2 — 핵심 실행 주체</div><div class="tier-row"><div class="cbox primary"><h4>3W (쓰리더블유)</h4><p>주관 · 기술 · 운영 총괄</p></div><div class="cbox accent"><h4>카카오</h4><p>주최 · 해커톤 · 유통</p></div><div class="cbox support"><h4>숙명여대</h4><p>산학연 · 교육 설계</p></div></div></div>
+  <div class="arrows">▼ &nbsp; ▼ &nbsp; ▼ &nbsp; ▼ &nbsp; ▼ &nbsp; ▼</div>
+  <div class="tier"><div class="tier-label">TIER 3 — 관계부처 (6개)</div><div class="tier-row"><div class="cbox"><h4 style="font-size:10px;">문체부</h4></div><div class="cbox highlight"><h4 style="font-size:10px;">고용부</h4></div><div class="cbox"><h4 style="font-size:10px;">중기부</h4></div><div class="cbox"><h4 style="font-size:10px;">행안부</h4></div><div class="cbox"><h4 style="font-size:10px;">국토부</h4></div><div class="cbox"><h4 style="font-size:10px;">방통위</h4></div></div></div>
+  <div class="arrows">▼ &nbsp; ▼ &nbsp; ▼ &nbsp; ▼</div>
+  <div class="tier"><div class="tier-label">TIER 4 — 협력기관</div><div class="tier-row"><div class="cbox support"><h4 style="font-size:10px;">농협중앙회</h4><p>ESG · 식재료</p></div><div class="cbox support"><h4 style="font-size:10px;">농민신문</h4><p>홍보 · PR</p></div><div class="cbox support"><h4 style="font-size:10px;">한식진흥원</h4><p>레시피</p></div><div class="cbox support"><h4 style="font-size:10px;">KCDF</h4><p>디자인</p></div></div></div>
+  <div class="foot foot-a"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; 고용노동부 협력 제안</span></div>
+</div></div>
+
+<!-- 9: DIVIDER 사업내용 -->
+<div class="slide"><div class="si dk" style="display:flex;flex-direction:column;justify-content:center;padding:0 60px;">
+  <div style="position:absolute;left:0;top:0;width:4px;height:100%;background:var(--accent);"></div>
+  <span class="tag" style="color:var(--accent);margin-bottom:12px;">SECTION 03</span>
+  <h2 class="serif" style="font-size:32px;font-weight:700;margin-bottom:8px;">시니어 일자리 설계</h2>
+  <p style="font-size:13px;color:rgba(255,255,255,0.4);">3가지 전문 역할 · 세대융합 팀 · 일자리 파이프라인 · 규모 추정</p>
+  <div class="foot foot-a"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; 고용노동부 협력 제안</span></div>
+</div></div>
+
+<!-- 10: 시니어 역할 3분화 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">03</span><h2>시니어 역할 3분화 — 경험의 가치를 일자리로</h2></div>
+  <div style="padding:10px 40px;">
+    <p style="font-size:10.5px;color:var(--muted);margin-bottom:8px;">전국 모집 시니어 60명에게 단순 참여가 아닌 <strong>3가지 전문 역할</strong>을 부여합니다. AI 도구가 시니어의 "경험적 판단력"을 "실행 가능한 결과물"로 변환합니다.</p>
+    <table>
+      <thead><tr><th style="width:18%;">역할</th><th style="width:8%;">인원</th><th style="width:28%;">하는 일</th><th style="width:22%;">필요 경험</th><th>AI 도구</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:700;color:var(--accent);">개발자</td><td>20명</td><td>AI 기반 웹·앱 제작, 상품 페이지</td><td>IT·사무 경험</td><td>ChatGPT, 웹빌더</td></tr>
+        <tr class="alt"><td style="font-weight:700;color:var(--blue);">디자이너</td><td>20명</td><td>AI 이미지 생성, 패키지·브랜드</td><td>디자인·제조·유통</td><td>Midjourney, Canva</td></tr>
+        <tr><td style="font-weight:700;color:var(--orange);">콘텐츠 마케터</td><td>20명</td><td>판매 문구, AI 숏폼, 브랜드 스토리</td><td>마케팅·영업·서비스</td><td>ChatGPT, CapCut</td></tr>
+      </tbody>
+    </table>
+    <div style="display:flex;gap:12px;margin-top:10px;">
+      <div style="flex:1;background:var(--ink);border-radius:4px;padding:10px 14px;">
+        <span style="color:var(--yellow);font-weight:700;font-size:10px;">팀 구성</span>
+        <p style="color:rgba(255,255,255,0.6);font-size:10px;line-height:1.5;margin-top:3px;">청년 창업가 1명 + 시니어 3명(개발자+디자이너+마케터) = 4명 × 20팀</p>
+      </div>
+      <div style="flex:1;" class="callout">
+        <strong style="color:var(--accent);">핵심 전환:</strong> "공공근로 시니어"가 아니라 <strong>"AI 전문 역할을 수행하고 실제 상품을 만드는 시니어"</strong>. 이것이 시니어 일자리의 질적 전환입니다.
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 11: 일자리 파이프라인 + 규모 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">03</span><h2>일자리 파이프라인 + 규모 추정</h2></div>
+  <div style="padding:8px 40px;display:flex;gap:16px;">
+    <div style="flex:1;">
+      <p style="font-size:10px;color:var(--muted);margin-bottom:4px;font-weight:700;">교육 → 실전 → 거점 → 확산</p>
+      <table style="font-size:10px;">
+        <thead><tr><th style="width:20%;">단계</th><th style="width:15%;">기간</th><th>고용 관점</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:700;color:var(--blue);">AI 교육</td><td>1~6주</td><td>직업훈련 (AI 전문 역할)</td></tr>
+          <tr class="alt"><td style="font-weight:700;color:var(--blue);">해커톤</td><td>7~8주</td><td>실전 프로젝트 (시제품+콘텐츠)</td></tr>
+          <tr><td style="font-weight:700;color:var(--orange);">시장검증</td><td>9~10주</td><td>창업 실증 (카카오메이커스 매출)</td></tr>
+          <tr class="alt"><td style="font-weight:700;color:var(--green);">거점 운영</td><td>11주~</td><td><strong>일자리 창출</strong> (폐교 거점)</td></tr>
+          <tr style="background:rgba(30,126,90,0.06);"><td style="font-weight:700;color:var(--accent);">프랜차이즈</td><td>2027~</td><td><strong>일자리 확산</strong> (전국 가맹)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="flex:1;">
+      <p style="font-size:10px;color:var(--muted);margin-bottom:4px;font-weight:700;">일자리 규모 추정</p>
+      <table style="font-size:10px;">
+        <thead><tr><th>구분</th><th>1기 (2026)</th><th>2기~3기</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:700;">프로그램 참여</td><td>80명</td><td>160~240명</td></tr>
+          <tr class="alt"><td style="font-weight:700;">거점 직접 고용</td><td>20명 (5곳)</td><td>60명 (15곳)</td></tr>
+          <tr style="background:rgba(30,126,90,0.06);"><td style="font-weight:700;">프랜차이즈 고용</td><td>—</td><td style="font-weight:700;color:var(--accent);">200~300명</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:10px;color:var(--muted);margin-top:8px;font-weight:700;">기존 프로그램 연계</p>
+      <table style="font-size:9.5px;">
+        <tbody>
+          <tr><td style="font-weight:700;">신중년 경력형 일자리</td><td>시니어 참여자 등록</td></tr>
+          <tr class="alt"><td style="font-weight:700;">고령자 고용지원금</td><td>거점 시니어 채용 시</td></tr>
+          <tr><td style="font-weight:700;">국민내일배움카드</td><td>2기 교육비 재원</td></tr>
+          <tr class="alt"><td style="font-weight:700;">고용센터 자문</td><td>노무·법률 무상</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 12: 기대 효과 + 협조 요청 -->
+<div class="slide"><div class="si lt">
+  <div class="sh"><span class="num">04</span><h2>기대 효과 · 협조 요청 — 예산 0원</h2></div>
+  <div style="padding:8px 40px;display:flex;gap:16px;">
+    <div style="flex:1;">
+      <div class="stats" style="margin-bottom:10px;">
+        <div class="stat"><div class="v" style="color:var(--accent);">60명</div><div class="l">시니어 일자리<br>(전문 역할 기반)</div></div>
+        <div class="stat" style="border-top-color:var(--blue);"><div class="v" style="color:var(--blue);">20팀</div><div class="l">세대융합<br>창업팀</div></div>
+        <div class="stat" style="border-top-color:var(--orange);"><div class="v" style="color:var(--orange);">300명</div><div class="l">프랜차이즈<br>고용 (2028)</div></div>
+      </div>
+      <div style="background:var(--ink);border-radius:4px;padding:10px 14px;">
+        <p style="font-size:10px;color:var(--yellow);font-weight:700;margin-bottom:4px;" class="mono">고용부 예산 요청: 0원</p>
+        <p style="font-size:10px;color:rgba(255,255,255,0.6);line-height:1.6;">기존 프로그램 연계만 요청합니다. <strong style="color:#fff;">비용 0에 시니어 일자리 질적 전환의 정책 성과</strong>를 확보할 수 있습니다.</p>
+      </div>
+    </div>
+    <div style="flex:1;">
+      <p style="font-size:10px;color:var(--muted);margin-bottom:5px;font-weight:700;">협조 요청 — 전부 0원</p>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div class="req"><div class="req-num">01</div><div class="req-body"><h5>고용센터 자문 연결</h5><p>5개 지역 노무·법률 무상 자문 제공</p></div></div>
+        <div class="req"><div class="req-num">02</div><div class="req-body"><h5>기존 프로그램 연계 검토</h5><p>신중년 경력형·고용지원금·배움카드 등</p></div></div>
+        <div class="req"><div class="req-num">03</div><div class="req-body"><h5>NCS 훈련과정 등록 자문</h5><p>AI 콘텐츠 교육 → 2기 제도화 준비</p></div></div>
+        <div class="req"><div class="req-num">04</div><div class="req-body"><h5>장기 협력 기반 마련</h5><p>1기 성과 기반 확대 논의 + 향후 고용 데이터 활용 등</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; (주)쓰리더블유</span></div>
+</div></div>
+
+<!-- 13: CLOSING -->
+<div class="slide"><div class="si dk" style="display:flex;flex-direction:column;justify-content:center;padding:0 60px;">
+  <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent);"></div>
+  <div style="border-left:3px solid var(--yellow);padding-left:16px;">
+    <p class="serif" style="font-size:24px;color:rgba(255,255,255,0.5);">비용 0원으로</p>
+    <p class="serif" style="font-size:22px;color:var(--yellow);font-weight:700;margin-top:6px;">시니어 일자리 60명 · 세대융합 20팀</p>
+    <p class="serif" style="font-size:22px;color:var(--yellow);font-weight:700;">프랜차이즈 300명 일자리 모델</p>
+  </div>
+  <p class="serif" style="font-size:16px;color:rgba(255,255,255,0.4);margin:14px 0 0 19px;">AI 시대 시니어 일자리의 질적 전환을 실증합니다.</p>
+  <p style="font-size:11px;color:rgba(255,255,255,0.25);margin:12px 0 0 19px;">공공근로가 아닌, 전문 역할 기반 실전 일자리.</p>
+  <div style="position:absolute;bottom:60px;left:60px;border-top:1px solid rgba(255,255,255,0.08);padding-top:14px;">
+    <p style="font-size:11px;color:rgba(255,255,255,0.3);">(주)쓰리더블유 &nbsp;|&nbsp; 담당 PM 박민환</p>
+    <p style="font-size:11px;color:rgba(255,255,255,0.3);">010-6568-0986 &nbsp;|&nbsp; pmh@3w.ai.kr</p>
+  </div>
+  <div class="foot foot-a"><span>K-주전부리 활성화 사업 &nbsp;|&nbsp; 고용노동부 협력 제안</span></div>
+</div></div>
+
+</div>
+<div class="nav"><button onclick="prev()">‹</button><span class="counter"><span id="cur">1</span> / <span id="tot">13</span></span><button onclick="next()">›</button></div>
+<script>const slides=document.querySelectorAll('.slide');let current=0;const total=slides.length;document.getElementById('tot').textContent=total;function show(n){slides[current].classList.remove('active');current=(n+total)%total;slides[current].classList.add('active');document.getElementById('cur').textContent=current+1;}function next(){show(current+1);}function prev(){show(current-1);}document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='Enter'){e.preventDefault();next();}if(e.key==='ArrowLeft'||e.key==='Backspace'){e.preventDefault();prev();}if(e.key==='Home'){e.preventDefault();show(0);}if(e.key==='End'){e.preventDefault();show(total-1);}});let tx=0;document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){d<0?next():prev();}});</script>
+</body></html>

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K-주전부리 — 카카오 협력 제안</title>
+<!--
+  K-주전부리 PT PREVIEW — SLIDES 01~03 of 16
+  Stack : Three.js r128 (particles) · GSAP 3 (animations) · Vanilla CSS/JS
+  Theme : Kakao Yellow #FEE500 on Deep Black #0A0A0A · Pretendard font
+  Nav   : ← → Arrow keys · Space · Mouse wheel · Touch swipe
+  Spec  : 나머지 13슬라이드는 PT_스펙_K주전부리.md 참조
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<style>
+:root {
+  --bg:   #0A0A0A;
+  --card: #141414;
+  --bd:   #2A2A2A;
+  --Y:    #FEE500;
+  --Yd:   rgba(254,229,0,.12);
+  --Yb:   rgba(254,229,0,.25);
+  --Yg:   rgba(254,229,0,.06);
+  --w:    #FFFFFF;
+  --wm:   #A0A0A0;
+  --wd:   #505050;
+  --gb:   rgba(255,255,255,.04);
+  --gbr:  rgba(255,255,255,.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--w);
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+/* ── CURSOR ── */
+#cd {
+  position: fixed; width: 8px; height: 8px;
+  background: var(--Y); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s;
+}
+#cr {
+  position: fixed; width: 32px; height: 32px;
+  border: 1.5px solid rgba(254,229,0,.5); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: width .3s, height .3s, border-color .3s;
+}
+
+/* ── FIXED UI ── */
+#prog {
+  position: fixed; bottom: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, var(--Y), rgba(254,229,0,.3));
+  transition: width .6s cubic-bezier(.76,0,.24,1); z-index: 500;
+}
+#ctr {
+  position: fixed; bottom: 24px; right: 32px;
+  font-size: 12px; font-weight: 600; letter-spacing: .1em; z-index: 500;
+}
+#ctr .c { color: var(--Y); }
+#ctr .t { color: var(--wd); }
+.nb {
+  position: fixed; bottom: 20px; z-index: 500;
+  background: none; border: 1px solid var(--bd); color: var(--wd);
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  font-size: 14px; cursor: pointer; transition: all .2s;
+}
+.nb:hover { border-color: var(--Y); color: var(--Y); }
+#nprev { right: 120px; }
+#nnext { right: 76px; }
+#preview-note {
+  position: fixed; top: 24px; left: 32px;
+  font-size: 10px; font-weight: 700; letter-spacing: .12em;
+  color: var(--wd); text-transform: uppercase; z-index: 500;
+}
+#ag {
+  position: fixed; top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(254,229,0,.06) 0%, transparent 70%);
+  filter: blur(60px); pointer-events: none; z-index: 0;
+}
+
+/* ── SLIDE SYSTEM ── */
+#sw { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+.slide {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateX(100%);
+  pointer-events: none; will-change: transform, opacity;
+}
+.slide.active { opacity: 1; transform: translateX(0); pointer-events: all; }
+
+/* Dot Grid */
+.dg {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Common */
+.al { display: block; width: 48px; height: 4px; background: var(--Y); border-radius: 2px; margin-bottom: 16px; }
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 6px 16px; border-radius: 100px;
+  font-size: 11px; font-weight: 700; letter-spacing: .08em;
+  background: var(--Yd); color: var(--Y); border: 1px solid var(--Yb);
+}
+
+/* ─────────────────── SLIDE 1: COVER ─────────────────── */
+#s1 { background: var(--bg); }
+#tc  { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+
+/* Decorative 3D Cube */
+.cs { position: absolute; right: 7vw; top: 50%; transform: translateY(-50%); width: 200px; height: 200px; perspective: 800px; z-index: 1; opacity: .28; }
+.cb { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; animation: spinC 22s linear infinite; }
+@keyframes spinC { from { transform: rotateX(0) rotateY(0); } to { transform: rotateX(360deg) rotateY(360deg); } }
+.cf { position: absolute; width: 200px; height: 200px; border: 1.5px solid rgba(254,229,0,.45); background: rgba(254,229,0,.025); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: rgba(254,229,0,.65); letter-spacing: .12em; text-align: center; line-height: 1.4; }
+.cf.fr { transform: translateZ(100px); }
+.cf.bk { transform: rotateY(180deg) translateZ(100px); }
+.cf.rt { transform: rotateY(90deg) translateZ(100px); }
+.cf.lt { transform: rotateY(-90deg) translateZ(100px); }
+.cf.tp { transform: rotateX(90deg) translateZ(100px); }
+.cf.bt { transform: rotateX(-90deg) translateZ(100px); }
+
+/* Cover Content */
+.cov { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.cov-badge { margin-bottom: 28px; }
+.cov-title { font-size: clamp(52px, 7.5vw, 92px); font-weight: 900; line-height: .95; letter-spacing: -.04em; }
+.cov-title .y { color: var(--Y); }
+.cov-title .sub { display: block; font-size: clamp(22px, 3.2vw, 42px); font-weight: 400; color: var(--wm); margin-top: 10px; letter-spacing: -.02em; }
+.cov-line { width: 80px; height: 4px; background: var(--Y); border-radius: 2px; margin: 22px auto; }
+.cov-desc { font-size: clamp(13px, 1.4vw, 16px); color: var(--wm); line-height: 1.7; margin-bottom: 40px; }
+
+.cov-stats { display: flex; align-items: center; margin-bottom: 52px; }
+.csi { padding: 0 26px; text-align: center; }
+.csi .n { display: block; font-size: clamp(20px, 2.8vw, 32px); font-weight: 900; color: var(--Y); line-height: 1; }
+.csi .l { font-size: 10px; color: var(--wd); letter-spacing: .1em; text-transform: uppercase; margin-top: 4px; display: block; }
+.sdiv { width: 1px; height: 34px; background: var(--bd); }
+
+.cov-hint { font-size: 11px; color: var(--wd); letter-spacing: .22em; text-transform: uppercase; animation: blk 2s ease-in-out infinite; }
+@keyframes blk { 0%,100%{opacity:.25} 50%{opacity:.9} }
+
+/* ─────────────────── SLIDE 2: 왜 지금인가 ─────────────────── */
+#s2 { background: var(--bg); padding: 0 6vw; align-items: stretch; }
+.s2w { display: grid; grid-template-columns: 1fr 340px; gap: 56px; width: 100%; max-width: 1400px; align-items: center; }
+.s2-title { font-size: clamp(30px, 4vw, 50px); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 6px; }
+.s2-sub { font-size: 14px; color: var(--wm); line-height: 1.6; margin-bottom: 28px; }
+
+.pc {
+  padding: 17px 20px;
+  border-left: 3px solid var(--Y);
+  border-top: 1px solid var(--bd); border-right: 1px solid var(--bd); border-bottom: 1px solid var(--bd);
+  border-radius: 0 12px 12px 0;
+  background: rgba(255,255,255,.02);
+  margin-bottom: 13px;
+  opacity: 0; transform: translateX(-32px);
+}
+.pc-tag { font-size: 10px; font-weight: 700; color: var(--Y); letter-spacing: .08em; background: var(--Yd); padding: 2px 10px; border-radius: 100px; display: inline-block; margin-bottom: 5px; }
+.pc-name { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+.pc-stat { font-size: 12px; font-weight: 800; color: var(--Y); margin-bottom: 3px; }
+.pc-desc { font-size: 12px; color: var(--wm); line-height: 1.5; }
+
+.s2-venn { display: flex; align-items: center; justify-content: center; }
+
+/* ─────────────────── SLIDE 3: 3대 목적 ─────────────────── */
+#s3 { background: var(--bg); flex-direction: column; gap: 32px; padding: 0 5vw; }
+
+.s3h {
+  text-align: center;
+  opacity: 0; transform: translateY(-20px);
+}
+.s3h .al { margin: 0 auto 14px; }
+.s3h-title { font-size: clamp(26px, 3.6vw, 42px); font-weight: 800; letter-spacing: -.03em; }
+.s3h-sub { font-size: 13px; color: var(--wm); margin-top: 6px; }
+
+.fc-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; width: 100%; max-width: 1180px; }
+
+/* Flip Card */
+.fcw {
+  perspective: 1200px; height: 330px;
+  opacity: 0; transform: translateY(44px);
+}
+.fci {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .82s cubic-bezier(.175,.885,.32,1.275);
+  cursor: pointer;
+}
+.fcw.flip .fci { transform: rotateY(180deg); }
+
+.fcf {
+  position: absolute; inset: 0;
+  border-radius: 20px; padding: 30px;
+  display: flex; flex-direction: column;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.fcf.front {
+  background: var(--card); border: 1px solid var(--bd);
+  justify-content: space-between;
+  transition: border-color .3s;
+}
+.fcw:hover .fcf.front { border-color: rgba(254,229,0,.35); }
+.fcf.back {
+  background: linear-gradient(135deg, #1C1800, #141414);
+  border: 1px solid rgba(254,229,0,.2);
+  transform: rotateY(180deg);
+  justify-content: space-between;
+}
+
+.fc-icon { width: 60px; height: 60px; background: var(--Yd); border: 1px solid var(--Yb); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 14px; }
+.fc-title { font-size: 19px; font-weight: 800; line-height: 1.2; margin-bottom: 8px; }
+.fc-sub { font-size: 12px; color: var(--wm); line-height: 1.5; }
+.fc-hint { font-size: 10px; color: var(--Y); letter-spacing: .12em; font-weight: 700; }
+
+.bk-label { font-size: 10px; color: rgba(254,229,0,.6); letter-spacing: .15em; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+.bk-stat { font-size: clamp(40px, 5.5vw, 60px); font-weight: 900; color: var(--Y); line-height: 1; }
+.bk-unit { font-size: 12px; color: var(--wm); margin: 5px 0 14px; }
+.bk-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.bk-list li { font-size: 12px; color: var(--wm); padding-left: 14px; position: relative; line-height: 1.4; }
+.bk-list li::before { content: '→'; position: absolute; left: 0; color: var(--Y); font-size: 10px; top: 2px; }
+.bk-close { font-size: 10px; color: rgba(254,229,0,.4); letter-spacing: .1em; text-align: center; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cd"></div>
+<div id="cr"></div>
+
+<!-- Ambient Glow -->
+<div id="ag"></div>
+
+<!-- Fixed UI -->
+<div id="preview-note">K-주전부리 · PREVIEW 3 / 16</div>
+<div id="prog" style="width:33.33%"></div>
+<div id="ctr"><span class="c">01</span><span class="t"> / 03</span></div>
+<button class="nb" id="nprev">←</button>
+<button class="nb" id="nnext">→</button>
+
+<!-- =================== SLIDES =================== -->
+<div id="sw">
+
+  <!-- ─── SLIDE 01 : COVER ─── -->
+  <section class="slide active" id="s1">
+    <canvas id="tc"></canvas>
+    <div class="dg" style="opacity:.35"></div>
+
+    <!-- Deco Cube -->
+    <div class="cs">
+      <div class="cb">
+        <div class="cf fr">K-주전부리</div>
+        <div class="cf bk">KAKAO ×<br>3W</div>
+        <div class="cf rt">2026</div>
+        <div class="cf lt">80명</div>
+        <div class="cf tp">12.4억</div>
+        <div class="cf bt">20팀</div>
+      </div>
+    </div>
+
+    <div class="cov">
+      <div class="cov-badge">
+        <span class="badge">KAKAO × 3W × 지방시대위 &nbsp;·&nbsp; MOU 완료</span>
+      </div>
+
+      <div class="cov-title">
+        <span class="y">K</span>-주전부리
+        <span class="sub">활성화 사업</span>
+      </div>
+
+      <div class="cov-line"></div>
+
+      <div class="cov-desc">
+        전국 시니어·청년 팀 × 인구감소지역 특산물 × 카카오메이커스<br>
+        12주 민관학 협력 실증 프로젝트
+      </div>
+
+      <div class="cov-stats">
+        <div class="csi"><span class="n">2026</span><span class="l">Year</span></div>
+        <div class="sdiv"></div>
+        <div class="csi"><span class="n">5개</span><span class="l">인구감소지역</span></div>
+        <div class="sdiv"></div>
+        <div class="csi"><span class="n">80명</span><span class="l">전국 참가자</span></div>
+        <div class="sdiv"></div>
+        <div class="csi"><span class="n">20팀</span><span class="l">세대융합팀</span></div>
+        <div class="sdiv"></div>
+        <div class="csi"><span class="n">12.4억</span><span class="l">총 사업비</span></div>
+      </div>
+
+      <div class="cov-hint">PRESS SPACE OR → TO BEGIN</div>
+    </div>
+  </section>
+
+  <!-- ─── SLIDE 02 : 왜 지금인가 ─── -->
+  <section class="slide" id="s2">
+    <div class="dg"></div>
+    <div class="s2w">
+
+      <!-- Left -->
+      <div>
+        <span class="al"></span>
+        <div class="s2-title">왜 지금,<br>이 사업인가?</div>
+        <div class="s2-sub">세 가지 구조적 문제가 동시에 해결되는 유일한 교차점</div>
+
+        <div class="pc" id="pc1">
+          <span class="pc-tag">고용부 정책 과제</span>
+          <div class="pc-name">시니어 일자리 위기</div>
+          <div class="pc-stat">50대+ 경력직 전환율 5% 미만</div>
+          <div class="pc-desc">AI 시대에 전문성이 시장에서 가치화되지 못하는 구조. 공공근로·단순 보조 편중.</div>
+        </div>
+
+        <div class="pc" id="pc2">
+          <span class="pc-tag">행안부 정책 과제</span>
+          <div class="pc-name">인구감소지역 소멸 위기</div>
+          <div class="pc-stat">89개 지역 지정 · 폐교 3,900개+</div>
+          <div class="pc-desc">지역 특산물은 있으나 브랜딩·유통 역량 부재. 소멸기금 성공 집행 사례 없음.</div>
+        </div>
+
+        <div class="pc" id="pc3">
+          <span class="pc-tag">국토부 정책 과제</span>
+          <div class="pc-name">도시재생 재공실화 반복</div>
+          <div class="pc-stat">물리적 개선 후 운영 콘텐츠·주체 부재</div>
+          <div class="pc-desc">상품·유통·운영 주체 없이 거점을 열면 재공실화. 기존 도시재생의 구조적 한계.</div>
+        </div>
+      </div>
+
+      <!-- Right: Venn SVG -->
+      <div class="s2-venn">
+        <svg width="320" height="310" viewBox="0 0 320 310" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="yg" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="8" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- 3 circles -->
+          <circle id="va" cx="160" cy="105" r="96" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+          <circle id="vb" cx="95"  cy="218" r="96" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+          <circle id="vc" cx="225" cy="218" r="96" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+          <!-- Center -->
+          <circle id="vct" cx="160" cy="178" r="50" fill="rgba(254,229,0,.13)" stroke="#FEE500" stroke-width="2" filter="url(#yg)"/>
+          <!-- Labels -->
+          <text id="la" x="160" y="63" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="13" font-weight="600" font-family="Pretendard,sans-serif">시니어 일자리</text>
+          <text id="lb" x="55"  y="296" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="13" font-weight="600" font-family="Pretendard,sans-serif">지역 활성화</text>
+          <text id="lc" x="265" y="296" text-anchor="middle" fill="rgba(255,255,255,.65)" font-size="13" font-weight="600" font-family="Pretendard,sans-serif">도시재생</text>
+          <!-- Center text -->
+          <text id="ct1" x="160" y="173" text-anchor="middle" fill="#FEE500" font-size="13" font-weight="800" font-family="Pretendard,sans-serif">K-주전부리</text>
+          <text id="ct2" x="160" y="190" text-anchor="middle" fill="rgba(254,229,0,.7)" font-size="10" font-family="Pretendard,sans-serif">교차점</text>
+        </svg>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── SLIDE 03 : 사업 개요 3대 목적 ─── -->
+  <section class="slide" id="s3">
+    <div class="dg"></div>
+
+    <div class="s3h" id="s3h">
+      <span class="al"></span>
+      <div class="s3h-title">사업 개요 — 3대 목적</div>
+      <div class="s3h-sub">K-주전부리가 달성하는 세 가지 목적 &nbsp;·&nbsp; 카드를 클릭하면 상세 수치 확인</div>
+    </div>
+
+    <div class="fc-row">
+
+      <!-- Card 1: 일자리 창출 -->
+      <div class="fcw" id="fc1">
+        <div class="fci" onclick="doFlip('fc1')">
+          <div class="fcf front">
+            <div>
+              <div class="fc-icon">🤝</div>
+              <div class="fc-title">세대간<br>일자리 창출</div>
+              <div class="fc-sub">시니어 AI 전문 역할 교육 → 베테랑 앱 등록 → 고용부 파이프라인 취업 연계</div>
+            </div>
+            <div class="fc-hint">TAP TO REVEAL →</div>
+          </div>
+          <div class="fcf back">
+            <div>
+              <div class="bk-label">일자리 창출 규모</div>
+              <div class="bk-stat">80명</div>
+              <div class="bk-unit">전국 모집 (시니어 60 + 청년 20)</div>
+              <ul class="bk-list">
+                <li>AI 디자이너·마케터·개발자 3역할 전문화</li>
+                <li>세대융합 20팀 실전 상업 프로젝트</li>
+                <li>수료 → 베테랑 앱 자동 등록 → 취업 연결</li>
+                <li>거점 운영 직접 고용 20명 (5곳)</li>
+              </ul>
+            </div>
+            <div class="bk-close">↩ 다시 클릭</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: 지역 활성화 -->
+      <div class="fcw" id="fc2">
+        <div class="fci" onclick="doFlip('fc2')">
+          <div class="fcf front">
+            <div>
+              <div class="fc-icon">🌾</div>
+              <div class="fc-title">인구감소지역<br>활성화</div>
+              <div class="fc-sub">특산물 상품화 → 카카오메이커스 독점 판매 → 전국·글로벌 유통</div>
+            </div>
+            <div class="fc-hint">TAP TO REVEAL →</div>
+          </div>
+          <div class="fcf back">
+            <div>
+              <div class="bk-label">지역 활성화 규모</div>
+              <div class="bk-stat">5개</div>
+              <div class="bk-unit">인구감소지역 × 특산물 상품화 20종</div>
+              <ul class="bk-list">
+                <li>카카오메이커스 20팀 전량 독점 론칭</li>
+                <li>팀별 현장 탐방 1~2회 → 생활인구 유입</li>
+                <li>지역 브랜드 전국 노출 → 지자체 예산 명분</li>
+                <li>추석 전 배송 완결형 유통 구조</li>
+              </ul>
+            </div>
+            <div class="bk-close">↩ 다시 클릭</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: 도시재생 -->
+      <div class="fcw" id="fc3">
+        <div class="fci" onclick="doFlip('fc3')">
+          <div class="fcf front">
+            <div>
+              <div class="fc-icon">🏫</div>
+              <div class="fc-title">도시재생 ·<br>프랜차이즈 확장</div>
+              <div class="fc-sub">폐교·폐가 복합 거점 전환 → 2027년 30개 → 2028년 100개+ 전국 확산</div>
+            </div>
+            <div class="fc-hint">TAP TO REVEAL →</div>
+          </div>
+          <div class="fcf back">
+            <div>
+              <div class="bk-label">도시재생 확장 목표</div>
+              <div class="bk-stat">100+</div>
+              <div class="bk-unit">2028년 전국 프랜차이즈 가맹점</div>
+              <ul class="bk-list">
+                <li>1단계: 폐교·폐가 5곳 플래그십 거점 오픈</li>
+                <li>2단계: 빈점포 소형 가맹점 30개 (2027)</li>
+                <li>3단계: 전국 100개+ 확장 (2028)</li>
+                <li>89개 인구감소지역 동일 모델 복제 가능</li>
+              </ul>
+            </div>
+            <div class="bk-close">↩ 다시 클릭</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /sw -->
+
+<script>
+// ════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════
+let cur = 0, N = 3, busy = false;
+let did = [true, false, false]; // s1 inited at load
+
+// ════════════════════════════════════════════
+//  THREE.JS PARTICLE SYSTEM (SLIDE 1)
+// ════════════════════════════════════════════
+(function() {
+  const canvas = document.getElementById('tc');
+  const R = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
+  R.setPixelRatio(Math.min(devicePixelRatio, 2));
+  R.setSize(innerWidth, innerHeight);
+
+  const scene = new THREE.Scene();
+  const cam   = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 500);
+  cam.position.z = 5;
+
+  const COUNT = 650;
+  const pos = new Float32Array(COUNT * 3);
+  const vel = [];
+  for (let i = 0; i < COUNT; i++) {
+    pos[i*3]   = (Math.random() - .5) * 24;
+    pos[i*3+1] = (Math.random() - .5) * 14;
+    pos[i*3+2] = (Math.random() - .5) * 5;
+    vel.push({ y: .003 + Math.random() * .009, x: (Math.random() - .5) * .002 });
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const mat = new THREE.PointsMaterial({
+    color: 0xFEE500, size: .07, transparent: true,
+    opacity: .6, blending: THREE.AdditiveBlending, depthWrite: false
+  });
+  scene.add(new THREE.Points(geo, mat));
+
+  let mx = 0, my = 0;
+  document.addEventListener('mousemove', e => {
+    mx = (e.clientX / innerWidth  - .5) * 24;
+    my = -(e.clientY / innerHeight - .5) * 14;
+  });
+
+  (function loop() {
+    requestAnimationFrame(loop);
+    if (cur !== 0) return; // pause when not on slide 1
+    for (let i = 0; i < COUNT; i++) {
+      pos[i*3+1] += vel[i].y;
+      pos[i*3]   += vel[i].x;
+      if (pos[i*3+1] > 8) { pos[i*3+1] = -8; pos[i*3] = (Math.random() - .5) * 24; }
+      const dx = pos[i*3] - mx, dy = pos[i*3+1] - my;
+      const d  = Math.sqrt(dx*dx + dy*dy);
+      if (d < 2) { pos[i*3] += dx/d * .025; pos[i*3+1] += dy/d * .025; }
+    }
+    geo.attributes.position.needsUpdate = true;
+    R.render(scene, cam);
+  })();
+
+  window.addEventListener('resize', () => {
+    cam.aspect = innerWidth / innerHeight;
+    cam.updateProjectionMatrix();
+    R.setSize(innerWidth, innerHeight);
+  });
+})();
+
+// ════════════════════════════════════════════
+//  GSAP INITIAL STATES (set before first render)
+// ════════════════════════════════════════════
+gsap.set('#va, #vb, #vc', { attr: { r: 0 }, opacity: 0 });
+gsap.set('#vct',          { attr: { r: 0 }, opacity: 0 });
+gsap.set('#la, #lb, #lc, #ct1, #ct2', { opacity: 0 });
+
+// ════════════════════════════════════════════
+//  SLIDE TRANSITION
+// ════════════════════════════════════════════
+function go(next) {
+  if (busy || next < 0 || next >= N || next === cur) return;
+  busy = true;
+
+  const all  = document.querySelectorAll('.slide');
+  const from = all[cur], to = all[next];
+  const dir  = next > cur ? 1 : -1;
+  const DUR  = 640, EASE = 'cubic-bezier(.76,0,.24,1)';
+
+  // Position incoming slide
+  to.style.cssText = `opacity:0;transform:translateX(${dir*100}%);transition:none;pointer-events:none;`;
+  to.offsetHeight; // force reflow
+
+  from.style.cssText = `opacity:0;transform:translateX(${dir * -8}%) scale(.96);transition:all ${DUR}ms ${EASE};`;
+  to.style.cssText   = `opacity:1;transform:translateX(0);transition:all ${DUR}ms ${EASE};pointer-events:all;`;
+
+  setTimeout(() => {
+    from.classList.remove('active');
+    from.style.cssText = `opacity:0;transform:translateX(${dir * -100}%);transition:none;pointer-events:none;`;
+    to.classList.add('active');
+    cur  = next;
+    busy = false;
+    updateUI();
+    if (!did[next]) { did[next] = true; initSlide(next); }
+  }, DUR);
+}
+
+function updateUI() {
+  document.getElementById('prog').style.width = ((cur + 1) / N * 100) + '%';
+  document.querySelector('#ctr .c').textContent = String(cur + 1).padStart(2, '0');
+}
+
+// ════════════════════════════════════════════
+//  SLIDE-SPECIFIC ANIMATIONS
+// ════════════════════════════════════════════
+function initSlide(idx) {
+  if (idx === 1) animS2();
+  if (idx === 2) animS3();
+}
+
+function animS2() {
+  // Problem cards stagger in from left
+  gsap.to('#pc1, #pc2, #pc3', {
+    x: 0, opacity: 1, duration: .65, stagger: .16, ease: 'power3.out', delay: .08
+  });
+
+  // Venn circles expand (r: 0 → full)
+  gsap.to('#va',  { attr: { r: 96 }, opacity: 1, duration: .75, delay: .18, ease: 'back.out(1.4)' });
+  gsap.to('#la',  { opacity: 1, duration: .4, delay: .5 });
+  gsap.to('#vb',  { attr: { r: 96 }, opacity: 1, duration: .75, delay: .38, ease: 'back.out(1.4)' });
+  gsap.to('#lb',  { opacity: 1, duration: .4, delay: .7 });
+  gsap.to('#vc',  { attr: { r: 96 }, opacity: 1, duration: .75, delay: .58, ease: 'back.out(1.4)' });
+  gsap.to('#lc',  { opacity: 1, duration: .4, delay: .9 });
+
+  // Center bubble pop
+  gsap.to('#vct', { attr: { r: 50 }, opacity: 1, duration: .6, delay: .95, ease: 'back.out(2)' });
+  gsap.to('#ct1, #ct2', { opacity: 1, duration: .4, delay: 1.1 });
+}
+
+function animS3() {
+  gsap.to('#s3h', { y: 0, opacity: 1, duration: .6, ease: 'power3.out' });
+  gsap.to('#fc1, #fc2, #fc3', {
+    y: 0, opacity: 1, duration: .7, stagger: .13, ease: 'power3.out', delay: .12
+  });
+}
+
+// ════════════════════════════════════════════
+//  FLIP CARDS
+// ════════════════════════════════════════════
+function doFlip(id) { document.getElementById(id).classList.toggle('flip'); }
+
+// ════════════════════════════════════════════
+//  NAVIGATION: KEYBOARD · WHEEL · TOUCH
+// ════════════════════════════════════════════
+let wLock = false;
+document.addEventListener('keydown', e => {
+  if ([' ','ArrowRight','ArrowDown'].includes(e.key)) { e.preventDefault(); go(cur + 1); }
+  if (['ArrowLeft','ArrowUp'].includes(e.key))        { e.preventDefault(); go(cur - 1); }
+});
+window.addEventListener('wheel', e => {
+  if (wLock) return; wLock = true;
+  go(e.deltaY > 0 ? cur + 1 : cur - 1);
+  setTimeout(() => wLock = false, 950);
+}, { passive: true });
+let ts = 0;
+window.addEventListener('touchstart', e => ts = e.touches[0].clientX, { passive: true });
+window.addEventListener('touchend',   e => {
+  const d = ts - e.changedTouches[0].clientX;
+  if (Math.abs(d) > 50) go(d > 0 ? cur + 1 : cur - 1);
+}, { passive: true });
+document.getElementById('nprev').onclick = () => go(cur - 1);
+document.getElementById('nnext').onclick = () => go(cur + 1);
+
+// ════════════════════════════════════════════
+//  CUSTOM CURSOR
+// ════════════════════════════════════════════
+const cdEl = document.getElementById('cd');
+const crEl = document.getElementById('cr');
+let crx = 0, cry = 0, cmx = 0, cmy = 0;
+
+document.addEventListener('mousemove', e => {
+  cmx = e.clientX; cmy = e.clientY;
+  cdEl.style.left = cmx + 'px';
+  cdEl.style.top  = cmy + 'px';
+});
+
+(function animCursor() {
+  crx += (cmx - crx) * .14;
+  cry += (cmy - cry) * .14;
+  crEl.style.left = crx + 'px';
+  crEl.style.top  = cry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+
+document.querySelectorAll('button, .fci').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    crEl.style.width = '46px'; crEl.style.height = '46px';
+    crEl.style.borderColor = 'rgba(254,229,0,.9)';
+  });
+  el.addEventListener('mouseleave', () => {
+    crEl.style.width = '32px'; crEl.style.height = '32px';
+    crEl.style.borderColor = 'rgba(254,229,0,.5)';
+  });
+});
+</script>
+</body>
+</html>

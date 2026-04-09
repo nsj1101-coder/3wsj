@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maximpact | AI 웹 개발팀</title>
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap');
+
+        :root {
+            --bg-dark: #0a0a0f;
+            --electric-blue: #22D3EE;
+            --accent-glow: rgba(34, 211, 238, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Plus+Jakarta+Sans', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .font-tech { font-family: 'Space+Grotesk', sans-serif; }
+
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #22D3EE; border-radius: 10px; }
+
+        
+        #custom-cursor {
+            width: 10px; height: 10px;
+            background: var(--electric-blue);
+            border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s ease, height 0.2s ease, background 0.2s;
+        }
+        #cursor-ring {
+            width: 36px; height: 36px;
+            border: 2px solid rgba(34, 211, 238, 0.55);
+            border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s cubic-bezier(0.4,0,0.2,1), height 0.3s cubic-bezier(0.4,0,0.2,1), border-color 0.3s;
+        }
+
+        
+        .scene {
+            width: 300px;
+            height: 300px;
+            perspective: 1200px;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 20s infinite linear;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--electric-blue);
+            background: rgba(34, 211, 238, 0.05);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--electric-blue);
+            box-shadow: inset 0 0 30px var(--accent-glow);
+        }
+
+        .front  { transform: rotateY(0deg) translateZ(150px); }
+        .back   { transform: rotateY(180deg) translateZ(150px); }
+        .right  { transform: rotateY(90deg) translateZ(150px); }
+        .left   { transform: rotateY(-90deg) translateZ(150px); }
+        .top    { transform: rotateX(90deg) translateZ(150px); }
+        .bottom { transform: rotateX(-90deg) translateZ(150px); }
+
+        @keyframes rotateCube {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-blue {
+            background: rgba(34, 211, 238, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+        }
+
+        
+        .diagonal-card {
+            clip-path: polygon(0% 0%, 90% 0%, 100% 10%, 100% 100%, 10% 100%, 0% 90%);
+        }
+
+        
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95) rotateX(10deg);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1) rotateX(0);
+        }
+
+        
+        .pipeline-node {
+            position: relative;
+        }
+        .pipeline-line {
+            height: 2px;
+            background: linear-gradient(90deg, var(--electric-blue), transparent);
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .pipeline-pulse {
+            width: 20px;
+            height: 2px;
+            background: white;
+            position: absolute;
+            animation: pulse-flow 3s infinite linear;
+        }
+        @keyframes pulse-flow {
+            0% { left: -20px; }
+            100% { left: 100%; }
+        }
+
+        
+        .tilt-card {
+            transition: transform 0.3s ease;
+        }
+        .tilt-card:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(5deg) scale(1.02);
+            border-color: var(--electric-blue);
+        }
+
+        
+        .logo-text {
+            letter-spacing: -2px;
+        }
+
+        /* === 3D AVATAR === */
+        .avatar-3d-wrap { width:100px; height:110px; perspective:500px; display:flex; align-items:center; justify-content:center; margin-bottom:1.5rem; }
+        .avatar-3d-box { width:68px; height:68px; position:relative; transform-style:preserve-3d; transform:rotateX(18deg) rotateY(-28deg); animation:avatarFloat 5s ease-in-out infinite; }
+        @keyframes avatarFloat {
+            0%,100% { transform:rotateX(18deg) rotateY(-28deg) translateY(0); }
+            50% { transform:rotateX(18deg) rotateY(-14deg) translateY(-6px); }
+        }
+        .avatar-face { position:absolute; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.5rem; color:#22D3EE; }
+        .avatar-front { width:68px; height:68px; background:rgba(34,211,238,0.12); border:1.5px solid rgba(34,211,238,0.65); transform:translateZ(34px); }
+        .avatar-right { width:34px; height:68px; background:rgba(34,211,238,0.06); border:1.5px solid rgba(34,211,238,0.3); transform:rotateY(90deg) translateZ(34px); right:0; }
+        .avatar-top { width:68px; height:34px; background:rgba(34,211,238,0.2); border:1.5px solid rgba(34,211,238,0.4); transform:rotateX(90deg) translateZ(34px); top:0; }
+
+        /* === CHART ANIMATION === */
+        .chart-line { stroke-dasharray:1500; stroke-dashoffset:1500; animation:drawLine 2.5s cubic-bezier(0.4,0,0.2,1) forwards 0.3s; }
+        @keyframes drawLine { to { stroke-dashoffset:0; } }
+        .chart-dot { opacity:0; transform-origin:center; animation:dotPop 0.4s ease forwards; }
+        .chart-dot:nth-child(1){animation-delay:0.5s} .chart-dot:nth-child(2){animation-delay:0.85s}
+        .chart-dot:nth-child(3){animation-delay:1.1s} .chart-dot:nth-child(4){animation-delay:1.35s}
+        .chart-dot:nth-child(5){animation-delay:1.6s} .chart-dot:nth-child(6){animation-delay:1.85s}
+        .chart-dot:nth-child(7){animation-delay:2.1s}
+        @keyframes dotPop { 0%{opacity:0;transform:scale(0)} 70%{transform:scale(1.5);opacity:1} 100%{transform:scale(1);opacity:1} }
+        @keyframes glowPulse { 0%,100%{opacity:0.2} 50%{opacity:0.55} }
+        .chart-glow { animation: glowPulse 2s ease-in-out infinite; }
+
+        /* === THEME TOGGLE === */
+        .theme-toggle-btn { width:36px; height:36px; border-radius:50%; border:1.5px solid rgba(34,211,238,0.5); background:transparent; color:#22D3EE; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.3s ease; flex-shrink:0; }
+        .theme-toggle-btn:hover { background:rgba(34,211,238,0.15); transform:rotate(20deg); }
+
+        /* === LIGHT MODE === */
+        body.light-mode { background-color:#f0f4f8; color:#0d0d1a; }
+        body.light-mode nav { background:rgba(235,240,248,0.9) !important; backdrop-filter:blur(12px); }
+        body.light-mode .glass { background:rgba(0,0,0,0.05) !important; border-color:rgba(0,0,0,0.12) !important; }
+        body.light-mode .glass-blue { background:rgba(34,211,238,0.08) !important; border-color:rgba(34,211,238,0.35) !important; }
+        body.light-mode h1,body.light-mode h2,body.light-mode h3,body.light-mode h4,body.light-mode h5 { color:#0d0d1a !important; }
+        body.light-mode .text-slate-400 { color:#4b5563 !important; }
+        body.light-mode .text-slate-500 { color:#6b7280 !important; }
+        body.light-mode .text-slate-600 { color:#374151 !important; }
+        body.light-mode .text-white { color:#0d0d1a !important; }
+        body.light-mode .bg-black { background-color:#dde4ed !important; }
+        body.light-mode .bg-white\/5 { background-color:rgba(0,0,0,0.03) !important; }
+        body.light-mode .bg-black\/40 { background:rgba(255,255,255,0.75) !important; }
+        body.light-mode .border-white\/10 { border-color:rgba(0,0,0,0.1) !important; }
+        body.light-mode .border-white\/5 { border-color:rgba(0,0,0,0.05) !important; }
+        body.light-mode input,body.light-mode textarea,body.light-mode select { color:#0d0d1a; }
+        body.light-mode .grid-bg { background-image:linear-gradient(rgba(34,211,238,0.2) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,0.2) 1px,transparent 1px) !important; }
+        body.light-mode #custom-cursor { background:#0891b2; }
+        body.light-mode #cursor-ring { border-color:rgba(8,145,178,0.6); }
+        body.light-mode ::-webkit-scrollbar-track { background:#f0f4f8; }
+        body.light-mode ::-webkit-scrollbar-thumb { background:#0891b2; }
+        body.light-mode .theme-toggle-btn { color:#0891b2; border-color:rgba(8,145,178,0.5); }
+        body.light-mode .logo-text { color:#0d0d1a !important; }
+        body.light-mode footer { background-color:#dde4ed !important; }
+        body.light-mode a { color:#374151; }
+        body.light-mode .cube-face { background:rgba(34,211,238,0.1) !important; border-color:rgba(34,211,238,0.45) !important; }
+        body.light-mode .avatar-front { background:rgba(34,211,238,0.1) !important; }
+        body.light-mode .avatar-right { background:rgba(34,211,238,0.05) !important; }
+        body.light-mode .avatar-top { background:rgba(34,211,238,0.18) !important; }
+
+    </style>
+
+  <style type="text/css">
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}/*
+! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+.fixed {
+  position: fixed;
+}
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+.inset-0 {
+  inset: 0px;
+}
+.-right-20 {
+  right: -5rem;
+}
+.-top-20 {
+  top: -5rem;
+}
+.bottom-10 {
+  bottom: 2.5rem;
+}
+.bottom-20 {
+  bottom: 5rem;
+}
+.bottom-4 {
+  bottom: 1rem;
+}
+.left-10 {
+  left: 2.5rem;
+}
+.left-20 {
+  left: 5rem;
+}
+.left-4 {
+  left: 1rem;
+}
+.right-20 {
+  right: 5rem;
+}
+.right-4 {
+  right: 1rem;
+}
+.top-0 {
+  top: 0px;
+}
+.top-1\/2 {
+  top: 50%;
+}
+.top-20 {
+  top: 5rem;
+}
+.-z-10 {
+  z-index: -10;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-50 {
+  z-index: 50;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.mb-12 {
+  margin-bottom: 3rem;
+}
+.mb-16 {
+  margin-bottom: 4rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-20 {
+  margin-bottom: 5rem;
+}
+.mb-32 {
+  margin-bottom: 8rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-20 {
+  margin-top: 5rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mt-8 {
+  margin-top: 2rem;
+}
+.flex {
+  display: flex;
+}
+.grid {
+  display: grid;
+}
+.hidden {
+  display: none;
+}
+.h-1 {
+  height: 0.25rem;
+}
+.h-12 {
+  height: 3rem;
+}
+.h-24 {
+  height: 6rem;
+}
+.h-32 {
+  height: 8rem;
+}
+.h-40 {
+  height: 10rem;
+}
+.h-60 {
+  height: 15rem;
+}
+.h-64 {
+  height: 16rem;
+}
+.h-\[400px\] {
+  height: 400px;
+}
+.h-full {
+  height: 100%;
+}
+.h-px {
+  height: 1px;
+}
+.h-screen {
+  height: 100vh;
+}
+.min-h-screen {
+  min-height: 100vh;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.w-12 {
+  width: 3rem;
+}
+.w-24 {
+  width: 6rem;
+}
+.w-32 {
+  width: 8rem;
+}
+.w-40 {
+  width: 10rem;
+}
+.w-60 {
+  width: 15rem;
+}
+.w-64 {
+  width: 16rem;
+}
+.w-full {
+  width: 100%;
+}
+.max-w-2xl {
+  max-width: 42rem;
+}
+.max-w-4xl {
+  max-width: 56rem;
+}
+.max-w-7xl {
+  max-width: 80rem;
+}
+.max-w-xl {
+  max-width: 36rem;
+}
+.max-w-xs {
+  max-width: 20rem;
+}
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+.-rotate-12 {
+  --tw-rotate: -12deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.rotate-45 {
+  --tw-rotate: 45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+@keyframes pulse {
+
+  50% {
+    opacity: .5;
+  }
+}
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.appearance-none {
+  appearance: none;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-end {
+  align-items: flex-end;
+}
+.items-center {
+  align-items: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-10 {
+  gap: 2.5rem;
+}
+.gap-12 {
+  gap: 3rem;
+}
+.gap-16 {
+  gap: 4rem;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.gap-6 {
+  gap: 1.5rem;
+}
+.gap-8 {
+  gap: 2rem;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.rounded {
+  border-radius: 0.25rem;
+}
+.rounded-full {
+  border-radius: 9999px;
+}
+.border {
+  border-width: 1px;
+}
+.border-2 {
+  border-width: 2px;
+}
+.border-4 {
+  border-width: 4px;
+}
+.border-b {
+  border-bottom-width: 1px;
+}
+.border-t {
+  border-top-width: 1px;
+}
+.border-cyan-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 211 238 / var(--tw-border-opacity, 1));
+}
+.border-cyan-400\/20 {
+  border-color: rgb(34 211 238 / 0.2);
+}
+.border-cyan-400\/30 {
+  border-color: rgb(34 211 238 / 0.3);
+}
+.border-cyan-400\/50 {
+  border-color: rgb(34 211 238 / 0.5);
+}
+.border-slate-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(51 65 85 / var(--tw-border-opacity, 1));
+}
+.border-white\/10 {
+  border-color: rgb(255 255 255 / 0.1);
+}
+.border-white\/20 {
+  border-color: rgb(255 255 255 / 0.2);
+}
+.border-white\/5 {
+  border-color: rgb(255 255 255 / 0.05);
+}
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+.bg-black\/40 {
+  background-color: rgb(0 0 0 / 0.4);
+}
+.bg-cyan-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 211 238 / var(--tw-bg-opacity, 1));
+}
+.bg-cyan-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 182 212 / var(--tw-bg-opacity, 1));
+}
+.bg-cyan-500\/10 {
+  background-color: rgb(6 182 212 / 0.1);
+}
+.bg-slate-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 116 139 / var(--tw-bg-opacity, 1));
+}
+.bg-slate-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(51 65 85 / var(--tw-bg-opacity, 1));
+}
+.bg-slate-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity, 1));
+}
+.bg-slate-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 23 42 / var(--tw-bg-opacity, 1));
+}
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+.bg-white\/10 {
+  background-color: rgb(255 255 255 / 0.1);
+}
+.bg-white\/5 {
+  background-color: rgb(255 255 255 / 0.05);
+}
+.p-1 {
+  padding: 0.25rem;
+}
+.p-10 {
+  padding: 2.5rem;
+}
+.p-12 {
+  padding: 3rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-5 {
+  padding: 1.25rem;
+}
+.p-8 {
+  padding: 2rem;
+}
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+.py-32 {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+.pt-10 {
+  padding-top: 2.5rem;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+.text-8xl {
+  font-size: 6rem;
+  line-height: 1;
+}
+.text-\[10px\] {
+  font-size: 10px;
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.font-black {
+  font-weight: 900;
+}
+.font-bold {
+  font-weight: 700;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.lowercase {
+  text-transform: lowercase;
+}
+.leading-relaxed {
+  line-height: 1.625;
+}
+.tracking-\[0\.5em\] {
+  letter-spacing: 0.5em;
+}
+.tracking-tighter {
+  letter-spacing: -0.05em;
+}
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+.text-cyan-400 {
+  --tw-text-opacity: 1;
+  color: rgb(34 211 238 / var(--tw-text-opacity, 1));
+}
+.text-slate-400 {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity, 1));
+}
+.text-slate-500 {
+  --tw-text-opacity: 1;
+  color: rgb(100 116 139 / var(--tw-text-opacity, 1));
+}
+.text-slate-600 {
+  --tw-text-opacity: 1;
+  color: rgb(71 85 105 / var(--tw-text-opacity, 1));
+}
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.text-white\/10 {
+  color: rgb(255 255 255 / 0.1);
+}
+.text-white\/20 {
+  color: rgb(255 255 255 / 0.2);
+}
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-50 {
+  opacity: 0.5;
+}
+.mix-blend-difference {
+  mix-blend-mode: difference;
+}
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.blur-3xl {
+  --tw-blur: blur(64px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.backdrop-filter {
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.duration-700 {
+  transition-duration: 700ms;
+}
+.hover\:scale-105:hover {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.hover\:bg-cyan-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 211 238 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-cyan-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 182 212 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-cyan-500\/20:hover {
+  background-color: rgb(6 182 212 / 0.2);
+}
+.hover\:bg-cyan-500\/5:hover {
+  background-color: rgb(6 182 212 / 0.05);
+}
+.hover\:bg-white\/10:hover {
+  background-color: rgb(255 255 255 / 0.1);
+}
+.hover\:text-black:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+.hover\:text-cyan-400:hover {
+  --tw-text-opacity: 1;
+  color: rgb(34 211 238 / var(--tw-text-opacity, 1));
+}
+.focus\:border-cyan-400:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 211 238 / var(--tw-border-opacity, 1));
+}
+.group:hover .group-hover\:-rotate-12 {
+  --tw-rotate: -12deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:rotate-12 {
+  --tw-rotate: 12deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:scale-110 {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:scale-\[0\.98\] {
+  --tw-scale-x: 0.98;
+  --tw-scale-y: 0.98;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:text-cyan-400\/50 {
+  color: rgb(34 211 238 / 0.5);
+}
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+@media (min-width: 768px) {
+
+  .md\:block {
+    display: block;
+  }
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\:flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .md\:text-7xl {
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+
+  .md\:text-9xl {
+    font-size: 8rem;
+    line-height: 1;
+  }
+
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}* {
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
+    }
+
+    *::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+  </style></head>
+<body class="w-full min-h-screen">
+
+    <div id="custom-cursor"></div>
+    <div id="cursor-ring"></div>
+
+    
+    <nav class="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center" style="background:linear-gradient(to bottom,rgba(10,10,15,0.75),transparent);backdrop-filter:blur(6px);">
+        <div class="logo-text text-2xl font-black text-white">MAXIMPACT</div>
+        <div class="hidden md:flex gap-10 text-sm font-tech uppercase tracking-widest text-slate-400">
+            <a href="#services" class="hover:text-cyan-400 transition-colors">서비스</a>
+            <a href="#portfolio" class="hover:text-cyan-400 transition-colors">포트폴리오</a>
+            <a href="#team" class="hover:text-cyan-400 transition-colors">팀</a>
+            <a href="#contact" class="hover:text-cyan-400 transition-colors">문의</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <button id="theme-toggle" class="theme-toggle-btn" title="테마 변경"><i class="ph ph-sun" id="theme-icon"></i></button>
+            <button class="glass-blue px-6 py-2 rounded-full text-xs font-tech tracking-tighter hover:bg-cyan-500/20 transition-all border-cyan-400/50">프로젝트 시작</button>
+        </div>
+    </nav>
+
+    
+    <section class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+        <div class="grid-bg"></div>
+        
+        <div class="scene mb-12">
+            <div class="cube">
+                <div class="cube-face front">MAXIMPACT</div>
+                <div class="cube-face back">AI DEV</div>
+                <div class="cube-face right">FUTURE</div>
+                <div class="cube-face left">IMPACT</div>
+                <div class="cube-face top">HIGH END</div>
+                <div class="cube-face bottom">BOUTIQUE</div>
+            </div>
+        </div>
+
+        <div class="text-center z-10 px-4">
+            <h1 class="text-7xl md:text-9xl font-black mb-4 tracking-tighter">MAXIMPACT</h1>
+            <p class="text-cyan-400 font-tech tracking-[0.5em] text-sm md:text-base uppercase mb-8">탁월한 AI 경험을 엔지니어링합니다</p>
+            <div class="flex gap-4 justify-center">
+                <a href="#contact" class="bg-cyan-500 text-black px-10 py-4 font-bold text-lg hover:scale-105 transition-transform diagonal-card flex items-center gap-2">
+                    문의하기 <i class="ph ph-arrow-right"></i>
+                </a>
+                <button class="glass px-10 py-4 font-bold text-lg hover:bg-white/10 transition-colors diagonal-card">
+                    작업물 보기
+                </button>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-10 flex flex-col gap-4 text-xs font-tech text-slate-500 opacity-50">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-px bg-slate-500"></div>
+                LATENCY: 12ms
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-px bg-slate-500"></div>
+                REGION: SEOUL_KR
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="py-24 px-8 reveal">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row gap-12 items-stretch">
+                <!-- 왼쪽: 텍스트 + 지표 -->
+                <div class="flex flex-col justify-between gap-8 lg:w-2/5">
+                    <div>
+                        <span class="text-cyan-400 font-tech text-xs tracking-[0.3em] uppercase">GROWTH_METRICS</span>
+                        <h3 class="text-3xl md:text-4xl font-black mt-3 leading-tight">2025년 10월 런칭 이후<br><span class="text-cyan-400">폭발적으로 성장</span> 중</h3>
+                        <p class="text-slate-400 text-sm mt-3 font-tech">SINCE_OCT_2025 // ACCELERATING</p>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem">
+                        <div class="glass-blue p-4 text-center no-magnet">
+                            <span class="text-4xl font-black text-white font-tech">05</span>
+                            <p class="text-cyan-400 text-xs font-tech mt-1 tracking-widest">계약</p>
+                        </div>
+                        <div class="glass-blue p-4 text-center no-magnet">
+                            <span class="text-3xl font-black text-cyan-400 font-tech">100%</span>
+                            <p class="text-white text-xs font-tech mt-1 tracking-widest">유지율</p>
+                        </div>
+                        <div class="glass-blue p-4 text-center no-magnet">
+                            <span class="text-4xl font-black text-white font-tech">00</span>
+                            <p class="text-cyan-400 text-xs font-tech mt-1 tracking-widest">클레임</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs font-tech text-slate-500">
+                        <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                        <span>LIVE DATA // '25.10 → '26.04</span>
+                    </div>
+                </div>
+
+                <!-- 오른쪽: SVG 차트 -->
+                <div class="lg:w-3/5 glass-blue p-6 no-magnet relative overflow-hidden">
+                    <div class="flex justify-between text-xs font-tech text-slate-500 mb-3 px-1">
+                        <span>'25.10</span><span>'25.11</span><span>'25.12</span><span>'26.01</span><span>'26.02</span><span>'26.03</span><span class="text-cyan-400">'26.04 ▲</span>
+                    </div>
+                    <svg viewBox="0 0 680 200" class="w-full" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+                        <defs>
+                            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.35"/>
+                                <stop offset="100%" stop-color="#22D3EE" stop-opacity="0.0"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Grid lines -->
+                        <line x1="0" y1="185" x2="680" y2="185" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                        <line x1="0" y1="145" x2="680" y2="145" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                        <line x1="0" y1="105" x2="680" y2="105" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                        <line x1="0" y1="65"  x2="680" y2="65"  stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                        <line x1="0" y1="25"  x2="680" y2="25"  stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                        <!-- Area fill -->
+                        <polygon points="0,195 0,182 113,165 227,148 340,110 453,68 567,22 680,5 680,195" fill="url(#areaGrad)"/>
+                        <!-- Chart line -->
+                        <polyline class="chart-line" points="0,182 113,165 227,148 340,110 453,68 567,22 680,5" fill="none" stroke="#22D3EE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- Data dots -->
+                        <circle class="chart-dot" cx="0"   cy="182" r="5" fill="#22D3EE"/>
+                        <circle class="chart-dot" cx="113" cy="165" r="5" fill="#22D3EE"/>
+                        <circle class="chart-dot" cx="227" cy="148" r="5" fill="#22D3EE"/>
+                        <circle class="chart-dot" cx="340" cy="110" r="5" fill="#22D3EE"/>
+                        <circle class="chart-dot" cx="453" cy="68"  r="5" fill="#22D3EE"/>
+                        <circle class="chart-dot" cx="567" cy="22"  r="5" fill="#22D3EE"/>
+                        <circle class="chart-dot" cx="680" cy="5"   r="7" fill="#22D3EE"/>
+                        <!-- Glow on current point -->
+                        <circle cx="680" cy="5" r="16" fill="rgba(34,211,238,0.18)" class="chart-glow"/>
+                        <!-- Y axis labels -->
+                        <text x="8" y="183" fill="rgba(255,255,255,0.2)" font-size="9" font-family="monospace">LOW</text>
+                        <text x="8" y="23"  fill="rgba(34,211,238,0.5)" font-size="9" font-family="monospace">HIGH</text>
+                    </svg>
+                    <div class="absolute top-4 right-6 text-cyan-400 font-tech text-xs font-bold flex items-center gap-1">
+                        <span>↗</span><span>우상향 트렌드</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="services" class="py-32 px-8 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div>
+                    <h2 class="text-5xl md:text-7xl font-black lowercase mb-4">기술 스택_</h2>
+                    <p class="text-slate-400 max-w-xl font-tech">AI 시대를 위해 설계된 특화된 아키텍처 패턴. 단순 웹사이트가 아닌 인텔리전스 기반 인프라를 구축합니다.</p>
+                </div>
+                <div class="text-cyan-400 text-sm font-tech border-b border-cyan-400/30 pb-2">SERVICES.JSON</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="glass-blue p-8 diagonal-card tilt-card group">
+                    <div class="w-12 h-12 bg-cyan-400 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+                        <i class="ph ph-chart-line-up text-black text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase font-tech">ERP / CRM / CMS</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">복잡한 비즈니스 운영을 간소화하는 자동화 인텔리전스 기반 통합 관리 시스템.</p>
+                </div>
+                
+                <div class="glass-blue p-8 diagonal-card tilt-card group">
+                    <div class="w-12 h-12 bg-white flex items-center justify-center mb-6 group-hover:-rotate-12 transition-transform">
+                        <i class="ph ph-shopping-cart-simple text-black text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase font-tech">마켓플레이스</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">개인화 추천 알고리즘과 실시간 재고 관리가 포함된 고성능 커머스 엔진.</p>
+                </div>
+                
+                <div class="glass-blue p-8 diagonal-card tilt-card group">
+                    <div class="w-12 h-12 bg-cyan-400 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+                        <i class="ph ph-browsers text-black text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase font-tech">커스텀 웹</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">표준 웹 프레임워크의 한계를 뛰어넘는 맞춤형 디지털 경험.</p>
+                </div>
+                
+                <div class="glass p-8 diagonal-card tilt-card group">
+                    <div class="w-12 h-12 bg-slate-700 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+                        <i class="ph ph-database text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase font-tech">데이터 분석</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">커스텀 학습된 LLM을 활용해 방대한 데이터를 실행 가능한 시각적 인사이트로 변환.</p>
+                </div>
+                
+                <div class="glass p-8 diagonal-card tilt-card group">
+                    <div class="w-12 h-12 bg-slate-700 flex items-center justify-center mb-6 group-hover:-rotate-12 transition-transform">
+                        <i class="ph ph-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase font-tech">대학 프로젝트</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">높은 기술적 엄밀성이 요구되는 복잡한 학술 프로토타입 및 졸업 연구 시스템.</p>
+                </div>
+                
+                <div class="glass p-8 diagonal-card tilt-card group">
+                    <div class="w-12 h-12 bg-slate-700 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+                        <i class="ph ph-device-mobile text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 uppercase font-tech">반응형</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">모든 기기와 화면 크기에서 네이티브처럼 느껴지는 옴니채널 경험.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="portfolio" class="bg-white/5 py-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-8 mb-16 flex justify-between items-center">
+            <h2 class="text-6xl font-black lowercase">실적_</h2>
+            <div class="flex gap-4">
+                <button class="w-12 h-12 border border-white/20 flex items-center justify-center hover:bg-cyan-500 hover:text-black transition-all"><i class="ph ph-caret-left"></i></button>
+                <button class="w-12 h-12 border border-white/20 flex items-center justify-center hover:bg-cyan-500 hover:text-black transition-all"><i class="ph ph-caret-right"></i></button>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-10">
+            
+            <div class="relative group cursor-pointer reveal">
+                <div class="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
+                <div class="flex flex-col md:flex-row items-center gap-12 px-8">
+                    <div class="w-full md:w-1/2 overflow-hidden h-[400px] glass relative transform group-hover:scale-[0.98] transition-transform duration-700">
+                        <div class="absolute inset-0 flex items-center justify-center text-4xl font-black text-white/10 uppercase">세무 플랫폼</div>
+                        <div class="absolute bottom-4 left-4 glass-blue p-4 text-xs font-tech">ARCH: NEXT.JS + AI AGENT</div>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="text-cyan-400 font-tech">01 // ENTERPRISE</span>
+                        <h3 class="text-5xl font-black mt-2 mb-4">세무 자동화 시스템</h3>
+                        <p class="text-slate-400 mb-6">AI 기반 문서 스캔으로 프리랜서 전문가를 위한 완전 자동화된 세금 신고 및 매칭 플랫폼.</p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">FINTECH</span>
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">OCR</span>
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">STRETCH API</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="relative group cursor-pointer reveal">
+                <div class="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
+                <div class="flex flex-col md:flex-row-reverse items-center gap-12 px-8">
+                    <div class="w-full md:w-1/2 overflow-hidden h-[400px] glass relative transform group-hover:scale-[0.98] transition-transform duration-700">
+                        <div class="absolute inset-0 flex items-center justify-center text-4xl font-black text-white/10 uppercase">인테리어 매칭</div>
+                        <div class="absolute bottom-4 right-4 glass-blue p-4 text-xs font-tech">ENGINE: STABLE DIFFUSION</div>
+                    </div>
+                    <div class="w-full md:w-1/2 text-right">
+                        <span class="text-cyan-400 font-tech">02 // PLATFORM</span>
+                        <h3 class="text-5xl font-black mt-2 mb-4">인테리어 디자인 허브</h3>
+                        <p class="text-slate-400 mb-6">공간 선호도를 분석하는 생성형 AI 매칭 엔진으로 고객과 디자이너를 연결합니다.</p>
+                        <div class="flex gap-2 justify-end">
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">VISUAL AI</span>
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">매칭</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="relative group cursor-pointer reveal">
+                <div class="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
+                <div class="flex flex-col md:flex-row items-center gap-12 px-8">
+                    <div class="w-full md:w-1/2 overflow-hidden h-[400px] glass relative transform group-hover:scale-[0.98] transition-transform duration-700">
+                        <div class="absolute inset-0 flex items-center justify-center text-4xl font-black text-white/10 uppercase">병원 CRM</div>
+                        <div class="absolute bottom-4 left-4 glass-blue p-4 text-xs font-tech">REAL-TIME: WEBSOCKETS</div>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="text-cyan-400 font-tech">03 // HEALTHCARE</span>
+                        <h3 class="text-5xl font-black mt-2 mb-4">병원 예약 시스템 v2</h3>
+                        <p class="text-slate-400 mb-6">자동화된 진단 일정 관리가 포함된 옴니채널 환자 예약 및 클리닉 관리 시스템.</p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">MEDTECH</span>
+                            <span class="px-3 py-1 bg-white/10 text-xs rounded">스케줄링</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="team" class="py-32 px-8 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-6xl font-black lowercase mb-20 text-center">팀 구성_</h2>
+            
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12 mb-32 relative">
+                
+                <div class="absolute w-full h-1 bg-slate-900 top-1/2 -z-10 hidden md:block">
+                    <div class="pipeline-pulse"></div>
+                </div>
+
+                <div class="flex flex-col items-center group">
+                    <div class="avatar-3d-wrap">
+                        <div class="avatar-3d-box">
+                            <div class="avatar-face avatar-front">S</div>
+                            <div class="avatar-face avatar-right"></div>
+                            <div class="avatar-face avatar-top"></div>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold uppercase font-tech">S</h4>
+                    <p class="text-slate-500 text-sm font-tech">프로젝트 매니저</p>
+                </div>
+                <div class="flex flex-col items-center group">
+                    <div class="avatar-3d-wrap">
+                        <div class="avatar-3d-box" style="animation-delay:1s">
+                            <div class="avatar-face avatar-front">K</div>
+                            <div class="avatar-face avatar-right"></div>
+                            <div class="avatar-face avatar-top"></div>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold uppercase font-tech">K</h4>
+                    <p class="text-slate-500 text-sm font-tech">백엔드 엔지니어</p>
+                </div>
+                <div class="flex flex-col items-center group">
+                    <div class="avatar-3d-wrap">
+                        <div class="avatar-3d-box" style="animation-delay:2s">
+                            <div class="avatar-face avatar-front">L</div>
+                            <div class="avatar-face avatar-right"></div>
+                            <div class="avatar-face avatar-top"></div>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold uppercase font-tech">L</h4>
+                    <p class="text-slate-500 text-sm font-tech">프론트엔드 엔지니어</p>
+                </div>
+                <div class="flex flex-col items-center group">
+                    <div class="avatar-3d-wrap">
+                        <div class="avatar-3d-box" style="animation-delay:3s">
+                            <div class="avatar-face avatar-front">P</div>
+                            <div class="avatar-face avatar-right"></div>
+                            <div class="avatar-face avatar-top"></div>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold uppercase font-tech">P</h4>
+                    <p class="text-slate-500 text-sm font-tech">UX/UI 디자이너</p>
+                </div>
+            </div>
+
+            
+            <div class="glass p-12 diagonal-card text-center relative overflow-hidden reveal">
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
+                <h3 class="text-3xl font-black uppercase mb-4 font-tech">+ 글로벌 프리랜서 네트워크</h3>
+                <p class="text-slate-400 max-w-2xl mx-auto">핵심 팀은 전문 계약자들의 엄선된 네트워크로 지원되며, 어떤 프로젝트도 빠르게 수평 확장이 가능합니다.</p>
+                <div class="mt-8 flex justify-center gap-12">
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold text-cyan-400">20+</span>
+                        <span class="text-xs font-tech text-slate-500">전문가 노드</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-bold text-cyan-400">24/7</span>
+                        <span class="text-xs font-tech text-slate-500">가용성</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="py-32 px-8">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-6xl font-black lowercase mb-20">프로세스_</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="glass p-10 flex flex-col gap-6 group hover:bg-cyan-500/5 transition-all">
+                    <span class="text-4xl font-black text-white/20 font-tech group-hover:text-cyan-400/50 transition-colors">01</span>
+                    <h4 class="text-2xl font-bold font-tech uppercase">컨설팅</h4>
+                    <p class="text-slate-400 text-sm">AI 구현을 위한 심층 아키텍처 분석 및 타당성 조사.</p>
+                </div>
+                <div class="glass p-10 flex flex-col gap-6 group hover:bg-cyan-500/5 transition-all">
+                    <span class="text-4xl font-black text-white/20 font-tech group-hover:text-cyan-400/50 transition-colors">02</span>
+                    <h4 class="text-2xl font-bold font-tech uppercase">디자인</h4>
+                    <p class="text-slate-400 text-sm">인터랙션을 위해 최적화된 고해상도 3D 모델링 및 미래지향적 인터페이스 디자인.</p>
+                </div>
+                <div class="glass p-10 flex flex-col gap-6 group hover:bg-cyan-500/5 transition-all">
+                    <span class="text-4xl font-black text-white/20 font-tech group-hover:text-cyan-400/50 transition-colors">03</span>
+                    <h4 class="text-2xl font-bold font-tech uppercase">개발</h4>
+                    <p class="text-slate-400 text-sm">최신 기술 스택과 커스텀 LLM 통합을 활용한 신속한 애자일 스프린트.</p>
+                </div>
+                <div class="glass p-10 flex flex-col gap-6 group hover:bg-cyan-500/5 transition-all">
+                    <span class="text-4xl font-black text-white/20 font-tech group-hover:text-cyan-400/50 transition-colors">04</span>
+                    <h4 class="text-2xl font-bold font-tech uppercase">배포</h4>
+                    <p class="text-slate-400 text-sm">강력한 보안 감사와 성능 확장을 갖춘 자동화된 CI/CD 파이프라인.</p>
+                </div>
+            </div>
+
+            
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="flex gap-6 items-start">
+                    <div class="w-12 h-12 bg-cyan-400 flex-shrink-0 flex items-center justify-center">
+                        <i class="ph ph-shield-check text-black text-2xl"></i>
+                    </div>
+                    <div>
+                        <h5 class="text-xl font-bold mb-2 uppercase font-tech">보안 우선 프로토콜</h5>
+                        <p class="text-slate-400 text-sm">모든 코드는 취약점 감사를 거칩니다. 민감한 엔터프라이즈 데이터를 군사급 암호화 표준으로 처리합니다.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="w-12 h-12 bg-white flex-shrink-0 flex items-center justify-center">
+                        <i class="ph ph-lightning text-black text-2xl"></i>
+                    </div>
+                    <div>
+                        <h5 class="text-xl font-bold mb-2 uppercase font-tech">애자일 모멘텀</h5>
+                        <p class="text-slate-400 text-sm">주간 릴리스와 빠른 프로토타이핑. 항상 시장을 앞서갈 수 있도록 빠르게 움직입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="contact" class="py-32 px-8 relative overflow-hidden bg-white/5">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-7xl font-black lowercase mb-4">문의하기_</h2>
+                <p class="text-cyan-400 font-tech tracking-wide">AI시대, 어떤 것이든 구현 해드리며 상상하시던 모든 것을 제작해드립니다.</p>
+            </div>
+
+            <form class="flex flex-col gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="relative group">
+                        <input type="text" placeholder="회사명" class="w-full bg-black/40 border border-white/10 p-5 font-tech focus:border-cyan-400 outline-none transition-all diagonal-card">
+                    </div>
+                    <div class="relative group">
+                        <input type="email" placeholder="이메일_주소" class="w-full bg-black/40 border border-white/10 p-5 font-tech focus:border-cyan-400 outline-none transition-all diagonal-card">
+                    </div>
+                </div>
+                <div class="relative group">
+                    <select class="w-full bg-black/40 border border-white/10 p-5 font-tech focus:border-cyan-400 outline-none transition-all appearance-none diagonal-card">
+                        <option value="" disabled="" selected="">프로젝트_유형</option>
+                        <option>ERP / CRM</option>
+                        <option>커스텀 AI 통합</option>
+                        <option>플랫폼 개발</option>
+                        <option>유지보수</option>
+                    </select>
+                </div>
+                <div class="relative group">
+                    <textarea rows="5" placeholder="프로젝트_설명" class="w-full bg-black/40 border border-white/10 p-5 font-tech focus:border-cyan-400 outline-none transition-all diagonal-card"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-cyan-500 text-black py-6 font-black text-xl hover:bg-cyan-400 transition-all diagonal-card flex items-center justify-center gap-4">
+                    요청 전송 <i class="ph ph-paper-plane-tilt"></i>
+                </button>
+            </form>
+        </div>
+
+        
+        <div class="absolute top-20 right-20 w-40 h-40 glass border-cyan-400/20 rotate-45 -z-10 animate-pulse"></div>
+        <div class="absolute bottom-20 left-20 w-60 h-60 glass border-cyan-400/20 -rotate-12 -z-10"></div>
+    </section>
+
+    
+    <footer class="py-20 px-8 border-t border-white/10 bg-black">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div>
+                <div class="logo-text text-4xl font-black mb-6">MAXIMPACT</div>
+                <p class="text-slate-500 font-tech text-sm max-w-xs">차세대 디지털 시대의 아키텍처 기반을 구축합니다. 리더를 위한 AI 우선 개발.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-16">
+                <div class="flex flex-col gap-4">
+                    <span class="font-tech text-cyan-400 text-xs">소셜</span>
+                    <a href="#" class="text-sm hover:text-cyan-400 transition-colors">GitHub</a>
+                    <a href="#" class="text-sm hover:text-cyan-400 transition-colors">LinkedIn</a>
+                    <a href="#" class="text-sm hover:text-cyan-400 transition-colors">X (Twitter)</a>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <span class="font-tech text-cyan-400 text-xs">오피스</span>
+                    <p class="text-sm text-slate-400">SEOUL, KOREA<br>GANYNAMED DIST.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <span class="font-tech text-cyan-400 text-xs">CONTACT</span>
+                    <p class="text-sm text-slate-400">HELLO@MAXIMPACT.DEV</p>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-20 pt-10 border-t border-white/5 flex justify-between items-center text-[10px] font-tech text-slate-600">
+            <span>© 2024 MAXIMPACT. ALL SYSTEMS OPERATIONAL.</span>
+            <div class="flex gap-4">
+                <span>개인정보처리방침</span>
+                <span>시스템_상태</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // === CURSOR ===
+        const cursor = document.getElementById('custom-cursor');
+        const ring = document.getElementById('cursor-ring');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mx = e.clientX; my = e.clientY;
+            cursor.style.left = mx + 'px';
+            cursor.style.top  = my + 'px';
+        });
+
+        (function animateRing() {
+            rx += (mx - rx) * 0.15;
+            ry += (my - ry) * 0.15;
+            ring.style.left = rx + 'px';
+            ring.style.top  = ry + 'px';
+            requestAnimationFrame(animateRing);
+        })();
+
+        document.querySelectorAll('a, button, input, textarea, select, .tilt-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                ring.style.width = '58px'; ring.style.height = '58px';
+                ring.style.borderColor = 'rgba(34,211,238,0.95)';
+                cursor.style.width = '6px'; cursor.style.height = '6px';
+            });
+            el.addEventListener('mouseleave', () => {
+                ring.style.width = '36px'; ring.style.height = '36px';
+                ring.style.borderColor = 'rgba(34,211,238,0.55)';
+                cursor.style.width = '10px'; cursor.style.height = '10px';
+            });
+        });
+
+        // === THEME TOGGLE ===
+        const themeBtn  = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        let isDark = true;
+        themeBtn.addEventListener('click', () => {
+            isDark = !isDark;
+            document.body.classList.toggle('light-mode', !isDark);
+            themeIcon.className = isDark ? 'ph ph-sun' : 'ph ph-moon';
+        });
+
+        
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        
+        const magnetButtons = document.querySelectorAll('.diagonal-card:not(.no-magnet)');
+        magnetButtons.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.05)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0) scale(1)';
+            });
+        });
+
+        
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const xRotation = ((y - rect.height / 2) / rect.height) * 20;
+                const yRotation = ((x - rect.width / 2) / rect.width) * -20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) scale(1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            });
+        });
+    </script>
+
+</body></html>

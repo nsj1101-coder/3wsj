@@ -1,2 +1,22 @@
+# Next.js
+.next/
+out/
+
+# Dependencies
+node_modules/
+
+# ── SECURITY: 절대 커밋 금지 ──
+.env
+.env.local
+.env.*.local
+config/auth.json        # 비밀번호 포함 — Vercel 에서는 환경변수 사용
+
+# macOS
 .DS_Store
+*.DS_Store
+
+# Playwright
 .playwright-mcp/
+
+# Editor
+.vscode/settings.json

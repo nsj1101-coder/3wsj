@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIMES 2026 박람회 참관 보고서</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #0f0f0f;
+      color: #333;
+    }
+
+    .slide {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-inner {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    /* ── Slide 1: Cover ── */
+    .slide-cover {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      text-align: center;
+    }
+
+    .slide-cover .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 8px 24px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    .slide-cover h1 {
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      background: linear-gradient(to right, #fff, #a8c0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide-cover .subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 48px;
+    }
+
+    .slide-cover .meta {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .slide-cover .meta span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slide-cover .meta .dot {
+      width: 6px; height: 6px;
+      background: #4a90d9;
+      border-radius: 50%;
+    }
+
+    /* ── Slide 2: Overview ── */
+    .slide-overview {
+      background: #ffffff;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #4a90d9;
+      margin-bottom: 16px;
+    }
+
+    .slide-overview h2 {
+      font-size: 40px;
+      font-weight: 900;
+      color: #1a1a2e;
+      margin-bottom: 48px;
+      line-height: 1.3;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .overview-card {
+      background: #f8f9fc;
+      border-radius: 16px;
+      padding: 32px 28px;
+      border: 1px solid #e8ecf4;
+      transition: transform 0.2s;
+    }
+
+    .overview-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .overview-card .icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .overview-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 10px;
+    }
+
+    .overview-card p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .icon-blue { background: #e8f0fe; color: #4a90d9; }
+    .icon-green { background: #e6f7ed; color: #34a853; }
+    .icon-orange { background: #fef3e2; color: #f59e0b; }
+
+    /* ── Slide 3: Vegas Deep Dive ── */
+    .slide-vegas {
+      background: linear-gradient(180deg, #f0f4ff 0%, #ffffff 100%);
+    }
+
+    .slide-vegas h2 {
+      font-size: 40px;
+      font-weight: 900;
+      color: #1a1a2e;
+      margin-bottom: 12px;
+    }
+
+    .slide-vegas .desc {
+      font-size: 16px;
+      color: #888;
+      margin-bottom: 48px;
+    }
+
+    .vegas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .vegas-item {
+      display: flex;
+      gap: 20px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid #e8ecf4;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+
+    .vegas-item .badge {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .badge-strength { background: #e6f7ed; color: #34a853; }
+    .badge-weakness { background: #fde8e8; color: #ea4335; }
+    .badge-neutral { background: #e8f0fe; color: #4a90d9; }
+
+    .vegas-item h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+
+    .vegas-item p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .tag-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 8px;
+    }
+
+    .tag-strength { background: #e6f7ed; color: #34a853; }
+    .tag-weakness { background: #fde8e8; color: #ea4335; }
+    .tag-note { background: #fff8e1; color: #f59e0b; }
+
+    /* ── Slide 4: UI/UX 비교 ── */
+    .slide-compare {
+      background: #ffffff;
+    }
+
+    .slide-compare h2 {
+      font-size: 40px;
+      font-weight: 900;
+      color: #1a1a2e;
+      margin-bottom: 48px;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+
+    .compare-table thead th {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 18px 24px;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .compare-table tbody td {
+      padding: 16px 24px;
+      font-size: 14px;
+      color: #444;
+      border-bottom: 1px solid #f0f0f0;
+      line-height: 1.6;
+    }
+
+    .compare-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .compare-table tbody tr:nth-child(even) {
+      background: #f8f9fc;
+    }
+
+    .compare-table tbody tr:hover {
+      background: #eef3ff;
+    }
+
+    .status-chip {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .chip-good { background: #e6f7ed; color: #34a853; }
+    .chip-mid { background: #fff8e1; color: #e8a500; }
+    .chip-old { background: #fde8e8; color: #ea4335; }
+
+    /* ── Slide 5: 공통 워크플로우 ── */
+    .slide-workflow {
+      background: linear-gradient(180deg, #f8f9fc 0%, #ffffff 100%);
+    }
+
+    .slide-workflow h2 {
+      font-size: 40px;
+      font-weight: 900;
+      color: #1a1a2e;
+      margin-bottom: 12px;
+    }
+
+    .slide-workflow .desc {
+      font-size: 16px;
+      color: #888;
+      margin-bottom: 56px;
+    }
+
+    .workflow-steps {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+      position: relative;
+    }
+
+    .workflow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+      position: relative;
+    }
+
+    .workflow-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 36px;
+      right: -50%;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, #4a90d9, #a8c0ff);
+      z-index: 0;
+    }
+
+    .step-circle {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4a90d9, #0f3460);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 4px 20px rgba(74,144,217,0.3);
+    }
+
+    .step-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: #4a90d9;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .workflow-step h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+
+    .workflow-step p {
+      font-size: 13px;
+      color: #888;
+      max-width: 160px;
+      line-height: 1.6;
+    }
+
+    /* ── Slide 6: 시사점 ── */
+    .slide-insights {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+    }
+
+    .slide-insights h2 {
+      font-size: 40px;
+      font-weight: 900;
+      margin-bottom: 48px;
+      background: linear-gradient(to right, #fff, #a8c0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .insight-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 32px 28px;
+      backdrop-filter: blur(10px);
+    }
+
+    .insight-card .priority {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .priority-high { background: rgba(234,67,53,0.2); color: #ff6b6b; }
+    .priority-mid { background: rgba(245,158,11,0.2); color: #fbbf24; }
+    .priority-future { background: rgba(74,144,217,0.2); color: #93c5fd; }
+
+    .insight-card h4 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .insight-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+    }
+
+    /* ── Page Number ── */
+    .page-num {
+      position: absolute;
+      bottom: 32px;
+      right: 48px;
+      font-size: 13px;
+      color: rgba(0,0,0,0.2);
+      font-weight: 600;
+    }
+
+    .slide-cover .page-num,
+    .slide-insights .page-num {
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ── Divider ── */
+    .slide-divider {
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(to right, #4a90d9, #a8c0ff);
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+
+    .slide-insights .slide-divider {
+      background: linear-gradient(to right, #4a90d9, #93c5fd);
+    }
+
+    /* ── Print ── */
+    @media print {
+      .slide { page-break-after: always; min-height: 100vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Slide 1: Cover -->
+  <div class="slide slide-cover">
+    <div class="slide-inner" style="text-align:center;">
+      <div class="tag">Expo Visit Report</div>
+      <h1>KIMES 2026<br>박람회 참관 보고서</h1>
+      <p class="subtitle">EMR 솔루션 경쟁사 분석 및 시사점</p>
+      <div class="meta">
+        <span><div class="dot"></div>2026년 3월</span>
+        <span><div class="dot"></div>KIMES (국제의료기기 박람회)</span>
+        <span><div class="dot"></div>베가스 EMR 외 2개 업체</span>
+      </div>
+    </div>
+    <div class="page-num">01</div>
+  </div>
+
+  <!-- Slide 2: Overview -->
+  <div class="slide slide-overview">
+    <div class="slide-inner">
+      <div class="section-label">Overview</div>
+      <h2>참관 개요</h2>
+      <div class="overview-grid">
+        <div class="overview-card">
+          <div class="icon icon-blue">&#128205;</div>
+          <h3>참관 목적</h3>
+          <p>경쟁사 EMR 솔루션 직접 시연 확인 및 기능·UI 벤치마킹을 통한 자사 제품 개선 방향 도출</p>
+        </div>
+        <div class="overview-card">
+          <div class="icon icon-green">&#127919;</div>
+          <h3>주요 시연 업체</h3>
+          <p><strong>베가스 EMR</strong> (업계 1위) 중심 시연 참관, 기타 2개 업체 솔루션 추가 체험</p>
+        </div>
+        <div class="overview-card">
+          <div class="icon icon-orange">&#128270;</div>
+          <h3>핵심 관찰 포인트</h3>
+          <p>메뉴 구조, CRM 기능, UI/UX 수준, 하드웨어 연동, 환자 동선 워크플로우</p>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">02</div>
+  </div>
+
+  <!-- Slide 3: Vegas Deep Dive -->
+  <div class="slide slide-vegas">
+    <div class="slide-inner">
+      <div class="section-label">Competitor Analysis</div>
+      <h2>베가스 EMR 상세 분석</h2>
+      <p class="desc">업계 1위 솔루션의 강점과 한계</p>
+      <div class="vegas-grid">
+        <div class="vegas-item">
+          <div class="badge badge-strength">&#10003;</div>
+          <div>
+            <span class="tag-label tag-strength">강점</span>
+            <h4>풍부한 메뉴 구성</h4>
+            <p>다양한 기능이 체계적으로 메뉴화되어 있으며, 오랜 기간 고도화된 것이 체감됨</p>
+          </div>
+        </div>
+        <div class="vegas-item">
+          <div class="badge badge-strength">&#10003;</div>
+          <div>
+            <span class="tag-label tag-strength">강점</span>
+            <h4>CRM 기능 우수</h4>
+            <p>환자 관리·마케팅·리텐션 등 CRM 영역이 매우 잘 구축되어 있어 눈에 띄는 수준</p>
+          </div>
+        </div>
+        <div class="vegas-item">
+          <div class="badge badge-weakness">!</div>
+          <div>
+            <span class="tag-label tag-weakness">약점</span>
+            <h4>노후한 UI/UX</h4>
+            <p>구 Windows 스타일의 인터페이스. 기능은 많으나 시각적 현대화가 부족</p>
+          </div>
+        </div>
+        <div class="vegas-item">
+          <div class="badge badge-weakness">!</div>
+          <div>
+            <span class="tag-label tag-weakness">약점</span>
+            <h4>불필요한 자잘한 기능</h4>
+            <p>고도화 과정에서 축적된 비핵심 기능이 많아 사용성 복잡도가 높음</p>
+          </div>
+        </div>
+        <div class="vegas-item">
+          <div class="badge badge-neutral">&#9733;</div>
+          <div>
+            <span class="tag-label tag-note">참고</span>
+            <h4>상단 메뉴 네비게이션</h4>
+            <p>기존 참고 레퍼런스는 좌측 메뉴 방식이었으나, 베가스는 상단 메뉴 구조를 채택</p>
+          </div>
+        </div>
+        <div class="vegas-item">
+          <div class="badge badge-neutral">&#9733;</div>
+          <div>
+            <span class="tag-label tag-note">참고</span>
+            <h4>하드웨어 연동</h4>
+            <p>키오스크, 영수증 프린터, 카드 리더기 등 외부 디바이스 연동 지원</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">03</div>
+  </div>
+
+  <!-- Slide 4: UI/UX 비교 -->
+  <div class="slide slide-compare">
+    <div class="slide-inner">
+      <div class="section-label">Comparison</div>
+      <h2>업체별 UI/UX 비교</h2>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:18%">항목</th>
+            <th style="width:30%">베가스 (업계 1위)</th>
+            <th style="width:26%">기타 업체 A·B</th>
+            <th style="width:26%">자사 방향성</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>UI 디자인</strong></td>
+            <td><span class="status-chip chip-old">Old Windows 스타일</span></td>
+            <td><span class="status-chip chip-old">구닥다리 UI</span></td>
+            <td><span class="status-chip chip-good">모던 웹 UI</span> 차별화 기회</td>
+          </tr>
+          <tr>
+            <td><strong>메뉴 구조</strong></td>
+            <td>상단 메뉴 (Top Navigation)</td>
+            <td>다양한 형태 혼재</td>
+            <td>좌측 메뉴 (기존 레퍼런스 기반)</td>
+          </tr>
+          <tr>
+            <td><strong>CRM 기능</strong></td>
+            <td><span class="status-chip chip-good">매우 우수</span></td>
+            <td><span class="status-chip chip-mid">기본 수준</span></td>
+            <td>핵심 강화 필요 영역</td>
+          </tr>
+          <tr>
+            <td><strong>기능 고도화</strong></td>
+            <td><span class="status-chip chip-good">높음</span> (과잉 기능 포함)</td>
+            <td><span class="status-chip chip-mid">보통</span></td>
+            <td>핵심 기능 중심 정제된 접근</td>
+          </tr>
+          <tr>
+            <td><strong>대기 TV 연동</strong></td>
+            <td>지원</td>
+            <td>지원 (공통 필수 기능)</td>
+            <td>필수 구현 대상</td>
+          </tr>
+          <tr>
+            <td><strong>H/W 연동</strong></td>
+            <td>키오스크·카드리더기·영수증</td>
+            <td>일부 지원</td>
+            <td>중장기 로드맵 반영</td>
+          </tr>
+          <tr>
+            <td><strong>환자 워크플로우</strong></td>
+            <td><span class="status-chip chip-good">직관적</span></td>
+            <td><span class="status-chip chip-good">직관적</span></td>
+            <td>업계 표준 수준 확보 필수</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="page-num">04</div>
+  </div>
+
+  <!-- Slide 5: 공통 워크플로우 -->
+  <div class="slide slide-workflow">
+    <div class="slide-inner">
+      <div class="section-label">Common Workflow</div>
+      <h2>업계 공통 핵심 워크플로우</h2>
+      <p class="desc">모든 참관 업체에서 직관적이고 편리하게 구현되어 있던 필수 동선</p>
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="step-circle">&#128203;</div>
+          <div class="step-num">STEP 01</div>
+          <h4>환자 접수</h4>
+          <p>신규 등록 또는 기존 환자 접수</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-circle">&#128694;</div>
+          <div class="step-num">STEP 02</div>
+          <h4>진료실 이동</h4>
+          <p>환자 위치 추적 및 진료 대기 관리</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-circle">&#128221;</div>
+          <div class="step-num">STEP 03</div>
+          <h4>처방 기록</h4>
+          <p>의사 진료 및 처방 내역 작성</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-circle">&#128179;</div>
+          <div class="step-num">STEP 04</div>
+          <h4>수납</h4>
+          <p>진료비 계산 및 결제 처리</p>
+        </div>
+      </div>
+      <div style="margin-top:48px; background:#fff; border-radius:12px; padding:24px 32px; border:1px solid #e8ecf4; display:flex; align-items:center; gap:16px;">
+        <span style="font-size:24px;">&#128161;</span>
+        <p style="font-size:14px; color:#666; line-height:1.7;">
+          <strong style="color:#1a1a2e;">핵심 인사이트:</strong> 위 4단계 워크플로우는 모든 업체에서 <strong>가장 직관적이고 편리하게</strong> 구현되어 있었으며, 업계 기본 기대치로 판단됨. 자사 제품에서도 이 동선의 완성도를 최우선으로 확보해야 함.
+        </p>
+      </div>
+    </div>
+    <div class="page-num">05</div>
+  </div>
+
+  <!-- Slide 6: 시사점 & Action Items -->
+  <div class="slide slide-insights">
+    <div class="slide-inner">
+      <div class="section-label" style="color:#93c5fd;">Key Takeaways</div>
+      <div class="slide-divider"></div>
+      <h2>시사점 및 Action Items</h2>
+      <div class="insight-grid">
+        <div class="insight-card">
+          <div class="priority priority-high">HIGH PRIORITY</div>
+          <h4>모던 UI/UX로 차별화</h4>
+          <p>모든 경쟁사가 구형 UI. 현대적 웹 기반 디자인으로 접근하면 강력한 차별점 확보 가능</p>
+        </div>
+        <div class="insight-card">
+          <div class="priority priority-high">HIGH PRIORITY</div>
+          <h4>핵심 워크플로우 완성도 확보</h4>
+          <p>접수 → 진료실 이동 → 처방 → 수납의 4단계 동선은 업계 기본. 직관적 UX로 완성도 확보 필수</p>
+        </div>
+        <div class="insight-card">
+          <div class="priority priority-mid">MEDIUM PRIORITY</div>
+          <h4>CRM 기능 강화</h4>
+          <p>베가스의 CRM은 확실한 강점. 자사 CRM 역시 경쟁력 있는 수준으로 고도화 필요</p>
+        </div>
+        <div class="insight-card">
+          <div class="priority priority-mid">MEDIUM PRIORITY</div>
+          <h4>대기실 TV 연동</h4>
+          <p>모든 업체 공통 필수 기능. 환자 대기 현황 디스플레이 기능 개발 검토</p>
+        </div>
+        <div class="insight-card">
+          <div class="priority priority-future">FUTURE ROADMAP</div>
+          <h4>하드웨어 연동 (키오스크 등)</h4>
+          <p>키오스크·카드리더기·영수증 프린터 연동은 중장기 과제로 로드맵에 반영</p>
+        </div>
+        <div class="insight-card">
+          <div class="priority priority-future">FUTURE ROADMAP</div>
+          <h4>기능 과잉 경계</h4>
+          <p>베가스의 불필요 기능 과다 사례를 반면교사 삼아, 핵심 기능 중심의 정제된 제품 전략 유지</p>
+        </div>
+      </div>
+    </div>
+    <div class="page-num">06</div>
+  </div>
+
+</body>
+</html>
