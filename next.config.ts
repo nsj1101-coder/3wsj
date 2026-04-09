@@ -15,10 +15,10 @@ const nextConfig: NextConfig = {
           key: 'Content-Security-Policy',
           value: [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval'",   // Next.js needs these
-            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-            "font-src 'self' https://fonts.gstatic.com",
-            "img-src 'self' data: https://images.unsplash.com",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
+            "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net",
+            "img-src 'self' data: blob: https:",
             "connect-src 'self'",
             "frame-ancestors 'none'",
           ].join('; '),
