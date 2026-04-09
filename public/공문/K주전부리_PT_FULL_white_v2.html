@@ -747,8 +747,11 @@ html, body { overflow: auto !important; height: auto !important; cursor: auto !i
 .s2-venn svg { overflow: visible !important; }
 .s2-venn { padding: 16px; }
 
-/* Slide 5: 패키징 왼쪽 정렬 */
+/* Slide 5: 왼쪽 정렬 */
+.s5w { align-items: flex-start !important; }
 .s5-right { align-items: flex-start !important; }
+.s5-right .chart-wrap { margin: 0 !important; }
+.s5-right > div:first-child { text-align: left !important; }
 
 /* Remove 협의 필요 labels from government slides */
 .mc-budget { display: none !important; }
