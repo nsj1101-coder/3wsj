@@ -18,10 +18,10 @@
   --card2:#F5F5F5;
   --bd:   #DCDCDC;
   --bd2:  #CCCCCC;
-  --Y:    #F7E600;
-  --Yd:   rgba(247,230,0,.12);
-  --Yb:   rgba(247,230,0,.35);
-  --Ys:   rgba(247,230,0,.08);
+  --Y:    #C8A000;
+  --Yd:   rgba(200,160,0,.12);
+  --Yb:   rgba(200,160,0,.35);
+  --Ys:   rgba(200,160,0,.08);
   --w:    #14213D;
   --wm:   #6A6A8A;
   --wd:   #9A9AAA;
@@ -49,7 +49,7 @@ html, body {
 }
 #cr {
   position: fixed; width: 36px; height: 36px;
-  border: 1.5px solid rgba(247,230,0,.45); border-radius: 50%;
+  border: 1.5px solid rgba(200,160,0,.45); border-radius: 50%;
   pointer-events: none; z-index: 9998;
   transform: translate(-50%,-50%);
   transition: width .25s, height .25s, border-color .25s;
@@ -70,7 +70,7 @@ html, body {
 ═══════════════════════════════════════════════════ */
 #prog {
   position: fixed; bottom: 0; left: 0; height: 3px;
-  background: linear-gradient(90deg, var(--Y), rgba(247,230,0,.3));
+  background: linear-gradient(90deg, var(--Y), rgba(200,160,0,.3));
   transition: width .6s cubic-bezier(.76,0,.24,1); z-index: 500;
 }
 #ctr {
@@ -96,7 +96,7 @@ html, body {
 #ag {
   position: fixed; top: -200px; right: -200px;
   width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(247,230,0,.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(200,160,0,.07) 0%, transparent 70%);
   filter: blur(70px); pointer-events: none; z-index: 0;
 }
 
@@ -107,7 +107,7 @@ html, body {
   border: none; border-radius: 8px; padding: 8px 20px;
   font-size: 12px; font-weight: 800; letter-spacing: .06em;
   cursor: pointer; transition: all .2s; font-family: inherit;
-  display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 12px rgba(247,230,0,.25);
+  display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 12px rgba(200,160,0,.25);
 }
 #pdf-btn:hover { opacity: .88; transform: translateY(-1px); }
 
@@ -202,14 +202,14 @@ html, body {
 .gl {
   position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background-image:
-    linear-gradient(rgba(247,230,0,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(247,230,0,.06) 1px, transparent 1px);
+    linear-gradient(rgba(200,160,0,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,160,0,.06) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 /* Scanline (maximpact) */
 .scanline {
   position: absolute; left: 0; width: 100%; height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(247,230,0,.18), transparent);
+  background: linear-gradient(90deg, transparent, rgba(200,160,0,.18), transparent);
   z-index: 2; pointer-events: none; opacity: .4;
   animation: scanmv 6s linear infinite;
 }
@@ -232,10 +232,10 @@ html, body {
   border-radius: 18px; padding: 28px 32px;
   transition: border-color .3s, transform .3s, box-shadow .3s;
 }
-.gc:hover { border-color: var(--Yb); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(247,230,0,.08); }
+.gc:hover { border-color: var(--Yb); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(200,160,0,.08); }
 .sec-title { font-size: clamp(42px, 5.5vw, 72px); font-weight: 900; letter-spacing: -.04em; line-height: .95; }
 .sec-sub   { font-size: clamp(15px, 1.6vw, 20px); color: var(--wm); line-height: 1.6; margin-top: 10px; }
-.kinetic   { background: linear-gradient(135deg, #F7E600 0%, #14213D 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.kinetic   { background: linear-gradient(135deg, #C8A000 0%, #14213D 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
 
 /* ═══════════════════════════════════════════════════
@@ -247,9 +247,9 @@ html, body {
 @keyframes spinC { from { transform: rotateX(0) rotateY(0); } to { transform: rotateX(360deg) rotateY(540deg); } }
 .cf {
   position: absolute; width: 220px; height: 220px;
-  border: 1.5px solid rgba(247,230,0,.5); background: rgba(247,230,0,.02);
+  border: 1.5px solid rgba(200,160,0,.5); background: rgba(200,160,0,.02);
   display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 700; color: rgba(247,230,0,.7); letter-spacing: .1em; text-align: center; line-height: 1.5;
+  font-size: 12px; font-weight: 700; color: rgba(200,160,0,.7); letter-spacing: .1em; text-align: center; line-height: 1.5;
 }
 .cf.fr { transform: translateZ(110px); }
 .cf.bk { transform: rotateY(180deg) translateZ(110px); }
@@ -309,18 +309,18 @@ html, body {
 .fcf { position: absolute; inset: 0; border-radius: 22px; padding: 34px; display: flex; flex-direction: column; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .fcf.front { background: var(--card); border: 1px solid var(--bd2); justify-content: space-between; transition: border-color .3s; }
 .fcw:hover .fcf.front { border-color: var(--Yb); }
-.fcf.back { transform: rotateY(180deg); border: 1px solid rgba(247,230,0,.25); justify-content: space-between; }
+.fcf.back { transform: rotateY(180deg); border: 1px solid rgba(200,160,0,.25); justify-content: space-between; }
 .fc-icon { width: 68px; height: 68px; background: var(--Yd); border: 1px solid var(--Yb); border-radius: 17px; display: flex; align-items: center; justify-content: center; font-size: 30px; margin-bottom: 16px; }
 .fc-title { font-size: 22px; font-weight: 900; line-height: 1.2; margin-bottom: 10px; }
 .fc-sub { font-size: 14px; color: var(--wm); line-height: 1.55; }
 .fc-hint { font-size: 11px; color: var(--Y); letter-spacing: .12em; font-weight: 700; }
-.bk-label { font-size: 11px; color: rgba(247,230,0,.6); letter-spacing: .15em; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+.bk-label { font-size: 11px; color: rgba(200,160,0,.6); letter-spacing: .15em; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
 .bk-stat { font-size: clamp(48px, 6vw, 68px); font-weight: 900; color: var(--Y); line-height: 1; }
 .bk-unit { font-size: 13px; color: var(--wm); margin: 6px 0 16px; }
 .bk-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
 .bk-list li { font-size: 13px; color: var(--wm); padding-left: 16px; position: relative; line-height: 1.4; }
 .bk-list li::before { content: '→'; position: absolute; left: 0; color: var(--Y); font-size: 11px; top: 2px; }
-.bk-close { font-size: 11px; color: rgba(247,230,0,.35); letter-spacing: .1em; text-align: center; font-weight: 600; }
+.bk-close { font-size: 11px; color: rgba(200,160,0,.35); letter-spacing: .1em; text-align: center; font-weight: 600; }
 
 /* ═══════════════════════════════════════════════════
    SLIDE 4 — 전체 플로우 (7단계)
@@ -338,14 +338,14 @@ html, body {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
   transition: all .3s; cursor: default; position: relative;
 }
-.fn-box:hover { border-color: var(--Y); transform: translateY(-8px); box-shadow: 0 16px 40px rgba(247,230,0,.12); }
-.fn-box.hi { border-color: var(--Y); box-shadow: 0 0 30px rgba(247,230,0,.2); }
+.fn-box:hover { border-color: var(--Y); transform: translateY(-8px); box-shadow: 0 16px 40px rgba(200,160,0,.12); }
+.fn-box.hi { border-color: var(--Y); box-shadow: 0 0 30px rgba(200,160,0,.2); }
 .fn-emo { font-size: 34px; }
 .fn-name { font-size: 13px; font-weight: 800; text-align: center; line-height: 1.2; }
 .fn-who { font-size: 11px; color: var(--wm); text-align: center; margin-top: 8px; line-height: 1.4; }
 .fn-memo { font-size: 10px; color: var(--wd); text-align: center; margin-top: 4px; line-height: 1.3; }
-.flow-conn { flex: 1; height: 2px; background: linear-gradient(90deg, var(--Y), rgba(247,230,0,.2)); position: relative; overflow: hidden; opacity: 0; }
-.flow-conn::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(247,230,0,.4), transparent); animation: flowpulse 2.5s infinite linear; }
+.flow-conn { flex: 1; height: 2px; background: linear-gradient(90deg, var(--Y), rgba(200,160,0,.2)); position: relative; overflow: hidden; opacity: 0; }
+.flow-conn::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(200,160,0,.4), transparent); animation: flowpulse 2.5s infinite linear; }
 @keyframes flowpulse { 0%{left:-100%} 100%{left:100%} }
 .flow-arr { width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid var(--Y); opacity: 0; flex-shrink: 0; }
 .tl-bar {
@@ -404,7 +404,7 @@ html, body {
   font-size: 12px; font-weight: 800; text-align: center; line-height: 1.2; color: var(--Y);
   transition: all .3s;
 }
-.hex:hover { background: rgba(247,230,0,.25); transform: scale(1.08); }
+.hex:hover { background: rgba(200,160,0,.25); transform: scale(1.08); }
 .hex-label { font-size: 10px; color: var(--wm); text-align: center; max-width: 80px; }
 
 /* ═══════════════════════════════════════════════════
@@ -414,7 +414,7 @@ html, body {
 .s6h { margin-bottom: 16px; opacity:0; transform:translateY(-18px); }
 .tl-cont { display: flex; gap: 0; width: 100%; flex: 1; position: relative; max-height: 82vh; overflow: hidden; }
 .tl-line-wrap { position: relative; width: 2px; background: var(--bd2); margin: 0 36px; flex-shrink: 0; }
-.tl-progress { position: absolute; top: 0; left: 0; width: 100%; height: 0%; background: linear-gradient(180deg, var(--Y), rgba(247,230,0,.2)); border-radius: 1px; }
+.tl-progress { position: absolute; top: 0; left: 0; width: 100%; height: 0%; background: linear-gradient(180deg, var(--Y), rgba(200,160,0,.2)); border-radius: 1px; }
 .tl-col { flex: 1; display: flex; flex-direction: column; gap: 8px; padding-bottom: 10px; }
 .tl-event {
   display: flex; align-items: flex-start; gap: 0;
@@ -425,13 +425,13 @@ html, body {
   border: 2px solid var(--bd2); flex-shrink: 0; margin-top: 6px;
   margin-left: -43px; margin-right: 30px; transition: all .3s;
 }
-.tl-dot.hi { background: var(--Y); border-color: var(--Y); box-shadow: 0 0 16px rgba(247,230,0,.5); }
+.tl-dot.hi { background: var(--Y); border-color: var(--Y); box-shadow: 0 0 16px rgba(200,160,0,.5); }
 .tl-card {
   flex: 1; padding: 10px 16px; border-radius: 12px;
   background: var(--card); border: 1px solid var(--bd2);
   transition: border-color .3s;
 }
-.tl-card.hi { border-color: var(--Yb); background: rgba(247,230,0,.03); }
+.tl-card.hi { border-color: var(--Yb); background: rgba(200,160,0,.03); }
 .tl-mo2 { font-size: 12px; font-weight: 700; color: var(--Y); letter-spacing: .08em; margin-bottom: 5px; }
 .tl-tit { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
 .tl-body { font-size: 11.5px; color: var(--wm); line-height: 1.45; }
@@ -453,9 +453,9 @@ html, body {
   min-width: 0;
   transition: border-color .3s, box-shadow .3s;
 }
-.pipe-node:hover { border-color: var(--Yb); box-shadow: 0 8px 32px rgba(247,230,0,.1); }
-.pipe-node.pn-hub { border-color: var(--Yb); background: rgba(247,230,0,.07); }
-.pipe-node.pn-kakao { border-color: rgba(247,230,0,.4); }
+.pipe-node:hover { border-color: var(--Yb); box-shadow: 0 8px 32px rgba(200,160,0,.1); }
+.pipe-node.pn-hub { border-color: var(--Yb); background: rgba(200,160,0,.07); }
+.pipe-node.pn-kakao { border-color: rgba(200,160,0,.4); }
 .pipe-node.pn-gov { position: relative; }
 .pipe-arrow {
   width: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
@@ -502,7 +502,7 @@ html, body {
 .bg-desc { font-size: 13px; color: var(--wd); margin-top: 5px; }
 .budget-note {
   margin-top: 28px; padding: 18px 22px; border-radius: 14px;
-  background: rgba(247,230,0,.06); border-left: 5px solid var(--Y);
+  background: rgba(200,160,0,.06); border-left: 5px solid var(--Y);
   font-size: 14px; color: var(--wm); line-height: 1.6;
   opacity:0; transform:translateY(16px);
 }
@@ -519,7 +519,7 @@ html, body {
   transition: all .3s; opacity:0; transform:translateY(30px);
   display: flex; flex-direction: column; gap: 12px;
 }
-.mc:hover { border-color: var(--Yb); border-top-color: var(--Y); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(247,230,0,.08); }
+.mc:hover { border-color: var(--Yb); border-top-color: var(--Y); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(200,160,0,.08); }
 .mc.pri { border-top-color: var(--Y); }
 .mc-head { display: flex; justify-content: space-between; align-items: flex-start; }
 .mc-name { font-size: 20px; font-weight: 900; }
@@ -557,7 +557,7 @@ html, body {
 .eff-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
 .eff-title::before { content: '✓ '; color: var(--Y); }
 .eff-desc { font-size: 12px; color: var(--wm); line-height: 1.5; }
-.quote-box { background: rgba(247,230,0,.06); border-left: 5px solid var(--Y); padding: 14px 16px; border-radius: 0 10px 10px 0; }
+.quote-box { background: rgba(200,160,0,.06); border-left: 5px solid var(--Y); padding: 14px 16px; border-radius: 0 10px 10px 0; }
 .quote-box p { font-size: 14px; color: var(--wm); line-height: 1.6; font-style: italic; }
 
 /* ═══════════════════════════════════════════════════
@@ -583,7 +583,7 @@ html, body {
 .eff-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .eff-chip { background: var(--gb); border-radius: 10px; padding: 12px; font-size: 13px; color: var(--wm); text-align: center; line-height: 1.4; }
 .eff-chip .ic { font-size: 20px; display: block; margin-bottom: 4px; }
-.panel-note { background: rgba(247,230,0,.06); border: 1px solid rgba(247,230,0,.2); border-radius: 12px; padding: 14px 16px; font-size: 14px; color: var(--wm); line-height: 1.6; }
+.panel-note { background: rgba(200,160,0,.06); border: 1px solid rgba(200,160,0,.2); border-radius: 12px; padding: 14px 16px; font-size: 14px; color: var(--wm); line-height: 1.6; }
 
 /* ═══════════════════════════════════════════════════
    SLIDE 12 — 고용부 + 방통위 + 국토부
@@ -603,7 +603,7 @@ html, body {
 .tp-item::before { content: '·'; position: absolute; left: 0; color: var(--Y); font-weight: 900; }
 .tp-eff { font-size: 13px; color: #4CAF50; padding-left: 14px; position: relative; margin-bottom: 4px; }
 .tp-eff::before { content: '✓'; position: absolute; left: 0; font-weight: 700; }
-.future-badge { background: rgba(247,230,0,.08); border-radius: 8px; padding: 8px 12px; font-size: 12px; color: var(--Y); font-weight: 700; text-align: center; }
+.future-badge { background: rgba(200,160,0,.08); border-radius: 8px; padding: 8px 12px; font-size: 12px; color: var(--Y); font-weight: 700; text-align: center; }
 
 /* ═══════════════════════════════════════════════════
    SLIDE 13 — 카카오 협력 요청
@@ -617,8 +617,8 @@ html, body {
   position: relative; overflow: hidden;
   transition: all .35s; opacity:0; transform:translateY(40px);
 }
-.rc:hover { border-color: var(--Yb); transform: translateY(-6px); box-shadow: 0 16px 50px rgba(247,230,0,.1); }
-.rc-num { position: absolute; top: 16px; right: 20px; font-size: 88px; font-weight: 900; color: rgba(247,230,0,.07); line-height: 1; pointer-events: none; }
+.rc:hover { border-color: var(--Yb); transform: translateY(-6px); box-shadow: 0 16px 50px rgba(200,160,0,.1); }
+.rc-num { position: absolute; top: 16px; right: 20px; font-size: 88px; font-weight: 900; color: rgba(200,160,0,.07); line-height: 1; pointer-events: none; }
 .rc-title { font-size: 22px; font-weight: 900; line-height: 1.2; }
 .rc-desc { font-size: 15px; color: var(--wm); line-height: 1.6; }
 .rc-checks { display: flex; flex-direction: column; gap: 9px; margin-top: 8px; }
@@ -646,7 +646,7 @@ html, body {
   width: 260px; height: 480px; border: 2.5px solid var(--bd2); border-radius: 40px;
   background: #0D0D0D; overflow: hidden;
   transform: perspective(900px) rotateY(-12deg) rotateX(4deg);
-  box-shadow: 0 24px 80px rgba(247,230,0,.15), 0 0 0 1px rgba(0,0,0,.06);
+  box-shadow: 0 24px 80px rgba(200,160,0,.15), 0 0 0 1px rgba(0,0,0,.06);
   position: relative;
 }
 .ph-notch { width: 80px; height: 22px; background: #000; border-radius: 0 0 16px 16px; margin: 0 auto; }
@@ -660,13 +660,13 @@ html, body {
 .ph-tag { font-size: 10px; color: var(--Y); }
 .ph-badge-wrap { display: flex; gap: 6px; flex-wrap: wrap; }
 .ph-badge { background: var(--Yd); color: var(--Y); font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
-.ph-footer { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(247,230,0,.1); border-top: 1px solid var(--Yb); padding: 12px 16px; text-align: center; font-size: 11px; color: var(--Y); font-weight: 700; }
+.ph-footer { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(200,160,0,.1); border-top: 1px solid var(--Yb); padding: 12px 16px; text-align: center; font-size: 11px; color: var(--Y); font-weight: 700; }
 .app-features { display: flex; flex-direction: column; gap: 16px; opacity:0; transform:translateX(30px); }
 .af { display: flex; gap: 20px; align-items: flex-start; }
 .af-num { width: 48px; height: 48px; border-radius: 14px; background: var(--Yd); border: 1px solid var(--Yb); color: var(--Y); font-size: 20px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .af-title { font-size: 18px; font-weight: 800; margin-bottom: 5px; }
 .af-desc { font-size: 14px; color: var(--wm); line-height: 1.5; }
-.app-note { margin-top: 20px; background: rgba(247,230,0,.06); border-left: 5px solid var(--Y); padding: 16px 20px; border-radius: 0 12px 12px 0; font-size: 14px; color: var(--wm); line-height: 1.6; opacity:0; }
+.app-note { margin-top: 20px; background: rgba(200,160,0,.06); border-left: 5px solid var(--Y); padding: 16px 20px; border-radius: 0 12px 12px 0; font-size: 14px; color: var(--wm); line-height: 1.6; opacity:0; }
 
 /* ═══════════════════════════════════════════════════
    SLIDE 15 — 미결 사항 + 액션
@@ -678,14 +678,14 @@ html, body {
 .pt-header { display: grid; grid-template-columns: 2fr 3fr 1.5fr; gap: 0; padding: 10px 16px; }
 .pt-hcell { font-size: 11px; font-weight: 700; color: var(--wd); letter-spacing: .1em; text-transform: uppercase; }
 .pt-row { display: grid; grid-template-columns: 2fr 3fr 1.5fr; gap: 0; padding: 14px 16px; border-top: 1px solid var(--bd); transition: background .2s; }
-.pt-row:hover { background: rgba(247,230,0,.03); }
+.pt-row:hover { background: rgba(200,160,0,.03); }
 .pt-cell { font-size: 14px; color: var(--wm); line-height: 1.5; }
 .pt-cell.hl { color: var(--w); font-weight: 700; }
 .pt-cell.kakao-cell { color: var(--Y); font-weight: 700; }
 .action-list { opacity:0; transform:translateX(20px); }
 .action-title { font-size: 16px; font-weight: 800; color: var(--w); margin-bottom: 16px; letter-spacing: -.02em; }
 .action-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--bd2); background: var(--card); margin-bottom: 10px; cursor: pointer; transition: all .25s; }
-.action-item:hover { border-color: var(--Yb); background: rgba(247,230,0,.03); }
+.action-item:hover { border-color: var(--Yb); background: rgba(200,160,0,.03); }
 .action-item.checked { opacity: .45; }
 .action-item.checked .ai-text { text-decoration: line-through; }
 .action-cb { width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--bd2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-size: 13px; transition: all .2s; }
@@ -833,12 +833,12 @@ html, body {
         <circle id="va" cx="175" cy="112" r="104" fill="rgba(0,0,0,.03)" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>
         <circle id="vb" cx="103" cy="228" r="104" fill="rgba(0,0,0,.03)" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>
         <circle id="vc" cx="247" cy="228" r="104" fill="rgba(0,0,0,.03)" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>
-        <circle id="vct" cx="175" cy="190" r="56" fill="rgba(247,230,0,.14)" stroke="#F7E600" stroke-width="2" filter="url(#yg)"/>
+        <circle id="vct" cx="175" cy="190" r="56" fill="rgba(200,160,0,.14)" stroke="#C8A000" stroke-width="2" filter="url(#yg)"/>
         <text id="la" x="175" y="60" text-anchor="middle" fill="rgba(20,33,61,.7)" font-size="14" font-weight="700" font-family="Pretendard,sans-serif">시니어 일자리</text>
         <text id="lb" x="50" y="316" text-anchor="middle" fill="rgba(20,33,61,.7)" font-size="14" font-weight="700" font-family="Pretendard,sans-serif">지역 활성화</text>
         <text id="lc" x="300" y="316" text-anchor="middle" fill="rgba(20,33,61,.7)" font-size="14" font-weight="700" font-family="Pretendard,sans-serif">도시재생</text>
-        <text id="ct1" x="175" y="184" text-anchor="middle" fill="#F7E600" font-size="14" font-weight="900" font-family="Pretendard,sans-serif">K-주전부리</text>
-        <text id="ct2" x="175" y="202" text-anchor="middle" fill="rgba(247,230,0,.7)" font-size="11" font-family="Pretendard,sans-serif">교차점</text>
+        <text id="ct1" x="175" y="184" text-anchor="middle" fill="#C8A000" font-size="14" font-weight="900" font-family="Pretendard,sans-serif">K-주전부리</text>
+        <text id="ct2" x="175" y="202" text-anchor="middle" fill="rgba(200,160,0,.7)" font-size="11" font-family="Pretendard,sans-serif">교차점</text>
       </svg>
     </div>
   </div>
@@ -956,10 +956,10 @@ html, body {
     </div>
     <div class="tl-bar" id="tl-bar">
       <div class="tl-seg" style="flex:1;background:#EBEBEB;"><div style="font-size:13px;font-weight:700;color:#9A9AAA">4~5월</div><div class="tl-mo">준비·모집</div></div>
-      <div class="tl-seg" style="flex:2;background:rgba(247,230,0,.12);color:#F7E600;"><div style="font-size:13px;font-weight:700;">6~7월</div><div class="tl-mo" style="color:#6A6A8A">AI 교육 8주</div></div>
-      <div class="tl-seg" style="flex:1.5;background:rgba(247,230,0,.38);"><div style="font-size:14px;font-weight:900;color:#F7E600">8월</div><div class="tl-mo" style="color:#F7E600">⚡ 해커톤</div></div>
-      <div class="tl-seg" style="flex:1;background:rgba(247,230,0,.18);"><div style="font-size:13px;font-weight:700;color:#F7E600">9월</div><div class="tl-mo" style="color:#6A6A8A">추석 판매</div></div>
-      <div class="tl-seg" style="flex:1.5;background:rgba(247,230,0,.1);"><div style="font-size:13px;font-weight:700;color:#F7E600">11~12월</div><div class="tl-mo" style="color:#6A6A8A">거점 오픈</div></div>
+      <div class="tl-seg" style="flex:2;background:rgba(200,160,0,.12);color:#C8A000;"><div style="font-size:13px;font-weight:700;">6~7월</div><div class="tl-mo" style="color:#6A6A8A">AI 교육 8주</div></div>
+      <div class="tl-seg" style="flex:1.5;background:rgba(200,160,0,.38);"><div style="font-size:14px;font-weight:900;color:#C8A000">8월</div><div class="tl-mo" style="color:#C8A000">⚡ 해커톤</div></div>
+      <div class="tl-seg" style="flex:1;background:rgba(200,160,0,.18);"><div style="font-size:13px;font-weight:700;color:#C8A000">9월</div><div class="tl-mo" style="color:#6A6A8A">추석 판매</div></div>
+      <div class="tl-seg" style="flex:1.5;background:rgba(200,160,0,.1);"><div style="font-size:13px;font-weight:700;color:#C8A000">11~12월</div><div class="tl-mo" style="color:#6A6A8A">거점 오픈</div></div>
       <div class="tl-seg" style="flex:2;background:#E5E5E5;border-right:none;"><div style="font-size:13px;font-weight:700;color:#9A9AAA">2027~28</div><div class="tl-mo">프랜차이즈 확장</div></div>
     </div>
   </div>
@@ -992,7 +992,7 @@ html, body {
         </div>
       </div>
       <div class="role-card" id="rc1">
-        <div class="role-bar" style="background:#F7E600;"></div>
+        <div class="role-bar" style="background:#C8A000;"></div>
         <div style="flex:1"><div class="role-name">AI 콘텐츠 기획·제작</div><div class="role-tools">ChatGPT, Midjourney, Canva, DALL·E 3</div></div>
         <div class="role-count">20명</div>
       </div>
@@ -1006,8 +1006,8 @@ html, body {
         <div style="flex:1"><div class="role-name">패키징·브랜딩·상세페이지</div><div class="role-tools">ChatGPT, 웹빌더 (Wix/Framer), Canva</div></div>
         <div class="role-count">20명</div>
       </div>
-      <div style="margin-top:8px;padding:12px 16px;border-radius:10px;background:rgba(247,230,0,.06);border-left:4px solid rgba(247,230,0,.4);font-size:13px;color:#A0A0A0;line-height:1.6;">
-        <strong style="color:#F7E600">핵심 논리:</strong> 청년이 <strong style="color:#14213D">만들고</strong>, 시니어가 AI로 <strong style="color:#14213D">팔고 알린다.</strong> 경력 다양성이 오히려 마케팅·기획 역량의 원천.
+      <div style="margin-top:8px;padding:12px 16px;border-radius:10px;background:rgba(200,160,0,.06);border-left:4px solid rgba(200,160,0,.4);font-size:13px;color:#A0A0A0;line-height:1.6;">
+        <strong style="color:#C8A000">핵심 논리:</strong> 청년이 <strong style="color:#14213D">만들고</strong>, 시니어가 AI로 <strong style="color:#14213D">팔고 알린다.</strong> 경력 다양성이 오히려 마케팅·기획 역량의 원천.
       </div>
     </div>
     <div class="s5-right" id="s5right">
@@ -1040,7 +1040,7 @@ html, body {
       <div class="tl-event" id="te0"><div class="tl-dot hi" id="td0"></div><div class="tl-card hi"><div class="tl-mo2">4월</div><div class="tl-tit">부처 협의 · 사전 세팅</div><div class="tl-body">행안부 실무 협의, 지자체 공문 발송, 폐교·폐가 후보 5곳 선정, 특산물 배정</div></div></div>
       <div class="tl-event" id="te1"><div class="tl-dot" id="td1"></div><div class="tl-card"><div class="tl-mo2">5월</div><div class="tl-tit">전국 모집 시작</div><div class="tl-body">시니어(베테랑 앱 연동) + 주니어(카카오 채널) 공개 모집. 각 팀 배정 지역 안내</div></div></div>
       <div class="tl-event" id="te2"><div class="tl-dot hi" id="td2"></div><div class="tl-card hi"><div class="tl-mo2">6~7월 &nbsp;<span class="badge" style="font-size:9px;padding:2px 8px;">핵심 구간</span></div><div class="tl-tit">AI 교육 8주 — 카카오 AI캠퍼스</div><div class="tl-body">AI 리터러시 → 이미지 생성 → 스토리텔링 → 상세페이지 → 숏폼 제작. 수료자만 해커톤 참가</div></div></div>
-      <div class="tl-event" id="te3"><div class="tl-dot hi" id="td3"></div><div class="tl-card hi" style="background:rgba(247,230,0,.04)"><div class="tl-mo2">⚡ 8월 1~3주 &nbsp;<span class="badge" style="font-size:9px;padding:2px 8px;">해커톤</span></div><div class="tl-tit">K-주전부리 해커톤</div><div class="tl-body">시제품 + 브랜딩 + 콘텐츠 패키지 동시 완성. 20팀 경쟁 — 수상 기준: 판매량·상품성·펀딩 달성률</div></div></div>
+      <div class="tl-event" id="te3"><div class="tl-dot hi" id="td3"></div><div class="tl-card hi" style="background:rgba(200,160,0,.04)"><div class="tl-mo2">⚡ 8월 1~3주 &nbsp;<span class="badge" style="font-size:9px;padding:2px 8px;">해커톤</span></div><div class="tl-tit">K-주전부리 해커톤</div><div class="tl-body">시제품 + 브랜딩 + 콘텐츠 패키지 동시 완성. 20팀 경쟁 — 수상 기준: 판매량·상품성·펀딩 달성률</div></div></div>
       <div class="tl-event" id="te4"><div class="tl-dot" id="td4"></div><div class="tl-card"><div class="tl-mo2">8월 4주</div><div class="tl-tit">수상자 발표 · 카카오메이커스 등록</div><div class="tl-body">전팀 카카오메이커스 등록. 수상팀 우선 노출 + 메인 피처링</div></div></div>
       <div class="tl-event" id="te5"><div class="tl-dot" id="td5"></div><div class="tl-card"><div class="tl-mo2">8월 말 ~ 9월 (추석)</div><div class="tl-tit">상품 판매 · 물류 · 배송</div><div class="tl-body">카카오메이커스 온라인 독점 판매 + 펀딩 병행. 추석 배송 완결형 물류 구조</div></div></div>
       <div class="tl-event" id="te6"><div class="tl-dot" id="td6"></div><div class="tl-card"><div class="tl-mo2">2026.11~12</div><div class="tl-tit">폐교·폐가 거점 5곳 오픈</div><div class="tl-body">특산물 판매 + 체험 공방 + 카페·이벤트 복합 거점 전환. 거점당 4명 직접 고용</div></div></div>
@@ -1070,8 +1070,8 @@ html, body {
       <!-- arrow -->
       <div class="pipe-arrow" id="pa0">
         <svg width="36" height="20" viewBox="0 0 36 20">
-          <line x1="2" y1="10" x2="28" y2="10" stroke="rgba(247,230,0,.45)" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <polygon points="28,5 36,10 28,15" fill="rgba(247,230,0,.5)"/>
+          <line x1="2" y1="10" x2="28" y2="10" stroke="rgba(200,160,0,.45)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polygon points="28,5 36,10 28,15" fill="rgba(200,160,0,.5)"/>
         </svg>
       </div>
 
@@ -1085,8 +1085,8 @@ html, body {
       <!-- arrow -->
       <div class="pipe-arrow" id="pa1">
         <svg width="36" height="20" viewBox="0 0 36 20">
-          <line x1="2" y1="10" x2="28" y2="10" stroke="rgba(247,230,0,.45)" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <polygon points="28,5 36,10 28,15" fill="rgba(247,230,0,.5)"/>
+          <line x1="2" y1="10" x2="28" y2="10" stroke="rgba(200,160,0,.45)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polygon points="28,5 36,10 28,15" fill="rgba(200,160,0,.5)"/>
         </svg>
       </div>
 
@@ -1100,8 +1100,8 @@ html, body {
       <!-- arrow -->
       <div class="pipe-arrow" id="pa2">
         <svg width="36" height="20" viewBox="0 0 36 20">
-          <line x1="2" y1="10" x2="28" y2="10" stroke="rgba(247,230,0,.45)" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <polygon points="28,5 36,10 28,15" fill="rgba(247,230,0,.5)"/>
+          <line x1="2" y1="10" x2="28" y2="10" stroke="rgba(200,160,0,.45)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polygon points="28,5 36,10 28,15" fill="rgba(200,160,0,.5)"/>
         </svg>
       </div>
 
@@ -1146,7 +1146,7 @@ html, body {
       <div class="budget-list" id="budget-list">
         <div class="bg-item">
           <div class="bg-top"><span class="bg-name">행안부 · 지자체 (소멸기금)</span><span><span class="bg-amt">4.7억</span><span class="bg-pct">38%</span></span></div>
-          <div class="bg-bar-wrap"><div class="bg-bar" id="bb0" style="background:#F7E600;width:0%"></div></div>
+          <div class="bg-bar-wrap"><div class="bg-bar" id="bb0" style="background:#C8A000;width:0%"></div></div>
           <div class="bg-desc">이미 배분된 소멸기금 활용 — 신규 예산 요청 아님</div>
         </div>
         <div class="bg-item">
@@ -1172,7 +1172,7 @@ html, body {
       </div>
       <div class="budget-note" id="budget-note">
         💡 소멸기금 72억이 지자체에 이미 배분된 상태입니다.<br>
-        행안부에 요청하는 예산은 그 중 <strong style="color:#F7E600">1.5% (약 1억/지자체)</strong>입니다.<br>
+        행안부에 요청하는 예산은 그 중 <strong style="color:#C8A000">1.5% (약 1억/지자체)</strong>입니다.<br>
         신규 예산이 아닙니다.
       </div>
     </div>
@@ -1193,7 +1193,7 @@ html, body {
         <div class="mc-head"><div class="mc-name">행정안전부</div><div class="mc-rank"><span class="badge">1순위 · 핵심</span></div></div>
         <div class="mc-req">공문 1장 + 소멸기금 집행 적격 확인 + 폐교·폐가 행정 가이드</div>
         <div class="mc-foot">
-          <div class="mc-budget" style="font-size:18px;color:#F7E600;">협의 필요</div>
+          <div class="mc-budget" style="font-size:18px;color:#C8A000;">협의 필요</div>
           <div class="mc-results"><div class="mc-result">소멸기금 모범 집행 사례</div><div class="mc-result">5곳 동시 실증 데이터</div></div>
         </div>
       </div>
@@ -1201,7 +1201,7 @@ html, body {
         <div class="mc-head"><div class="mc-name">문화체육관광부</div><div class="mc-rank"><span class="badge w">2순위</span></div></div>
         <div class="mc-req">AI 교육 강사비 위탁계약 + 베테랑 앱 기부체납 위탁용역</div>
         <div class="mc-foot">
-          <div class="mc-budget" style="font-size:18px;color:#F7E600;">협의 필요</div>
+          <div class="mc-budget" style="font-size:18px;color:#C8A000;">협의 필요</div>
           <div class="mc-results"><div class="mc-result">AI 크리에이터 60명 양성</div><div class="mc-result">기부체납 1건 · 콘텐츠 270건+</div></div>
         </div>
       </div>
@@ -1209,7 +1209,7 @@ html, body {
         <div class="mc-head"><div class="mc-name">중소벤처기업부</div><div class="mc-rank"><span class="badge w">3순위</span></div></div>
         <div class="mc-req">예비창업자 패키지 20명 연계 + 소공인 특화자금 융자</div>
         <div class="mc-foot">
-          <div class="mc-budget" style="font-size:18px;color:#F7E600;">협의 필요</div>
+          <div class="mc-budget" style="font-size:18px;color:#C8A000;">협의 필요</div>
           <div class="mc-results"><div class="mc-result">프랜차이즈 100개+ 확산</div><div class="mc-result">수요검증 창업 선례</div></div>
         </div>
       </div>
@@ -1217,7 +1217,7 @@ html, body {
         <div class="mc-head"><div class="mc-name">고용노동부</div><div class="mc-rank"><span class="badge w">4순위</span></div></div>
         <div class="mc-req">기업 특약 체결 + 신중년 프로그램 연계 + 고용센터 자문</div>
         <div class="mc-foot">
-          <div class="mc-budget" style="font-size:18px;color:#F7E600;">협의 필요</div>
+          <div class="mc-budget" style="font-size:18px;color:#C8A000;">협의 필요</div>
           <div class="mc-results"><div class="mc-result">시니어 전문 일자리 60명</div><div class="mc-result">민간 채용 파이프라인 선례</div></div>
         </div>
       </div>
@@ -1225,7 +1225,7 @@ html, body {
         <div class="mc-head"><div class="mc-name">방송통신위원회</div><div class="mc-rank"><span class="badge w">5순위</span></div></div>
         <div class="mc-req">협조 공문 1장 + 미디어센터 장비·스튜디오 사용 (7~10월)</div>
         <div class="mc-foot">
-          <div class="mc-budget" style="font-size:18px;color:#F7E600;">협의 필요</div>
+          <div class="mc-budget" style="font-size:18px;color:#C8A000;">협의 필요</div>
           <div class="mc-results"><div class="mc-result">미디어센터 이용 실적</div><div class="mc-result">콘텐츠 270건+ · 커리큘럼 보급</div></div>
         </div>
       </div>
@@ -1233,7 +1233,7 @@ html, body {
         <div class="mc-head"><div class="mc-name">국토교통부</div><div class="mc-rank"><span class="badge w">6순위 · 2기</span></div></div>
         <div class="mc-req">인허가 간소화 가이드 + 도시재생 뉴딜 배치 검토</div>
         <div class="mc-foot">
-          <div class="mc-budget" style="font-size:18px;color:#F7E600;">협의 필요</div>
+          <div class="mc-budget" style="font-size:18px;color:#C8A000;">협의 필요</div>
           <div class="mc-results"><div class="mc-result">자생형 도시재생 모델</div><div class="mc-result">재공실화 없는 상권 선례</div></div>
         </div>
       </div>
@@ -1248,7 +1248,7 @@ html, body {
     <div class="s10h" id="s10h">
       <div class="bcrum">정부 부처 협력 &nbsp;›&nbsp; <span>행정안전부 (1순위)</span></div>
       <div style="display:flex;justify-content:space-between;align-items:baseline;">
-        <div class="sec-title">행정안전부 &nbsp;<span style="color:#F7E600;font-size:22px;">협의 필요</span></div>
+        <div class="sec-title">행정안전부 &nbsp;<span style="color:#C8A000;font-size:22px;">협의 필요</span></div>
         <span class="badge">소멸기금 × 지역자산 활성화</span>
       </div>
     </div>
@@ -1291,7 +1291,7 @@ html, body {
       <div class="panel" id="p11a">
         <div class="panel-head">
           <div><div class="panel-name">문화체육관광부</div><div class="panel-rank">2순위 · AI 크리에이터 육성</div></div>
-          <div style="text-align:right"><div class="panel-budget" style="font-size:16px;color:#F7E600;">협의 필요</div></div>
+          <div style="text-align:right"><div class="panel-budget" style="font-size:16px;color:#C8A000;">협의 필요</div></div>
         </div>
         <div class="mini-section"><div class="mini-title">정책 과제</div>
           <div class="mini-item">AI 시대 시니어 콘텐츠 역량 강화 사업 필요</div>
@@ -1299,9 +1299,9 @@ html, body {
           <div class="mini-item">민간 협력 공공 디지털 자산(앱) 확보</div>
         </div>
         <div class="mini-section"><div class="mini-title">협조 요청</div>
-          <div class="mini-req"><div class="n">1</div><div>AI 교육 강사비 위탁계약 <strong style="color:#F7E600">협의 필요</strong></div></div>
-          <div class="mini-req"><div class="n">2</div><div>콘텐츠 제작 지원비 <strong style="color:#F7E600">협의 필요</strong></div></div>
-          <div class="mini-req"><div class="n">3</div><div>베테랑 앱 기부체납 위탁용역 <strong style="color:#F7E600">협의 필요</strong></div></div>
+          <div class="mini-req"><div class="n">1</div><div>AI 교육 강사비 위탁계약 <strong style="color:#C8A000">협의 필요</strong></div></div>
+          <div class="mini-req"><div class="n">2</div><div>콘텐츠 제작 지원비 <strong style="color:#C8A000">협의 필요</strong></div></div>
+          <div class="mini-req"><div class="n">3</div><div>베테랑 앱 기부체납 위탁용역 <strong style="color:#C8A000">협의 필요</strong></div></div>
           <div class="mini-req"><div class="n">4</div><div>커리큘럼 전국 보급 검토</div></div>
         </div>
         <div class="mini-section"><div class="mini-title">기대 효과</div>
@@ -1317,7 +1317,7 @@ html, body {
       <div class="panel" id="p11b">
         <div class="panel-head">
           <div><div class="panel-name">중소벤처기업부</div><div class="panel-rank">3순위 · 창업 생태계 연계</div></div>
-          <div style="text-align:right"><div class="panel-budget" style="font-size:16px;color:#F7E600;">협의 필요</div></div>
+          <div style="text-align:right"><div class="panel-budget" style="font-size:16px;color:#C8A000;">협의 필요</div></div>
         </div>
         <div class="mini-section"><div class="mini-title">정책 과제</div>
           <div class="mini-item">예비창업자 실제 창업 전환율 제고</div>
@@ -1340,7 +1340,7 @@ html, body {
         </div>
         <div class="panel-note" style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
           <div>일반 창업: ~1~2억</div>
-          <div style="color:#F7E600;font-weight:700;">K-주전부리: ~4,800만</div>
+          <div style="color:#C8A000;font-weight:700;">K-주전부리: ~4,800만</div>
           <div>정부지원 시: ~2,000만</div>
         </div>
       </div>
@@ -1359,7 +1359,7 @@ html, body {
     </div>
     <div class="three-panel">
       <div class="tp" id="tp0">
-        <div class="tp-head"><div class="tp-name">고용노동부</div><div class="tp-meta">4순위 &nbsp;·&nbsp; <span style="color:#F7E600;">협의 필요</span></div></div>
+        <div class="tp-head"><div class="tp-name">고용노동부</div><div class="tp-meta">4순위 &nbsp;·&nbsp; <span style="color:#C8A000;">협의 필요</span></div></div>
         <div>
           <div class="tp-section-title">정책 과제</div>
           <div class="tp-items"><div class="tp-item">시니어 일자리 질적 전환 (단순→전문)</div><div class="tp-item">AI 직업훈련 신규 과정 개설 필요</div></div>
@@ -1381,7 +1381,7 @@ html, body {
         </div>
       </div>
       <div class="tp" id="tp1">
-        <div class="tp-head"><div class="tp-name">방송통신위원회</div><div class="tp-meta">5순위 &nbsp;·&nbsp; <span style="color:#F7E600;">협의 필요</span></div></div>
+        <div class="tp-head"><div class="tp-name">방송통신위원회</div><div class="tp-meta">5순위 &nbsp;·&nbsp; <span style="color:#C8A000;">협의 필요</span></div></div>
         <div>
           <div class="tp-section-title">정책 과제</div>
           <div class="tp-items"><div class="tp-item">미디어센터 이용률 실적 필요</div><div class="tp-item">AI 미디어 리터러시 실전 교육 수요</div></div>
@@ -1404,7 +1404,7 @@ html, body {
       <div class="tp" id="tp2" style="opacity:.75">
         <div class="tp-head">
           <div class="tp-name">국토교통부</div>
-          <div class="tp-meta">6순위 &nbsp;·&nbsp; <span style="color:#F7E600;">협의 필요</span></div>
+          <div class="tp-meta">6순위 &nbsp;·&nbsp; <span style="color:#C8A000;">협의 필요</span></div>
         </div>
         <div>
           <div class="tp-section-title">정책 과제</div>
@@ -1497,15 +1497,15 @@ html, body {
         <div class="ph-header"><div class="ph-logo">VETERAN</div><div style="font-size:10px;color:rgba(0,0,0,.6);font-weight:700">BETA</div></div>
         <div class="ph-body">
           <div class="ph-card">
-            <div class="ph-card-head"><div class="ph-avatar" style="background:#F7E600">👤</div><div><div class="ph-name">김영수 (52세)</div><div class="ph-tag">AI 디자이너 · 수료완료</div></div></div>
+            <div class="ph-card-head"><div class="ph-avatar" style="background:#C8A000">👤</div><div><div class="ph-name">김영수 (52세)</div><div class="ph-tag">AI 디자이너 · 수료완료</div></div></div>
             <div class="ph-badge-wrap"><div class="ph-badge">Midjourney Pro</div><div class="ph-badge">Canva Expert</div><div class="ph-badge">✓ 고용부 연계</div></div>
           </div>
           <div class="ph-card">
             <div class="ph-card-head"><div class="ph-avatar" style="background:#CCCCCC">👤</div><div><div class="ph-name">이민지 (47세)</div><div class="ph-tag">콘텐츠 마케터 · 매칭중</div></div></div>
             <div class="ph-badge-wrap"><div class="ph-badge">ChatGPT</div><div class="ph-badge">CapCut</div><div class="ph-badge">🔍 구직중</div></div>
           </div>
-          <div class="ph-card" style="background:rgba(247,230,0,.08);border-color:rgba(247,230,0,.3)">
-            <div style="font-size:11px;color:#F7E600;font-weight:700;margin-bottom:4px">💼 면접 요청</div>
+          <div class="ph-card" style="background:rgba(200,160,0,.08);border-color:rgba(200,160,0,.3)">
+            <div style="font-size:11px;color:#C8A000;font-weight:700;margin-bottom:4px">💼 면접 요청</div>
             <div style="font-size:12px;color:#A0A0A0">(주)K푸드벤처스 → AI 마케터</div>
           </div>
         </div>
@@ -1524,7 +1524,7 @@ html, body {
         <div class="af"><div class="af-num">⑤</div><div><div class="af-title">고용노동부 납품 예정</div><div class="af-desc">2026.12 완성 후 고용노동부 납품. 개발비 4,000만 / 공공 디지털 자산.</div></div></div>
       </div>
       <div class="app-note" id="app-note">
-        이 앱은 사업 종료 후 공공 자산이 됩니다.<br>정부가 수억을 들여 구축해야 할 플랫폼을 민간이 개발 후 납품 — <strong style="color:#F7E600">고용노동부 납품 구조.</strong>
+        이 앱은 사업 종료 후 공공 자산이 됩니다.<br>정부가 수억을 들여 구축해야 할 플랫폼을 민간이 개발 후 납품 — <strong style="color:#C8A000">고용노동부 납품 구조.</strong>
       </div>
     </div>
   </div>
@@ -1754,7 +1754,7 @@ function animS0() {
 
     // "카카오" — yellow, right quarter-center
     oc.font      = `900 ${fs}px 'Pretendard', -apple-system, sans-serif`;
-    oc.fillStyle = '#F7E600';
+    oc.fillStyle = '#C8A000';
     oc.fillText('카카오', W * 0.73, H * 0.5);
 
     // ── sample pixel data ──
@@ -1853,7 +1853,7 @@ function animS5() {
         type: 'doughnut',
         data: {
           labels: ['시니어 개발자', 'AI 디자이너', '콘텐츠 마케터', '청년'],
-          datasets: [{ data: [20, 20, 20, 20], backgroundColor: ['#F7E600','#8080B0','#A0A0B0','#6A6A8A'], borderWidth: 0, hoverOffset: 10 }]
+          datasets: [{ data: [20, 20, 20, 20], backgroundColor: ['#C8A000','#8080B0','#A0A0B0','#6A6A8A'], borderWidth: 0, hoverOffset: 10 }]
         },
         options: {
           cutout: '72%', plugins: { legend: { display: false } },
@@ -1914,7 +1914,7 @@ function animS8() {
           labels: ['행안부·지자체', '카카오 현물', '농협중앙회', '3W 자체', '타 부처'],
           datasets: [{
             data: [4.7, 2.9, 2.0, 1.2, 1.6],
-            backgroundColor: ['#F7E600','#8080B0','#7EC8A4','#6A6A8A','#A0A0B0'],
+            backgroundColor: ['#C8A000','#8080B0','#7EC8A4','#6A6A8A','#A0A0B0'],
             borderWidth: 0, hoverOffset: 14
           }]
         },
@@ -1924,8 +1924,8 @@ function animS8() {
             legend: { display: false },
             tooltip: {
               backgroundColor: 'rgba(245,245,245,.97)',
-              borderColor: 'rgba(247,230,0,.3)', borderWidth: 1,
-              titleColor: '#F7E600', bodyColor: '#14213D', padding: 12,
+              borderColor: 'rgba(200,160,0,.3)', borderWidth: 1,
+              titleColor: '#C8A000', bodyColor: '#14213D', padding: 12,
               callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw}억` }
             }
           },
@@ -2093,8 +2093,8 @@ document.addEventListener('mousemove', e => {
 })();
 
 document.querySelectorAll('button, .fci, .ov-item, .action-item, .fn-box, .mc, .rc, .sat').forEach(el => {
-  el.addEventListener('mouseenter', () => { crEl.style.width='48px'; crEl.style.height='48px'; crEl.style.borderColor='rgba(247,230,0,.9)'; });
-  el.addEventListener('mouseleave', () => { crEl.style.width='36px'; crEl.style.height='36px'; crEl.style.borderColor='rgba(247,230,0,.45)'; });
+  el.addEventListener('mouseenter', () => { crEl.style.width='48px'; crEl.style.height='48px'; crEl.style.borderColor='rgba(200,160,0,.9)'; });
+  el.addEventListener('mouseleave', () => { crEl.style.width='36px'; crEl.style.height='36px'; crEl.style.borderColor='rgba(200,160,0,.45)'; });
 });
 </script>
 </body>
